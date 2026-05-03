@@ -31,6 +31,7 @@ defineProps<{
   width: 100%;
   aspect-ratio: 9 / 16;
   max-height: min(92vh, 760px);
+  margin-bottom: -1px;
 
   img {
     width: 100%;
@@ -44,13 +45,30 @@ defineProps<{
 .hero__veil {
   position: absolute;
   inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(32, 28, 26, 0.08) 0%,
+      rgba(32, 28, 26, 0.02) 40%,
+      rgba(250, 249, 247, 0.25) 86%,
+      var(--color-bg) 100%
+    );
+  pointer-events: none;
+}
+
+.hero__veil::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+  height: 80px;
   background: linear-gradient(
     180deg,
-    rgba(32, 28, 26, 0.12) 0%,
-    rgba(32, 28, 26, 0.02) 40%,
-    rgba(250, 247, 242, 0.45) 100%
+    rgba(250, 249, 247, 0) 0%,
+    var(--color-bg) 55%,
+    var(--color-bg) 100%
   );
-  pointer-events: none;
 }
 
 .hero__copy {
@@ -66,19 +84,39 @@ defineProps<{
 }
 
 .hero__line {
+  display: inline-block;
   margin: 0;
   font-family: $font-hero-script;
   font-size: clamp(2.35rem, 9vw, 3.1rem);
   font-weight: 400;
   letter-spacing: 0.04em;
-  line-height: 1.15;
+  line-height: 1.3;
   color: var(--color-hero-gold);
-  text-shadow:
-    0 1px 2px rgba(255, 255, 255, 0.35),
-    0 2px 18px rgba(28, 22, 18, 0.35);
 
-  &:not(:last-child) {
-    margin-bottom: 0.02em;
+  white-space: nowrap;
+
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  animation: handwritingReveal 1.8s ease forwards;
+
+  &:nth-child(2) {
+    animation-delay: 1.1s;
+  }
+}
+
+@keyframes handwritingReveal {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  1% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
   }
 }
 </style>

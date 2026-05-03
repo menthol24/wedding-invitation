@@ -1,6 +1,22 @@
-$font-display: 'Cormorant Garamond', serif;
-$font-body: 'Plus Jakarta Sans', 'Apple SD Gothic Neo', system-ui, sans-serif;
-$font-hero-script: 'Great Vibes', cursive;
+@font-face {
+  font-family: 'HeroTitleFont';
+  src: url('@/assets/fonts/BulgaryRose-L3ggG.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ContentFont';
+  src: url('@/assets/fonts/NanumSquareActR.woff2') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+$font-hero-script: 'HeroTitleFont', cursive;
+$font-display: 'ContentFont', 'Apple SD Gothic Neo', system-ui, sans-serif;
+$font-body: 'ContentFont', 'Apple SD Gothic Neo', system-ui, sans-serif;
 
 :root {
   --page-max: 430px;
@@ -17,7 +33,7 @@ $font-hero-script: 'Great Vibes', cursive;
   --color-accent-soft: rgba(212, 163, 163, 0.14);
 
   /** 섹션 제목 */
-  --color-section-heading: #c49595;
+  --color-section-heading: #df9f9f;
 
   /** 디데이 원형 배지 */
   --color-countdown-pink: #f0b8bc;
@@ -30,13 +46,13 @@ $font-hero-script: 'Great Vibes', cursive;
   --color-text-muted: var(--color-body-muted);
 
   /** 히어로 스크립트 — 샴페인 골드 */
-  --color-hero-gold: #e3c58e;
+  --color-hero-gold: #ffeebf;
   --color-hero-gold-soft: #f0dcb8;
 
   --color-hero-overlay: rgba(252, 249, 245, 0.97);
 
   --radius-card: 12px;
-  --radius-photo: 12px;
+  --radius-photo: 8px;
   --radius-button: 6px;
 
   --shadow-soft: 0 4px 20px rgba(42, 36, 34, 0.04);

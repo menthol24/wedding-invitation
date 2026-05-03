@@ -6,7 +6,7 @@ export const WEDDING_EVENT_ISO = '2026-08-16T15:20:00+09:00'
 export const weddingHero = {
   imageUrl: ASSET_URLS.hero,
   /** 스크립트 히어로 — 두 줄 권장 */
-  titleLines: ['Welcome', 'to our Wedding'],
+  titleLines: ['We\'re getting', 'married!'],
 }
 
 export const ceremonyInfo = {
@@ -79,7 +79,7 @@ export const venueGuideTabs = [
   {
     id: 'welcome',
     title: '웰컴드링크',
-    imageUrl: ASSET_URLS.tabWelcomeFlowers,
+    imageUrl: ASSET_URLS.tabWelcomeDrinks,
     imageAlt: '웰컴 드링크 안내 이미지',
     blocks: [
       {
@@ -121,7 +121,6 @@ export const venueGuideTabs = [
   {
     id: 'atm',
     title: 'ATM 안내',
-    imageUrl: ASSET_URLS.tabAtm,
     imageAlt: 'ATM 위치 안내',
     blocks: [
       {

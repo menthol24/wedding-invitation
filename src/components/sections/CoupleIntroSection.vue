@@ -69,12 +69,9 @@ defineProps<{
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   align-items: center;
-  padding: 22px;
+  padding: 10px;
   margin-bottom: 28px;
-  border-radius: var(--radius-card);
   background: var(--color-surface);
-  box-shadow: var(--shadow-lift);
-  border: 1px solid var(--color-border);
 
   &:last-child {
     margin-bottom: 0;

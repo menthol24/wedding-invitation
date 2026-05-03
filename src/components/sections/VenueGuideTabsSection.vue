@@ -4,8 +4,8 @@ import { ref, computed } from 'vue'
 export type VenueTab = {
   id: string
   title: string
-  imageUrl: string
-  imageAlt: string
+  imageUrl?: string
+  imageAlt?: string
   blocks: { subtitle: string; lines: string[] }[]
 }
 
@@ -49,8 +49,8 @@ function choose(id: string) {
       role="tabpanel"
       :aria-labelledby="'tab-' + (active?.id ?? '')"
     >
-      <figure v-if="active" class="figure">
-        <img :src="active.imageUrl" :alt="active.imageAlt" loading="lazy" decoding="async" />
+      <figure v-if="active?.imageUrl" class="figure">
+        <img :src="active.imageUrl" :alt="active.imageAlt || ''" loading="lazy" decoding="async" />
       </figure>
 
       <div v-if="active" class="blocks">

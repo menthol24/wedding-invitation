@@ -88,9 +88,6 @@ defineProps<{ items: TimelinePiece[] }>()
   width: calc(50% - 14px);
   border-radius: var(--radius-card);
   background: var(--color-surface);
-  padding: 14px;
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-lift);
 }
 
 .row:not(.row--flip) .card {
@@ -127,7 +124,7 @@ defineProps<{ items: TimelinePiece[] }>()
 .text {
   margin: 0;
   font-size: 0.86rem;
-  line-height: 1.82;
+  line-height: 1.2;
   color: var(--color-body-muted);
   letter-spacing: 0.01em;
 }

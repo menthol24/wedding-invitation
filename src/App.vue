@@ -99,7 +99,7 @@ import {
 }
 
 .canvas .content {
-  padding-bottom: calc(120px + env(safe-area-inset-bottom));
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
 }
 
 .canvas .section-pad {

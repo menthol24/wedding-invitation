@@ -27,10 +27,11 @@ defineProps<{
 .title {
   margin: 0 0 40px;
   font-family: $font-display;
-  font-size: 1.42rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  letter-spacing: 0.07em;
   color: var(--color-section-heading);
+  letter-spacing: 0.01em;
+  word-spacing: 0.02em !important;
 }
 
 .body {
@@ -40,9 +41,9 @@ defineProps<{
 
 .line {
   margin: 0;
-  font-size: 0.98rem;
-  line-height: 2.05;
-  letter-spacing: 0.02em;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
   color: var(--color-body);
 }
 </style>
