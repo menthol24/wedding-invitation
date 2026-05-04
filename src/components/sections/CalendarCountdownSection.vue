@@ -103,9 +103,8 @@ const { parts } = useCountdown(props.weddingIso)
 @use '@/styles/variables' as *;
 
 .title-stack {
-  text-align: center;
+  text-align: left;
   margin-bottom: 28px;
-
   h2 {
     margin: 0 0 18px;
   }
@@ -116,9 +115,11 @@ const { parts } = useCountdown(props.weddingIso)
   font-family: $font-display;
   font-size: 1.42rem;
   font-weight: 500;
-  letter-spacing: 0.05em;
   line-height: 1.36;
   color: var(--color-section-heading);
+
+  letter-spacing: 0.01em;
+  word-spacing: 0.02em !important;
 
   &:not(:first-child) {
     margin-top: 4px;
@@ -126,20 +127,13 @@ const { parts } = useCountdown(props.weddingIso)
 }
 
 .title-rule {
-  width: min(200px, 55%);
   height: 1px;
   margin: 0 auto;
   background: rgba(196, 149, 149, 0.35);
 }
 
 .calendar {
-  max-width: 300px;
-  margin: 0 auto;
   padding: 20px 14px 22px;
-  border-radius: var(--radius-card);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-lift);
 }
 
 .weekdays {
@@ -149,7 +143,7 @@ const { parts } = useCountdown(props.weddingIso)
   margin-bottom: 14px;
 
   .w {
-    font-size: 0.68rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--color-body-muted);
     letter-spacing: 0.12em;
@@ -170,7 +164,7 @@ const { parts } = useCountdown(props.weddingIso)
 .cell {
   min-height: 2.85rem;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding-top: 2px;
 }
@@ -183,7 +177,6 @@ const { parts } = useCountdown(props.weddingIso)
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--color-body);
-  padding-top: 6px;
 }
 
 .cell--pick {
@@ -194,16 +187,14 @@ const { parts } = useCountdown(props.weddingIso)
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  padding-bottom: 4px;
 }
 
 .pick__circle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.1rem;
-  height: 2.1rem;
+  width: 1.8rem;
+  height: 1.8rem;
   border-radius: 50%;
   background: var(--color-countdown-pink);
   color: #fffefd;
@@ -213,15 +204,16 @@ const { parts } = useCountdown(props.weddingIso)
 }
 
 .pick__time {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--color-body-muted);
   letter-spacing: 0.02em;
   white-space: nowrap;
+  position: relative;
+  top: 8px;
 }
 
 .section-rule {
-  width: min(240px, 70%);
   height: 1px;
   margin: 36px auto 28px;
   background: rgba(196, 149, 149, 0.38);

@@ -15,14 +15,12 @@ defineProps<{ items: TimelinePiece[] }>()
 
     <div class="axis">
       <div v-for="(it, idx) in items" :key="idx" class="row" :class="{ 'row--flip': idx % 2 === 1 }">
-        <div class="card card--leading">
-          <figure class="fig">
-            <img :src="it.photoUrl" :alt="it.alt ?? ''" loading="lazy" decoding="async" />
-          </figure>
-          <div class="content">
-            <p v-if="it.year" class="year">{{ it.year }}</p>
-            <p class="text">{{ it.text }}</p>
-          </div>
+        <figure class="fig">
+          <img :src="it.photoUrl" :alt="it.alt ?? ''" loading="lazy" decoding="async" />
+        </figure>
+        <div class="content">
+          <p v-if="it.year" class="year">{{ it.year }}</p>
+          <p class="text">{{ it.text }}</p>
         </div>
       </div>
     </div>
@@ -58,21 +56,25 @@ defineProps<{ items: TimelinePiece[] }>()
   }
 }
 
+// axis 양옆에 사진/텍스트가 1:1 로 분리되는 레이아웃
 .row {
   position: relative;
   display: grid;
+  grid-template-columns: 1fr 28px 1fr; // 좌 | axis 닷 영역 | 우
+  align-items: center;
+  column-gap: 0;
   margin-bottom: 46px;
 
   &:last-child {
     margin-bottom: 0;
   }
 
+  // axis 위 닷
   &::before {
     content: '';
-    position: absolute;
-    top: clamp(118px, 30vw, 142px);
-    left: 50%;
-    transform: translate(-50%, -50%);
+    grid-column: 2;
+    justify-self: center;
+    align-self: center;
     width: 11px;
     height: 11px;
     border-radius: 50%;
@@ -84,23 +86,42 @@ defineProps<{ items: TimelinePiece[] }>()
   }
 }
 
-.card {
-  width: calc(50% - 14px);
-  border-radius: var(--radius-card);
-  background: var(--color-surface);
-}
-
-.row:not(.row--flip) .card {
-  justify-self: start;
-}
-
-.row--flip .card {
-  justify-self: end;
+// 기본(짝수 row) — 사진 왼쪽, 텍스트 오른쪽
+.row .fig {
   grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+  padding-right: 12px;
+}
+
+.row .content {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: start;
+  padding-left: 12px;
+  text-align: left;
+}
+
+// row--flip (홀수 row) — 텍스트 왼쪽, 사진 오른쪽
+.row--flip .fig {
+  grid-column: 3;
+  justify-self: start;
+  padding-right: 0;
+  padding-left: 12px;
+}
+
+.row--flip .content {
+  grid-column: 1;
+  justify-self: end;
+  padding-left: 0;
+  padding-right: 12px;
+  text-align: right;
 }
 
 .fig {
-  margin: 0 0 10px;
+  margin: 0;
+  width: 100%;
+  max-width: 160px;
 
   img {
     display: block;
@@ -110,6 +131,10 @@ defineProps<{ items: TimelinePiece[] }>()
     object-fit: cover;
     box-shadow: 0 4px 14px rgba(42, 36, 34, 0.06);
   }
+}
+
+.content {
+  width: 100%;
 }
 
 .year {
@@ -124,28 +149,8 @@ defineProps<{ items: TimelinePiece[] }>()
 .text {
   margin: 0;
   font-size: 0.86rem;
-  line-height: 1.2;
+  line-height: 1.45;
   color: var(--color-body-muted);
   letter-spacing: 0.01em;
-}
-
-@media (max-width: 380px) {
-  .axis::before {
-    left: calc(22px + env(safe-area-inset-left, 0));
-    transform: none;
-  }
-
-  .row::before {
-    left: calc(22px + env(safe-area-inset-left, 0));
-  }
-
-  .card {
-    width: calc(100% - 62px - env(safe-area-inset-left, 0));
-    margin-inline-start: 52px;
-  }
-
-  .row--flip .card {
-    justify-self: start;
-  }
 }
 </style>

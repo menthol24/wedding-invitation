@@ -48,7 +48,15 @@ async function copyNumber(num: string) {
     </div>
 
     <div class="accordions">
-      <div v-for="g in props.groups" :key="g.id" class="acc">
+      <div
+        v-for="g in props.groups"
+        :key="g.id"
+        class="acc"
+        :class="{
+          'acc--groom': g.id === 'groom-side',
+          'acc--bride': g.id === 'bride-side',
+        }"
+      >
         <button
           type="button"
           class="acc__head"
@@ -77,9 +85,6 @@ async function copyNumber(num: string) {
             <div class="ops">
               <button type="button" class="chip chip--copy" @click="copyNumber(row.number)">
                 복사
-              </button>
-              <button type="button" class="chip chip--pay">
-                <span class="pay-mark">pay</span>
               </button>
             </div>
           </div>
@@ -186,6 +191,17 @@ async function copyNumber(num: string) {
   font-weight: 600;
   color: var(--color-section-heading);
   letter-spacing: 0.06em;
+}
+
+// 그룹별 신랑/신부 색상 — acc__label(아코디언 헤더)과 row의 .role 모두 적용
+.acc--groom .acc__label,
+.acc--groom .role {
+  color: var(--color-role-groom);
+}
+
+.acc--bride .acc__label,
+.acc--bride .role {
+  color: var(--color-role-bride);
 }
 
 .num {

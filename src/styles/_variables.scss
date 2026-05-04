@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'HeroTitleFont';
+  font-family: 'BulgaryRoseFont';
   src: url('@/assets/fonts/BulgaryRose-L3ggG.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
@@ -7,25 +7,50 @@
 }
 
 @font-face {
-  font-family: 'ContentFont';
-  src: url('@/assets/fonts/NanumSquareActR.woff2') format('truetype');
+  font-family: 'NanumRegularFont';
+  src: url('@/assets/fonts/NanumSquareAcR.woff2') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-$font-hero-script: 'HeroTitleFont', cursive;
-$font-display: 'ContentFont', 'Apple SD Gothic Neo', system-ui, sans-serif;
-$font-body: 'ContentFont', 'Apple SD Gothic Neo', system-ui, sans-serif;
+@font-face {
+  font-family: 'PretendardMediumFont';
+  src: url('@/assets/fonts/Pretendard-Medium.woff2') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PretendardLightFont';
+  src: url('@/assets/fonts/Pretendard-Light.woff2') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+$font-poster-script: 'BulgaryRoseFont', cursive;
+$font-display: 'PretendardMediumFont', 'Apple SD Gothic Neo', system-ui, sans-serif;
+$font-body: 'NanumRegularFont', 'Apple SD Gothic Neo', system-ui, sans-serif;
 
 :root {
   --page-max: 430px;
 
   /** 참고안 — 거의 화이트에 가까운 아이보리 */
-  --color-bg: #faf9f7;
+  --color-bg: #fdfdfd;
   --color-bg-soft: #f3f1ed;
   --color-surface: #ffffff;
   --color-border: rgba(72, 58, 54, 0.07);
+
+  /** 로딩 텍스트 그라데이션 **/
+  --color-loading-gradation: linear-gradient(
+      135deg,
+      #c49595 0%,
+      #df9f9f 35%,
+      #e9c79c 75%,
+      #c49595 100%
+  );
 
   /** 로즈 베이지 / 더스트 핑크 톤 */
   --color-accent: #d4a3a3;
@@ -35,8 +60,13 @@ $font-body: 'ContentFont', 'Apple SD Gothic Neo', system-ui, sans-serif;
   /** 섹션 제목 */
   --color-section-heading: #df9f9f;
 
+
   /** 디데이 원형 배지 */
   --color-countdown-pink: #f0b8bc;
+
+  /** 신랑 / 신부 역할 컬러 — 신랑: 청록, 신부: 진한 분홍 */
+  --color-role-groom: #3b8e8a;
+  --color-role-bride: #c84b7a;
 
   /** 본문 */
   --color-body: #4a4a4a;
@@ -46,10 +76,10 @@ $font-body: 'ContentFont', 'Apple SD Gothic Neo', system-ui, sans-serif;
   --color-text-muted: var(--color-body-muted);
 
   /** 히어로 스크립트 — 샴페인 골드 */
-  --color-hero-gold: #ffeebf;
-  --color-hero-gold-soft: #f0dcb8;
+  --color-poster-gold: #ffeebf;
+  --color-poster-gold-soft: #f0dcb8;
 
-  --color-hero-overlay: rgba(252, 249, 245, 0.97);
+  --color-poster-overlay: rgba(252, 249, 245, 0.97);
 
   --radius-card: 12px;
   --radius-photo: 8px;

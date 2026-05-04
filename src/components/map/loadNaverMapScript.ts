@@ -18,7 +18,7 @@ export function loadNaverMapScript(ncpClientId: string): Promise<void> {
     const script = document.createElement('script')
     script.setAttribute(SCRIPT_MARKER, 'true')
     script.async = true
-    script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${encodeURIComponent(ncpClientId)}`
+    script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${encodeURIComponent(ncpClientId)}`
     script.onload = () => resolve()
     script.onerror = () => {
       loadPromise = null

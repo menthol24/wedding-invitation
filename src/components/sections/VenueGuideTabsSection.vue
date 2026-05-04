@@ -24,8 +24,6 @@ function choose(id: string) {
 
 <template>
   <section class="guide section-pad section-pad--wide" aria-labelledby="guide-heading">
-    <h2 id="guide-heading" class="title">예식장 부가 안내</h2>
-
     <div class="tablist" role="tablist" aria-label="예식장 부가 안내">
       <button
         v-for="t in tabs"
@@ -161,5 +159,9 @@ function choose(id: string) {
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+#panel-guide {
+  min-height: 380px;
 }
 </style>

@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import NaverMapEmbed from '@/components/map/NaverMapEmbed.vue'
+import tmapIcon from '@/assets/images/icons/tmap.svg'
+import kakaomapIcon from '@/assets/images/icons/kakaomap.svg'
+import navermapIcon from '@/assets/images/icons/navermap.jpg'
 
 defineProps<{
   venueTitle: string
@@ -15,6 +18,17 @@ defineProps<{
 }>()
 
 const naverClientId = String(import.meta.env.VITE_NAVER_MAP_CLIENT_ID ?? '')
+
+// 버튼 라벨 → 아이콘 매핑
+const navIconMap: Record<string, string> = {
+  '티맵': tmapIcon,
+  '카카오내비': kakaomapIcon,
+  '네이버지도': navermapIcon,
+}
+
+function iconFor(label: string): string | undefined {
+  return navIconMap[label]
+}
 </script>
 
 <template>
@@ -37,10 +51,6 @@ const naverClientId = String(import.meta.env.VITE_NAVER_MAP_CLIENT_ID ?? '')
           </svg>
         </a>
       </div>
-      <p class="hall">{{ hallLine }}</p>
-      <p class="phone-line">
-        <a class="phone" :href="`tel:${phone.replace(/\D/g, '')}`">{{ phone }}</a>
-      </p>
       <p class="addr">{{ address }}</p>
     </div>
 
@@ -56,7 +66,15 @@ const naverClientId = String(import.meta.env.VITE_NAVER_MAP_CLIENT_ID ?? '')
         :href="lnk.href"
         rel="noopener noreferrer"
       >
-        {{ lnk.label }}
+        <img
+          v-if="iconFor(lnk.label)"
+          :src="iconFor(lnk.label)"
+          :alt="''"
+          class="app-btn__icon"
+          aria-hidden="true"
+          decoding="async"
+        />
+        <span class="app-btn__label">{{ lnk.label }}</span>
       </a>
     </div>
   </section>
@@ -175,6 +193,10 @@ const naverClientId = String(import.meta.env.VITE_NAVER_MAP_CLIENT_ID ?? '')
 
   .app-btn {
     flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     text-align: center;
     text-decoration: none;
     padding: 12px 6px;
@@ -197,6 +219,18 @@ const naverClientId = String(import.meta.env.VITE_NAVER_MAP_CLIENT_ID ?? '')
     &:active {
       transform: translateY(1px);
     }
+  }
+
+  .app-btn__icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .app-btn__label {
+    line-height: 1;
   }
 }
 </style>

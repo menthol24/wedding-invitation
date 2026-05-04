@@ -3,8 +3,8 @@ import { ASSET_URLS } from './assetPaths'
 /** 예식 시작 시각 (로컬) — 카운트다운·달력에 사용 */
 export const WEDDING_EVENT_ISO = '2026-08-16T15:20:00+09:00'
 
-export const weddingHero = {
-  imageUrl: ASSET_URLS.hero,
+export const weddingPoster = {
+  imageUrl: ASSET_URLS.poster,
   /** 스크립트 히어로 — 두 줄 권장 */
   titleLines: ['We\'re getting', 'married!'],
 }
@@ -33,7 +33,7 @@ export const couplesSection = {
   bride: {
     roleLabel: '신부',
     givenName: '유민선',
-    parentsLine: '문선옥의 딸',
+    parentsLine: '고 유희주 · 문선옥의 딸',
     photoUrl: ASSET_URLS.bride,
     alt: '신부 사진',
   },
@@ -60,18 +60,41 @@ export const galleryImages = ASSET_URLS.gallery.map((url, index) => ({
 export const directionsSection = {
   venueTitle: '더베르G',
   hallLine: '단독홀',
-  phone: '02-0000-0000',
-  address: '서울 영등포구 국회대로 612',
+  phone: '02-2088-5272',
+  address: '서울 영등포구 국회대로 612 (당산동3가 2-7)',
   /** 네이버 지도 API 중심 좌표 (필요 시 주소 검색 후 수정) */
   map: {
-    lat: 37.52835,
-    lng: 126.91785,
+    lat: 37.525952,
+    lng: 126.902249,
     zoom: 17,
   },
   navigationLinks: [
     { label: '티맵', href: '#' },
-    { label: '카카오내비', href: '#' },
-    { label: '네이버지도', href: '#' },
+    { label: '카카오내비', href: 'https://map.naver.com/p/directions/-/3zetzr,2AKl3Y,%EB%8D%94%EB%B2%A0%EB%A5%B4G,,/-/car?c=15.00,0,0,0,dh' },
+    { label: '네이버지도', href: 'https://map.naver.com/p/directions/-/3zetzr,2AKl3Y,%EB%8D%94%EB%B2%A0%EB%A5%B4G,,/-/car?c=15.00,0,0,0,dh' },
+  ],
+}
+
+export const transportInfo = {
+  blocks: [
+    {
+      subtitle: '[지하철]',
+      lines: ['2·5호선 영등포구청역 4번 출구에서 566m(도보 약 7분)'],
+    },
+    {
+      subtitle: '[셔틀버스]',
+      lines: [
+        '영등포구청역 5번 출구 ↔ 더베르G 주차장 입구 좌측',
+        '순환 운행',
+      ],
+    },
+    {
+      subtitle: '[주차]',
+      lines: [
+        '건물 내 지하주차장 이용(2시간 무료 주차)',
+        '2층 웰컴드링크존 또는 지하 1층 연회장에서 주차등록 후 출차',
+      ],
+    },
   ],
 }
 
@@ -83,22 +106,8 @@ export const venueGuideTabs = [
     imageAlt: '웰컴 드링크 안내 이미지',
     blocks: [
       {
-        subtitle: '[지하철]',
-        lines: ['2·5호선 영등포구청역 4번 출구에서 566m(도보 약 7분)'],
-      },
-      {
-        subtitle: '[셔틀버스]',
-        lines: [
-          '영등포구청역 5번 출구 ↔ 더베르G 주차장 입구 좌측',
-          '순환 운행',
-        ],
-      },
-      {
-        subtitle: '[주차]',
-        lines: [
-          '건물 내 지하주차장 이용(2시간 무료 주차)',
-          '2층 웰컴드링크존 또는 지하 1층 연회장에서 주차등록 후 출차',
-        ],
+        subtitle: '[웰컴드링크 안내]',
+        lines: ['귀한 발걸음 해주신 하객분들을 위해 로비에 간단한 음료가 준비되어 있습니다. 식 전에 여유롭게 즐겨주세요.'],
       },
     ],
   },
@@ -109,27 +118,20 @@ export const venueGuideTabs = [
     imageAlt: '신부대기실',
     blocks: [
       {
-        subtitle: '위치 안내',
-        lines: ['단독홀 인근 신부 전용 라운지에서 준비하실 수 있습니다.'],
-      },
-      {
-        subtitle: '이용 시간',
-        lines: ['예식 2시간 전부터 이용 가능합니다. 스태프에게 문의해 주세요.'],
+        subtitle: '[신부대기실 위치 및 인사 가능 시간]',
+        lines: ['홀 왼편 \'베르아일(복도)\' 끝에 위치, 사진 촬영 및 인사는 예식 시작 15분 전까지 가능합니다.'],
       },
     ],
   },
   {
     id: 'atm',
     title: 'ATM 안내',
+    imageUrl: ASSET_URLS.tabAtm,
     imageAlt: 'ATM 위치 안내',
     blocks: [
       {
         subtitle: '[위치]',
-        lines: ['1층 로비 우측, 편의시설 존 근처에 ATM이 준비되어 있습니다.'],
-      },
-      {
-        subtitle: '[유의]',
-        lines: ['혼주·하객 모두 이용 가능하며, 현금 필요 시 이용해 주세요.'],
+        lines: ['더베르G 2층 접수대 좌측 끝 포토월 옆에 2대가 있습니다.'],
       },
     ],
   },
@@ -137,19 +139,17 @@ export const venueGuideTabs = [
 
 export const timelineItems = [
   {
-    year: '2019',
-    text: '고등학교 친구의 소개로 만났습니다.',
+    text: '2020년 고등학교 친구의 소개로 만난 우리. 신랑의 구애 끝에 세번째 만남에 사귀게 되었어요.',
     photoUrl: ASSET_URLS.timeline1,
     alt: '2019 추억',
   },
   {
-    year: '2020',
-    text: '구원 덕에 운동을 시작하고 조금 더 단단해졌습니다.',
+    text: '신랑 덕에 운동을 시작하고 강해졌어요. 하지만 둘 다 먹고 마시는 걸 좋아해서 살 빼기가 힘들어요T_T',
     photoUrl: ASSET_URLS.timeline2,
     alt: '운동',
   },
   {
-    text: '우리의 인생 여행지는 오키나와입니다.',
+    text: '우리의 인생 여행지는 오키나와! 날씨도 일정도 음식도 바다도 모두 완벽. 또 가고싶다~',
     photoUrl: ASSET_URLS.timeline3,
     alt: '여행',
   },
@@ -159,7 +159,7 @@ export const timelineItems = [
     alt: '함께',
   },
   {
-    text: '작년 12월, 깊어진 마음 속에서 프로포즈를 받았습니다.',
+    text: '작년 12월, 프로포즈를 받았습니다. 위시리스트 중 하나였던 한강이 보이는 레스토랑에서.',
     photoUrl: ASSET_URLS.timeline5,
     alt: '프로포즈',
   },

@@ -7,6 +7,7 @@ defineProps<{
 
 <template>
   <section class="invite section-pad section-pad--wide">
+    <div class="bg-circle" aria-hidden="true" />
     <h2 class="title">{{ headline }}</h2>
     <div class="body">
       <template v-for="(block, bi) in paragraphs" :key="bi">
@@ -21,7 +22,31 @@ defineProps<{
 @use '@/styles/variables' as *;
 
 .invite {
+  position: relative;
   text-align: center;
+  overflow: hidden;
+  height:400px;
+}
+
+.bg-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(280px, 78vw, 380px);
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(248, 217, 222, 0.4);
+  // 원 테두리 흐리게 — 값이 클수록 더 부드러워짐
+  filter: blur(11px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.title,
+.body {
+  position: relative;
+  z-index: 1;
 }
 
 .title {

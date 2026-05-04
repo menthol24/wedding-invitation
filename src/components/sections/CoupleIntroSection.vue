@@ -19,8 +19,6 @@ defineProps<{
 
 <template>
   <section class="couple section-pad section-pad--wide" aria-labelledby="couple-heading">
-    <h2 id="couple-heading" class="heading">두 사람 이야기</h2>
-
     <article class="card">
       <div class="text">
         <h3 class="name-line">
@@ -79,7 +77,7 @@ defineProps<{
 }
 
 .card--reverse {
-  direction: rtl;
+  //direction: rtl;
 }
 
 .card--reverse .text,
@@ -88,7 +86,7 @@ defineProps<{
 }
 
 .text {
-  padding: 4px 2px;
+  // padding: 4px 2px;
 }
 
 .text--end {
@@ -114,6 +112,15 @@ defineProps<{
   color: var(--color-section-heading);
 }
 
+// 신랑 카드(첫 번째)는 청록, 신부 카드(.card--reverse)는 진한 분홍
+.card:not(.card--reverse) .role {
+  color: var(--color-role-groom);
+}
+
+.card--reverse .role {
+  color: var(--color-role-bride);
+}
+
 .given {
   font-family: $font-display;
   font-size: 1.18rem;
@@ -129,7 +136,7 @@ defineProps<{
   max-width: 100%;
 
   &--end {
-    width: 85%;
+    width: 95%;
     margin-left: auto;
     margin-right: 0;
   }
