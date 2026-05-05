@@ -1,3 +1,4 @@
+@use 'sass:list';
 <script setup lang="ts">
 withDefaults(
   defineProps<{
@@ -70,7 +71,7 @@ withDefaults(
 
 <style scoped lang="scss">
 @use '@/styles/variables' as *;
-
+@use 'sass:list';
 .poster {
   position: relative;
   width: 100%;
