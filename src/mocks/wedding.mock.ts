@@ -213,4 +213,5 @@ export const shareMeta = {
    * VITE_SITE_URL 기준의 절대 URL 로 보정됩니다.
    */
   imageUrl: new URL('@/assets/images/kakaoMessage.jpg', import.meta.url).href,
+  url: new URL('https://wedding-invitation-sandy-chi.vercel.app/').href,
 }
