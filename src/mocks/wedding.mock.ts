@@ -213,5 +213,10 @@ export const shareMeta = {
    * VITE_SITE_URL 기준의 절대 URL 로 보정됩니다.
    */
   imageUrl: new URL('@/assets/images/kakaoMessage.jpg', import.meta.url).href,
-  url: new URL('https://wedding-invitation-sandy-chi.vercel.app/').href,
+  /**
+   * 카카오톡 메시지에서 카드 / 버튼 클릭 시 이동할 링크 (절대 URL).
+   * 이 도메인이 카카오 디벨로퍼스 > 플랫폼 > Web 사이트 도메인에 등록되어 있어야
+   * 카카오톡에서 클릭이 차단되지 않습니다.
+   */
+  url: 'https://wedding-invitation-sandy-chi.vercel.app',
 }

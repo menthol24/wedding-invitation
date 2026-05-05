@@ -78,18 +78,40 @@ export type WeddingSharePayload = {
 /**
  * Feed 템플릿으로 카카오톡 공유창 띄우기
  *
- * 카카오 측 도메인 화이트리스트(앱 > 플랫폼 > Web 사이트 도메인)에
- * 호출 페이지의 도메인이 등록돼 있어야 정상 동작함.
+ * 링크가 클릭되지 않을 때 점검 포인트:
+ *  1) 카카오 디벨로퍼스 > 내 애플리케이션 > 플랫폼 > Web 사이트 도메인에
+ *     "호출 페이지 도메인" 과 "linkUrl 도메인" 이 모두 등록되어 있어야 함.
+ *     예) https://wedding-invitation-sandy-chi.vercel.app
+ *  2) linkUrl 은 https 절대 URL 이어야 함. localhost 도 등록은 가능하지만
+ *     모바일 카카오톡에서 열면 PC 의 localhost 라 당연히 열리지 않음.
+ *  3) 카카오톡 데스크톱(=PC)은 링크 클릭이 막혀 있는 경우가 있어 모바일에서 테스트 권장.
  */
 export function shareWedding(payload: WeddingSharePayload): boolean {
   if (!ensureKakaoReady()) return false
   const Kakao = window.Kakao
   if (!Kakao) return false
 
-  const linkUrl =
-    payload.linkUrl ?? (typeof window !== 'undefined' ? window.location.href : getSiteUrl())
+  // 빈 문자열 / 공백 / 잘못된 값은 fallback 으로 대체
+  const fallbackUrl =
+    typeof window !== 'undefined' && window.location.href
+      ? window.location.href
+      : getSiteUrl()
+  const requested = (payload.linkUrl ?? '').trim()
+  const linkUrl = requested ? toAbsoluteUrl(requested) : fallbackUrl
+
+  // 카카오는 http(s) 절대 URL 만 허용 — 그 외는 전달 안 함
+  if (!/^https?:\/\//i.test(linkUrl)) {
+    console.warn('[kakao] linkUrl 이 절대 URL 이 아닙니다:', linkUrl)
+  }
+
   const imageUrl = toAbsoluteUrl(payload.imageUrl)
   const buttonLabel = payload.buttonLabel ?? '청첩장 보기'
+
+  // 메시지 카드 본체 / 버튼이 모두 같은 링크로 가도록 link 객체를 공유
+  const link = {
+    mobileWebUrl: linkUrl,
+    webUrl: linkUrl,
+  }
 
   Kakao.Share.sendDefault({
     objectType: 'feed',
@@ -97,20 +119,17 @@ export function shareWedding(payload: WeddingSharePayload): boolean {
       title: payload.title,
       description: payload.description,
       imageUrl,
-      link: {
-        mobileWebUrl: linkUrl,
-        webUrl: linkUrl,
-      },
+      link,
     },
     buttons: [
       {
         title: buttonLabel,
-        link: {
-          mobileWebUrl: linkUrl,
-          webUrl: linkUrl,
-        },
+        link,
       },
     ],
+    // 링크 클릭 시 카카오톡 인앱 브라우저가 아닌 OS 기본 브라우저로 열도록 유도하는 옵션
+    // (카카오톡 일부 버전에서 인앱 브라우저로 열리면서 차단되는 케이스 회피)
+    installTalk: false,
   })
   return true
 }
