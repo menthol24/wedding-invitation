@@ -108,11 +108,6 @@ onBeforeUnmount(() => {
             <span class="names__name-inner">{{ brideName }}</span>
           </span>
         </div>
-
-        <!-- 가느다란 골드 인디케이터 -->
-        <div class="bar" aria-hidden="true">
-          <span class="bar__fill" />
-        </div>
       </div>
     </div>
   </Transition>
@@ -222,34 +217,6 @@ onBeforeUnmount(() => {
   color: var(--color-body-muted);
   opacity: 0;
   animation: sub-in 1s ease 0.7s forwards;
-}
-
-// === 로딩 바 ===
-.bar {
-  position: relative;
-  margin: 0 auto;
-  width: 120px;
-  height: 1px;
-  background: rgba(196, 149, 149, 0.18);
-  overflow: hidden;
-  border-radius: 999px;
-  opacity: 0;
-  animation: sub-in 1s ease 0.9s forwards;
-}
-
-.bar__fill {
-  position: absolute;
-  top: 0;
-  left: -40%;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--color-poster-gold) 50%,
-    transparent 100%
-  );
-  animation: bar-slide 1.6s ease-in-out infinite;
 }
 
 // === 키프레임 ===

@@ -193,14 +193,23 @@ const { parts } = useCountdown(props.weddingIso)
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.8rem;
-  height: 1.8rem;
-  border-radius: 50%;
+  // 하트 모양 — 시각적 무게가 원보다 살짝 가벼우므로 살짝 키움
+  width: 2rem;
+  height: 1.9rem;
   background: var(--color-countdown-pink);
   color: #fffefd;
-  font-size: 0.88rem;
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.02em;
+  // CSS mask로 하트 모양 클리핑
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 29'><path d='M23.6 0c-2.91 0-5.49 1.41-7.6 3.59C13.89 1.41 11.31 0 8.4 0 3.76 0 0 3.76 0 8.4c0 9.27 16 20.6 16 20.6s16-11.33 16-20.6C32 3.76 28.24 0 23.6 0z' fill='black'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 29'><path d='M23.6 0c-2.91 0-5.49 1.41-7.6 3.59C13.89 1.41 11.31 0 8.4 0 3.76 0 0 3.76 0 8.4c0 9.27 16 20.6 16 20.6s16-11.33 16-20.6C32 3.76 28.24 0 23.6 0z' fill='black'/></svg>");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
 
 .pick__time {

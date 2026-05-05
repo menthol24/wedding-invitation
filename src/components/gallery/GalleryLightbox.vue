@@ -53,8 +53,12 @@ const tx = ref(0)
 const ty = ref(0)
 
 const imgStyle = computed(() => ({
-  transform: `translate3d(${tx.value}px, ${ty.value}px, 0) scale(${scale.value})`,
-  transition: gestureActive.value ? 'none' : 'transform 0.2s ease',
+  transform: `translate3d(${tx.value + swipeOffsetX.value}px, ${ty.value}px, 0) scale(${scale.value})`,
+  transition: swipeAnimating.value
+    ? 'transform 0.22s ease'
+    : gestureActive.value
+      ? 'none'
+      : 'transform 0.2s ease',
 }))
 
 function resetTransform() {
@@ -84,6 +88,17 @@ let isPinching = false
 let isPanning = false
 let lastTapAt = 0
 
+// --- 스와이프 상태 (확대되지 않은 상태에서 1손가락 좌우 이동) ---
+const SWIPE_THRESHOLD = 50
+const SWIPE_INTENT = 8
+let swipeTracking = false
+let swipeStartX = 0
+let swipeStartY = 0
+/** 'pending' = 가로/세로 미확정, 'horizontal' = 손가락 따라 이미지 이동, 'vertical' = 무시 */
+let swipeIntent: 'pending' | 'horizontal' | 'vertical' = 'pending'
+const swipeOffsetX = ref(0)
+const swipeAnimating = ref(false)
+
 function distance(t1: Touch, t2: Touch) {
   const dx = t1.clientX - t2.clientX
   const dy = t1.clientY - t2.clientY
@@ -102,6 +117,7 @@ function onTouchStart(e: TouchEvent) {
     e.preventDefault()
     isPinching = true
     isPanning = false
+    swipeTracking = false
     gestureActive.value = true
     startDistance = distance(e.touches[0], e.touches[1])
     startScale = scale.value
@@ -113,11 +129,20 @@ function onTouchStart(e: TouchEvent) {
   } else if (e.touches.length === 1 && scale.value > 1) {
     // 확대 상태에서만 1손가락 팬 허용 (스와이프와 충돌 방지)
     isPanning = true
+    swipeTracking = false
     gestureActive.value = true
     startMidX = e.touches[0].clientX
     startMidY = e.touches[0].clientY
     startTx = tx.value
     startTy = ty.value
+  } else if (e.touches.length === 1) {
+    // 확대 전 상태에서 1손가락 좌우 스와이프 추적 시작
+    swipeTracking = true
+    swipeIntent = 'pending'
+    swipeStartX = e.touches[0].clientX
+    swipeStartY = e.touches[0].clientY
+    swipeAnimating.value = false
+    swipeOffsetX.value = 0
   }
 }
 
@@ -136,11 +161,80 @@ function onTouchMove(e: TouchEvent) {
     e.preventDefault()
     tx.value = startTx + (e.touches[0].clientX - startMidX)
     ty.value = startTy + (e.touches[0].clientY - startMidY)
+  } else if (swipeTracking && e.touches.length === 1) {
+    // 1손가락 좌우 스와이프 — 이미지가 손가락을 따라 끌려가게
+    const dx = e.touches[0].clientX - swipeStartX
+    const dy = e.touches[0].clientY - swipeStartY
+    if (swipeIntent === 'pending') {
+      if (Math.abs(dx) < SWIPE_INTENT && Math.abs(dy) < SWIPE_INTENT) return
+      swipeIntent = Math.abs(dx) > Math.abs(dy) ? 'horizontal' : 'vertical'
+    }
+    if (swipeIntent === 'horizontal') {
+      if (e.cancelable) e.preventDefault()
+      swipeAnimating.value = false
+      swipeOffsetX.value = dx
+    }
   }
 }
 
 function onTouchEnd(e: TouchEvent) {
   if (e.touches.length === 0) {
+    // 1손가락 좌우 스와이프 판정 — 확대되지 않은 상태에서만
+    if (swipeTracking && e.changedTouches.length === 1 && scale.value <= MIN_SCALE + 0.01) {
+      const t = e.changedTouches[0]
+      const dx = t.clientX - swipeStartX
+      const dy = t.clientY - swipeStartY
+      const wasHorizontal = swipeIntent === 'horizontal'
+      const committed =
+        wasHorizontal && Math.abs(dx) >= SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)
+
+      swipeTracking = false
+      swipeIntent = 'pending'
+
+      if (committed) {
+        // 화면 밖까지 슬라이드 아웃 → 인덱스 변경 → 반대편에서 슬라이드 인
+        const width = window.innerWidth || 400
+        swipeAnimating.value = true
+        swipeOffsetX.value = dx < 0 ? -width : width
+        const direction: 'next' | 'prev' = dx < 0 ? 'next' : 'prev'
+        window.setTimeout(() => {
+          // 위치를 반대편에 즉시 옮긴 뒤 인덱스 변경
+          swipeAnimating.value = false
+          swipeOffsetX.value = direction === 'next' ? width : -width
+          if (direction === 'next') next()
+          else prev()
+          // resetTransform이 위 prev/next 안에서 호출되므로 tx/ty는 0
+          requestAnimationFrame(() => {
+            swipeAnimating.value = true
+            swipeOffsetX.value = 0
+          })
+          // 트랜지션 끝나면 swipeAnimating 해제
+          window.setTimeout(() => {
+            swipeAnimating.value = false
+          }, 240)
+        }, 220)
+
+        lastTapAt = 0
+        isPinching = false
+        isPanning = false
+        gestureActive.value = false
+        return
+      }
+
+      // 임계값 미달 → 원위치로 복귀
+      if (wasHorizontal) {
+        swipeAnimating.value = true
+        swipeOffsetX.value = 0
+        window.setTimeout(() => {
+          swipeAnimating.value = false
+        }, 220)
+      } else {
+        swipeOffsetX.value = 0
+      }
+    }
+    swipeTracking = false
+    swipeIntent = 'pending'
+
     isPinching = false
     isPanning = false
     gestureActive.value = false
@@ -252,7 +346,8 @@ function clamp(n: number, min: number, max: number) {
   font-size: 1.15rem;
   color: #888888;
   z-index: 2;
-
+  margin-top: 20px;
+  margin-bottom: 20px;
   &:hover {
     color: #555555;
   }

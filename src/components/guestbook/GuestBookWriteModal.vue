@@ -195,6 +195,7 @@ function onSubmit(ev: Event) {
     background: transparent;
     color: var(--color-body-muted);
     border: 1px solid rgba(72, 58, 54, 0.1);
+    font-size:0.9rem;
   }
 
   .btn--accent {
@@ -202,6 +203,7 @@ function onSubmit(ev: Event) {
     color: var(--color-section-heading);
     border: 1px solid rgba(169, 120, 134, 0.28);
     box-shadow: none;
+    font-size:0.9rem;
   }
 }
 </style>

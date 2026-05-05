@@ -141,7 +141,7 @@ withDefaults(
 .poster__names-role {
   font-family: $font-body;
   font-size: 0.78rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.05em;
   opacity: 0.85;
 }
 

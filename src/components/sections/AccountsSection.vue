@@ -183,6 +183,7 @@ async function copyNumber(num: string) {
 .info {
   flex: 1;
   min-width: 0;
+  line-height: 1.5;
 }
 
 .role {
@@ -191,6 +192,7 @@ async function copyNumber(num: string) {
   font-weight: 600;
   color: var(--color-section-heading);
   letter-spacing: 0.06em;
+  line-height: 1.5
 }
 
 // 그룹별 신랑/신부 색상 — acc__label(아코디언 헤더)과 row의 .role 모두 적용

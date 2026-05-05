@@ -33,7 +33,7 @@ export const couplesSection = {
   bride: {
     roleLabel: '신부',
     givenName: '유민선',
-    parentsLine: '고 유희주 · 문선옥의 딸',
+    parentsLine: '故 유희주 · 문선옥의 딸',
     photoUrl: ASSET_URLS.bride,
     alt: '신부 사진',
   },
