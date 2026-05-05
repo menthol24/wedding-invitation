@@ -204,6 +204,13 @@ export const accountsSection = {
 
 /** 공유 시 제목 등 — 배포 후 문구 수정 */
 export const shareMeta = {
-  title: '구원 ♥ 유민선 결혼식에 초대합니다',
+  title: '구원 ♥ 민선 결혼합니다',
   text: '저희 두 사람의 새로운 시작을 함께해 주세요.',
+  description: '2026년 8월 16일 오후 3시 30분\n영등포 더베르G',
+  /**
+   * 카카오톡 메시지 공유 썸네일.
+   * 빌드 시 해시가 붙은 자산 URL 로 변환되며, 카카오 SDK 호출 시
+   * VITE_SITE_URL 기준의 절대 URL 로 보정됩니다.
+   */
+  imageUrl: new URL('@/assets/images/kakaoMessage.jpg', import.meta.url).href,
 }

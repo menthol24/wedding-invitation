@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import GuestBookWriteModal from '@/components/guestbook/GuestBookWriteModal.vue'
 import { useGuestbook } from '@/composables/useGuestbook'
 import { useSwipe } from '@/composables/useSwipe'
-import type { GuestBookCreateInput } from '@/services/guestbook/types'
+import type { GuestBookCreateInput, GuestBookEntry } from '@/services/guestbook/types'
 
 const props = defineProps<{
   title: string
@@ -21,6 +21,7 @@ const {
   goToPage,
   prevPage,
   nextPage,
+  pageSize,
 } = useGuestbook()
 
 const modalOpen = ref(false)
@@ -60,14 +61,25 @@ const pageNumbers = computed(() => {
 
 const showPagination = computed(() => entries.value.length > 5)
 
-// === 드래그 따라가기 + 슬라이드 전환 ===
+function getPageEntries(page: number): GuestBookEntry[] {
+  if (page < 1 || page > totalPages.value) return []
+  const start = (page - 1) * pageSize
+  return entries.value.slice(start, start + pageSize)
+}
+
+// === 트랙 기반 카루셀 ===
+// 트랙은 [prev, current, next] 세 슬라이드를 가로로 깔고, 평소에는 -100% - gap 위치(=current가 보임)에 정지
+const SLIDE_GAP = 16 // 슬라이드 간 간격 (px)
 const dragX = ref(0)
 const animating = ref(false)
-const slideDir = ref<'forward' | 'backward'>('forward')
 
-const listStyle = computed(() => ({
-  transform: dragX.value !== 0 ? `translate3d(${dragX.value}px, 0, 0)` : '',
-  transition: animating.value ? 'transform 220ms ease' : 'none',
+const prevEntries = computed(() => getPageEntries(currentPage.value - 1))
+const currentEntries = computed(() => visibleEntries.value)
+const nextEntries = computed(() => getPageEntries(currentPage.value + 1))
+
+const trackStyle = computed(() => ({
+  transform: `translate3d(calc(-100% - ${SLIDE_GAP}px + ${dragX.value}px), 0, 0)`,
+  transition: animating.value ? 'transform 260ms ease' : 'none',
 }))
 
 function canMove(delta: number) {
@@ -80,37 +92,42 @@ const swipe = useSwipe({
   enabled: () => totalPages.value > 1,
   onDragMove: (dx) => {
     animating.value = false
+    // 끝 페이지에서 더 끌면 저항감
     if ((dx < 0 && !canMove(1)) || (dx > 0 && !canMove(-1))) {
       dragX.value = dx * 0.35
     } else {
       dragX.value = dx
     }
   },
-  onDragEnd: (committed) => {
-    if (committed) {
-      // 페이지 교체는 <Transition>이 처리 — 드래그 오프셋은 즉시 리셋
-      animating.value = false
-      dragX.value = 0
-    } else {
+  onDragEnd: (committed, direction) => {
+    if (!committed) {
+      // 임계값 미달 — 원위치로 부드럽게 복귀
       animating.value = true
       dragX.value = 0
+      return
     }
-  },
-  onSwipeLeft: () => {
-    if (!canMove(1)) return
-    slideDir.value = 'forward'
-    nextPage()
-  },
-  onSwipeRight: () => {
-    if (!canMove(-1)) return
-    slideDir.value = 'backward'
-    prevPage()
+    // 1) 트랙을 다음/이전 슬라이드 위치까지 마저 이동 (간격만큼 추가)
+    const width = (viewportEl.value?.clientWidth ?? window.innerWidth ?? 400) + SLIDE_GAP
+    animating.value = true
+    dragX.value = direction === 'left' ? -width : width
+
+    // 2) 트랜지션 끝나면 인덱스 변경 + 트랙 위치를 즉시(트랜지션 없이) 0으로 리셋
+    window.setTimeout(() => {
+      animating.value = false
+      if (direction === 'left') nextPage()
+      else prevPage()
+      dragX.value = 0
+    }, 260)
   },
 })
 
+const viewportEl = ref<HTMLElement | null>(null)
+
 function jumpToPage(n: number) {
   if (n === currentPage.value) return
-  slideDir.value = n > currentPage.value ? 'forward' : 'backward'
+  // 페이지 번호 클릭은 즉시 이동 (애니메이션 생략)
+  animating.value = false
+  dragX.value = 0
   goToPage(n)
 }
 </script>
@@ -151,15 +168,16 @@ function jumpToPage(n: number) {
 
     <div
       v-else
+      ref="viewportEl"
       class="list-viewport"
       @touchstart.passive="swipe.onTouchStart"
       @touchmove="swipe.onTouchMove"
       @touchend="swipe.onTouchEnd"
       @touchcancel="swipe.onTouchCancel"
     >
-      <Transition :name="slideDir === 'forward' ? 'slide-fwd' : 'slide-bwd'" mode="out-in">
-        <ul :key="currentPage" class="list" :style="listStyle">
-          <li v-for="e in visibleEntries" :key="e.id" class="item">
+      <div class="track" :style="trackStyle">
+        <ul class="slide list" aria-hidden="true">
+          <li v-for="e in prevEntries" :key="`p-${e.id}`" class="item">
             <div class="meta">
               <span class="name">{{ e.name }}</span>
               <span class="date">{{ fmtDate(e.createdAt) }}</span>
@@ -167,7 +185,25 @@ function jumpToPage(n: number) {
             <p class="body">{{ e.content }}</p>
           </li>
         </ul>
-      </Transition>
+        <ul class="slide list">
+          <li v-for="e in currentEntries" :key="`c-${e.id}`" class="item">
+            <div class="meta">
+              <span class="name">{{ e.name }}</span>
+              <span class="date">{{ fmtDate(e.createdAt) }}</span>
+            </div>
+            <p class="body">{{ e.content }}</p>
+          </li>
+        </ul>
+        <ul class="slide list" aria-hidden="true">
+          <li v-for="e in nextEntries" :key="`n-${e.id}`" class="item">
+            <div class="meta">
+              <span class="name">{{ e.name }}</span>
+              <span class="date">{{ fmtDate(e.createdAt) }}</span>
+            </div>
+            <p class="body">{{ e.content }}</p>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <nav v-if="showPagination" class="pager" aria-label="방명록 페이지 이동">
@@ -299,44 +335,26 @@ function jumpToPage(n: number) {
   touch-action: pan-y;
 }
 
+.track {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  gap: 16px;
+  will-change: transform;
+}
+
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+}
+
 .list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   gap: 14px;
-  will-change: transform;
-}
-
-// 다음 페이지: 새 리스트는 오른쪽에서 들어오고, 이전 리스트는 왼쪽으로 빠짐
-.slide-fwd-enter-from {
-  transform: translate3d(100%, 0, 0);
-  opacity: 0;
-}
-
-.slide-fwd-leave-to {
-  transform: translate3d(-100%, 0, 0);
-  opacity: 0;
-}
-
-// 이전 페이지: 반대 방향
-.slide-bwd-enter-from {
-  transform: translate3d(-100%, 0, 0);
-  opacity: 0;
-}
-
-.slide-bwd-leave-to {
-  transform: translate3d(100%, 0, 0);
-  opacity: 0;
-}
-
-.slide-fwd-enter-active,
-.slide-fwd-leave-active,
-.slide-bwd-enter-active,
-.slide-bwd-leave-active {
-  transition:
-    transform 220ms ease,
-    opacity 220ms ease;
 }
 
 .item {

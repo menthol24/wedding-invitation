@@ -44,7 +44,7 @@ function keydown(ev: KeyboardEvent) {
 onMounted(() => window.addEventListener('keydown', keydown))
 onUnmounted(() => window.removeEventListener('keydown', keydown))
 
-// === 핀치 줌 / 팬 ===
+// === 핀치 줌 / 팬 (current 이미지 한정) ===
 const MIN_SCALE = 1
 const MAX_SCALE = 4
 
@@ -53,12 +53,8 @@ const tx = ref(0)
 const ty = ref(0)
 
 const imgStyle = computed(() => ({
-  transform: `translate3d(${tx.value + swipeOffsetX.value}px, ${ty.value}px, 0) scale(${scale.value})`,
-  transition: swipeAnimating.value
-    ? 'transform 0.22s ease'
-    : gestureActive.value
-      ? 'none'
-      : 'transform 0.2s ease',
+  transform: `translate3d(${tx.value}px, ${ty.value}px, 0) scale(${scale.value})`,
+  transition: gestureActive.value ? 'none' : 'transform 0.2s ease',
 }))
 
 function resetTransform() {
@@ -75,6 +71,21 @@ watch(
     if (!v) resetTransform()
   },
 )
+
+// === 트랙 (prev / current / next 세 슬라이드) ===
+const SLIDE_GAP = 24 // 슬라이드 간 간격 (px)
+const dragX = ref(0)
+const trackAnimating = ref(false)
+const frameEl = ref<HTMLElement | null>(null)
+
+const prevSlide = computed(() => props.slides[normalize(idx.value - 1)] ?? null)
+const currentSlide = computed(() => props.slides[idx.value] ?? null)
+const nextSlide = computed(() => props.slides[normalize(idx.value + 1)] ?? null)
+
+const trackStyle = computed(() => ({
+  transform: `translate3d(calc(-100% - ${SLIDE_GAP}px + ${dragX.value}px), 0, 0)`,
+  transition: trackAnimating.value ? 'transform 0.26s ease' : 'none',
+}))
 
 // --- 제스처 상태 ---
 const gestureActive = ref(false)
@@ -94,10 +105,8 @@ const SWIPE_INTENT = 8
 let swipeTracking = false
 let swipeStartX = 0
 let swipeStartY = 0
-/** 'pending' = 가로/세로 미확정, 'horizontal' = 손가락 따라 이미지 이동, 'vertical' = 무시 */
+/** 'pending' = 가로/세로 미확정, 'horizontal' = 손가락 따라 트랙 이동, 'vertical' = 무시 */
 let swipeIntent: 'pending' | 'horizontal' | 'vertical' = 'pending'
-const swipeOffsetX = ref(0)
-const swipeAnimating = ref(false)
 
 function distance(t1: Touch, t2: Touch) {
   const dx = t1.clientX - t2.clientX
@@ -141,8 +150,8 @@ function onTouchStart(e: TouchEvent) {
     swipeIntent = 'pending'
     swipeStartX = e.touches[0].clientX
     swipeStartY = e.touches[0].clientY
-    swipeAnimating.value = false
-    swipeOffsetX.value = 0
+    trackAnimating.value = false
+    dragX.value = 0
   }
 }
 
@@ -150,8 +159,8 @@ function onTouchMove(e: TouchEvent) {
   if (isPinching && e.touches.length === 2) {
     e.preventDefault()
     const d = distance(e.touches[0], e.touches[1])
-    const next = clamp((d / startDistance) * startScale, MIN_SCALE, MAX_SCALE)
-    scale.value = next
+    const ns = clamp((d / startDistance) * startScale, MIN_SCALE, MAX_SCALE)
+    scale.value = ns
 
     // 두 손가락 중심점이 이동한 만큼 함께 팬
     const mid = midpoint(e.touches[0], e.touches[1])
@@ -162,7 +171,7 @@ function onTouchMove(e: TouchEvent) {
     tx.value = startTx + (e.touches[0].clientX - startMidX)
     ty.value = startTy + (e.touches[0].clientY - startMidY)
   } else if (swipeTracking && e.touches.length === 1) {
-    // 1손가락 좌우 스와이프 — 이미지가 손가락을 따라 끌려가게
+    // 1손가락 좌우 스와이프 — 트랙이 손가락을 따라가게
     const dx = e.touches[0].clientX - swipeStartX
     const dy = e.touches[0].clientY - swipeStartY
     if (swipeIntent === 'pending') {
@@ -171,8 +180,8 @@ function onTouchMove(e: TouchEvent) {
     }
     if (swipeIntent === 'horizontal') {
       if (e.cancelable) e.preventDefault()
-      swipeAnimating.value = false
-      swipeOffsetX.value = dx
+      trackAnimating.value = false
+      dragX.value = dx
     }
   }
 }
@@ -192,27 +201,17 @@ function onTouchEnd(e: TouchEvent) {
       swipeIntent = 'pending'
 
       if (committed) {
-        // 화면 밖까지 슬라이드 아웃 → 인덱스 변경 → 반대편에서 슬라이드 인
-        const width = window.innerWidth || 400
-        swipeAnimating.value = true
-        swipeOffsetX.value = dx < 0 ? -width : width
+        // 트랙을 다음/이전 슬라이드 위치까지 마저 이동시키고, 트랜지션 끝나면 인덱스 변경
+        const width = (frameEl.value?.clientWidth ?? window.innerWidth ?? 400) + SLIDE_GAP
+        trackAnimating.value = true
+        dragX.value = dx < 0 ? -width : width
         const direction: 'next' | 'prev' = dx < 0 ? 'next' : 'prev'
         window.setTimeout(() => {
-          // 위치를 반대편에 즉시 옮긴 뒤 인덱스 변경
-          swipeAnimating.value = false
-          swipeOffsetX.value = direction === 'next' ? width : -width
+          trackAnimating.value = false
           if (direction === 'next') next()
           else prev()
-          // resetTransform이 위 prev/next 안에서 호출되므로 tx/ty는 0
-          requestAnimationFrame(() => {
-            swipeAnimating.value = true
-            swipeOffsetX.value = 0
-          })
-          // 트랜지션 끝나면 swipeAnimating 해제
-          window.setTimeout(() => {
-            swipeAnimating.value = false
-          }, 240)
-        }, 220)
+          dragX.value = 0
+        }, 260)
 
         lastTapAt = 0
         isPinching = false
@@ -221,15 +220,12 @@ function onTouchEnd(e: TouchEvent) {
         return
       }
 
-      // 임계값 미달 → 원위치로 복귀
+      // 임계값 미달 → 원위치로 부드럽게 복귀
       if (wasHorizontal) {
-        swipeAnimating.value = true
-        swipeOffsetX.value = 0
-        window.setTimeout(() => {
-          swipeAnimating.value = false
-        }, 220)
+        trackAnimating.value = true
+        dragX.value = 0
       } else {
-        swipeOffsetX.value = 0
+        dragX.value = 0
       }
     }
     swipeTracking = false
@@ -282,27 +278,63 @@ function clamp(n: number, min: number, max: number) {
           ✕
         </button>
 
-        <button type="button" class="lb__nav lb__nav--prev ghost" aria-label="이전" @click.stop="prev">
+        <button
+          type="button"
+          class="lb__nav lb__nav--prev ghost"
+          aria-label="이전"
+          @click.stop="prev"
+        >
           ‹
         </button>
 
         <div
+          ref="frameEl"
           class="lb__frame"
           @touchstart.passive="onTouchStart"
           @touchmove="onTouchMove"
           @touchend="onTouchEnd"
         >
-          <img
-            class="lb__img"
-            :src="slides[idx]?.src"
-            :alt="slides[idx]?.alt ?? ''"
-            :style="imgStyle"
-            decoding="async"
-            draggable="false"
-          />
+          <div class="lb__track" :style="trackStyle">
+            <div class="lb__slide" aria-hidden="true">
+              <img
+                v-if="prevSlide"
+                class="lb__img lb__img--static"
+                :src="prevSlide.src"
+                :alt="prevSlide.alt ?? ''"
+                decoding="async"
+                draggable="false"
+              />
+            </div>
+            <div class="lb__slide">
+              <img
+                v-if="currentSlide"
+                class="lb__img"
+                :src="currentSlide.src"
+                :alt="currentSlide.alt ?? ''"
+                :style="imgStyle"
+                decoding="async"
+                draggable="false"
+              />
+            </div>
+            <div class="lb__slide" aria-hidden="true">
+              <img
+                v-if="nextSlide"
+                class="lb__img lb__img--static"
+                :src="nextSlide.src"
+                :alt="nextSlide.alt ?? ''"
+                decoding="async"
+                draggable="false"
+              />
+            </div>
+          </div>
         </div>
 
-        <button type="button" class="lb__nav lb__nav--next ghost" aria-label="다음" @click.stop="next">
+        <button
+          type="button"
+          class="lb__nav lb__nav--next ghost"
+          aria-label="다음"
+          @click.stop="next"
+        >
           ›
         </button>
       </div>
@@ -388,6 +420,24 @@ function clamp(n: number, min: number, max: number) {
   user-select: none;
 }
 
+.lb__track {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 24px;
+  will-change: transform;
+}
+
+.lb__slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .lb__img {
   width: 100%;
   height: auto;
@@ -397,5 +447,11 @@ function clamp(n: number, min: number, max: number) {
   will-change: transform;
   -webkit-user-drag: none;
   user-select: none;
+}
+
+.lb__img--static {
+  // 미리보기 슬라이드는 변형 없이 고정 크기로
+  transform: none !important;
+  transition: none !important;
 }
 </style>
