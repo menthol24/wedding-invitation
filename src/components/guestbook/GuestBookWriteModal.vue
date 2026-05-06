@@ -5,13 +5,13 @@ const props = defineProps<{ open: boolean; busy: boolean }>()
 
 const emit = defineEmits<{
   close: []
-  submit: [{ name: string; password: string; content: string }]
+  submit: [{ name: string; password: string; message: string }]
 }>()
 
 const form = reactive({
   name: '',
   password: '',
-  content: '',
+  message: '',
 })
 
 watch(
@@ -20,18 +20,18 @@ watch(
     if (!v) {
       form.name = ''
       form.password = ''
-      form.content = ''
+      form.message = ''
     }
   },
 )
 
 function onSubmit(ev: Event) {
   ev.preventDefault()
-  if (!form.name.trim() || !form.password.trim() || !form.content.trim()) return
+  if (!form.name.trim() || !form.password.trim() || !form.message.trim()) return
   emit('submit', {
     name: form.name.trim(),
     password: form.password,
-    content: form.content.trim(),
+    message: form.message.trim(),
   })
 }
 </script>
@@ -66,7 +66,7 @@ function onSubmit(ev: Event) {
 
             <label class="field">
               <span class="label">내용</span>
-              <textarea v-model="form.content" rows="5" class="textarea" />
+              <textarea v-model="form.message" rows="5" class="textarea" />
             </label>
 
             <div class="actions">

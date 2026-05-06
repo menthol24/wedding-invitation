@@ -1,5 +1,6 @@
 import { computed, readonly, ref, shallowRef, watch } from 'vue'
-import { createLocalGuestBookProvider } from '@/services/guestbook/localGuestBookProvider'
+/* import { createLocalGuestBookProvider } from '@/services/guestbook/localGuestBookProvider' */
+import { createSupabaseGuestBookProvider } from '@/services/guestbook/supabaseGuestBookProvider.ts'
 import type {
   GuestBookCreateInput,
   GuestBookEntry,
@@ -7,7 +8,7 @@ import type {
 } from '@/services/guestbook/types'
 
 /** 기본 제공자 인스턴스 — 나중에 Supabase 구현체로 교체 가능 */
-const defaultProvider = createLocalGuestBookProvider()
+const defaultProvider = createSupabaseGuestBookProvider()
 
 /** 페이지당 표시할 방명록 개수 */
 const PAGE_SIZE = 5

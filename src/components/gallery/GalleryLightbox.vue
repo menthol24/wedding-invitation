@@ -378,7 +378,6 @@ function clamp(n: number, min: number, max: number) {
   font-size: 1.15rem;
   color: #888888;
   z-index: 2;
-  margin-top: 20px;
   margin-bottom: 20px;
   &:hover {
     color: #555555;

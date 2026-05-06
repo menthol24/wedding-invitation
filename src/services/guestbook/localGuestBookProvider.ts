@@ -30,7 +30,7 @@ export function createLocalGuestBookProvider(): GuestBookProvider {
   return {
     async list() {
       return readStore().sort(
-        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
       )
     },
 
@@ -38,8 +38,8 @@ export function createLocalGuestBookProvider(): GuestBookProvider {
       const entry: GuestBookEntry = {
         id: uuid(),
         name: input.name.trim(),
-        content: input.content.trim(),
-        createdAt: new Date().toISOString(),
+        message: input.message.trim(),
+        created_at: new Date().toISOString(),
       }
       const next = [entry, ...readStore()]
       writeStore(next)

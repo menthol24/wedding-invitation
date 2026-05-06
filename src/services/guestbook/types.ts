@@ -1,14 +1,14 @@
 export interface GuestBookEntry {
   id: string
   name: string
-  content: string
-  createdAt: string
+  message: string
+  created_at: string
 }
 
 export interface GuestBookCreateInput {
   name: string
   password: string
-  content: string
+  message: string
 }
 
 export interface GuestBookProvider {

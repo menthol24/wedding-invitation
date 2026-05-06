@@ -180,27 +180,27 @@ function jumpToPage(n: number) {
           <li v-for="e in prevEntries" :key="`p-${e.id}`" class="item">
             <div class="meta">
               <span class="name">{{ e.name }}</span>
-              <span class="date">{{ fmtDate(e.createdAt) }}</span>
+              <span class="date">{{ fmtDate(e.created_at) }}</span>
             </div>
-            <p class="body">{{ e.content }}</p>
+            <p class="body">{{ e.message }}</p>
           </li>
         </ul>
         <ul class="slide list">
           <li v-for="e in currentEntries" :key="`c-${e.id}`" class="item">
             <div class="meta">
               <span class="name">{{ e.name }}</span>
-              <span class="date">{{ fmtDate(e.createdAt) }}</span>
+              <span class="date">{{ fmtDate(e.created_at) }}</span>
             </div>
-            <p class="body">{{ e.content }}</p>
+            <p class="body">{{ e.message }}</p>
           </li>
         </ul>
         <ul class="slide list" aria-hidden="true">
           <li v-for="e in nextEntries" :key="`n-${e.id}`" class="item">
             <div class="meta">
               <span class="name">{{ e.name }}</span>
-              <span class="date">{{ fmtDate(e.createdAt) }}</span>
+              <span class="date">{{ fmtDate(e.created_at) }}</span>
             </div>
-            <p class="body">{{ e.content }}</p>
+            <p class="body">{{ e.message }}</p>
           </li>
         </ul>
       </div>
