@@ -62,14 +62,11 @@ function handleLoadingDone() {
         :groom-name="couplesSection.groom.givenName"
         :bride-name="couplesSection.bride.givenName"
         :play="!isLoading"
+        :date-label="ceremonyInfo.dateLabel"
+        :venue-name="ceremonyInfo.venueName"
       />
 
       <div class="content">
-        <CeremonySection
-          :date-label="ceremonyInfo.dateLabel"
-          :venue-name="ceremonyInfo.venueName"
-        />
-
         <InvitationSection
           :headline="invitationSection.headline"
           :paragraphs="invitationSection.paragraphs"
@@ -171,14 +168,6 @@ function handleLoadingDone() {
   padding-bottom: clamp(76px, 17vw, 112px);
   padding-inline: 18px;
   align-content: center;
-
-  &--wide {
-    //padding-inline: clamp(14px, 6vw, 24px);
-  }
-
-  &--after-poster {
-    padding-top: clamp(52px, 14vw, 80px);
-  }
 }
 
 .canvas .foot {

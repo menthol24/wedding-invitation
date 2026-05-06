@@ -66,7 +66,20 @@ async function copyNumber(num: string) {
           @click="toggle(g.id)"
         >
           <span class="acc__label">{{ g.label }}</span>
-          <span class="acc__chev" aria-hidden="true">{{ isOpen(g.id) ? '⌃' : '⌄' }}</span>
+          <span class="acc__chev" :class="{ 'acc__chev--open': isOpen(g.id) }" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              width="14"
+              height="14"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </span>
         </button>
 
         <div
@@ -156,8 +169,19 @@ async function copyNumber(num: string) {
 }
 
 .acc__chev {
-  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color-body-muted);
+  transition: transform 0.22s ease;
+
+  svg {
+    display: block;
+  }
+
+  &--open {
+    transform: rotate(-180deg);
+  }
 }
 
 .acc__panel {

@@ -1,12 +1,16 @@
 <script setup lang="ts">
+import { useReveal } from '@/composables/useReveal'
+
 defineProps<{
   headline: string
   paragraphs: string[][]
 }>()
+
+const { el, revealed } = useReveal({ threshold: 0.2 })
 </script>
 
 <template>
-  <section class="invite section-pad section-pad--wide">
+  <section ref="el" class="invite section-pad section-pad--wide" :class="{ 'is-revealed': revealed }">
     <div class="bg-circle" aria-hidden="true" />
     <h2 class="title">{{ headline }}</h2>
     <div class="body">
@@ -25,7 +29,22 @@ defineProps<{
   position: relative;
   text-align: center;
   overflow: hidden;
-  height:400px;
+  height: 400px;
+  margin-top: 100px !important;
+  margin-bottom: 100px !important;
+
+  // 섹션 전체가 한 번에 떠오르며 페이드인
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 720ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 720ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+
+  &.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .bg-circle {
@@ -37,7 +56,6 @@ defineProps<{
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: rgba(248, 217, 222, 0.4);
-  // 원 테두리 흐리게 — 값이 클수록 더 부드러워짐
   filter: blur(11px);
   pointer-events: none;
   z-index: 0;
@@ -70,5 +88,13 @@ defineProps<{
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: var(--color-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .invite {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 </style>

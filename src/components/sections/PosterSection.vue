@@ -9,6 +9,8 @@ withDefaults(
     /** 포스터 상단 양옆에 표시할 이름 */
     groomName?: string
     brideName?: string
+    dateLabel: string
+    venueName: string
   }>(),
   {
     play: false,
@@ -22,9 +24,7 @@ withDefaults(
 <template>
   <section class="poster" aria-label="웰컴 영역">
     <div class="poster__photo">
-      <img :src="imageUrl" alt="" width="430" height="780" decoding="async" fetchpriority="high" />
-      <div class="poster__veil" aria-hidden="true" />
-
+      <img :src="imageUrl" decoding="async" fetchpriority="high" />
       <!-- 포스터 상단 양옆 이름 헤더 -->
       <div v-if="groomName || brideName" class="poster__names">
         <span class="poster__names-side poster__names-side--left">
@@ -64,6 +64,10 @@ withDefaults(
 
       <div class="poster__copy" :class="{ 'poster__copy--play': play }">
         <p v-for="(line, i) in titleLines" :key="i" class="poster__line">{{ line }}</p>
+        <div class="poster__info">
+          <p class="date">{{ dateLabel }}</p>
+          <p class="venue">{{ venueName }}</p>
+        </div>
       </div>
     </div>
   </section>
@@ -77,38 +81,64 @@ withDefaults(
   width: 100%;
 }
 
-.poster::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 120px;
-  background: linear-gradient(
-          180deg,
-          rgba(250, 249, 247, 0) 0%,
-          var(--color-bg) 78%,
-          var(--color-bg) 100%
-  );
-  pointer-events: none;
-  z-index: 3;
-}
-
 .poster__photo {
   position: relative;
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 9 / 16;
-  max-height: min(92vh, 760px);
+  height: 100svh;
+  max-height: 860px;
   margin-bottom: -1px;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 24%;
+    object-position: center 45%;
     display: block;
     transform: scale(1.3);
+    transform-origin: center center;
+    // 사진 하단을 부드럽게 페이드 — 다음 섹션과 자연스럽게 이어지도록
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 78%,
+      rgba(0, 0, 0, 0.55) 92%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 78%,
+      rgba(0, 0, 0, 0.55) 92%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  // 하단 살짝 블러 — mask 가 알파만 깎아내므로 픽셀 자체를 흐리려면 별도 레이어가 필요
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 22%;
+    pointer-events: none;
+    z-index: 1;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    // 블러를 아래로 갈수록 강해지도록 mask
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.7) 60%,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.7) 60%,
+      #000 100%
+    );
   }
 }
 
@@ -153,22 +183,6 @@ withDefaults(
   letter-spacing: 0.05em;
 }
 
-.poster__veil {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(32, 28, 26, 0.08) 0%,
-      rgba(32, 28, 26, 0.02) 40%,
-      rgba(250, 249, 247, 0.25) 86%,
-      var(--color-bg) 96%,
-      var(--color-bg) 98%,
-      var(--color-bg) 100%,
-    );
-  pointer-events: none;
-}
-
 .poster__copy {
   position: absolute;
   inset: 0;
@@ -177,7 +191,7 @@ withDefaults(
   justify-content: flex-end;
   align-items: center;
   text-align: center;
-  padding: 56px 24px 120px;
+  padding: 56px 24px 40px;
   pointer-events: none;
 }
 
@@ -348,5 +362,29 @@ $sparkles: (
     opacity: 0.55;
     transform: scale(0.85) rotate(20deg);
   }
+}
+
+.poster__info {
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  padding-top: 20px;
+}
+
+.date {
+  margin: 0px auto 0px;
+  font-size: 0.94rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.venue {
+  margin: 0 auto 0px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  line-height: 1.75;
 }
 </style>
