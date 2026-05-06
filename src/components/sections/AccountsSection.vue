@@ -256,7 +256,7 @@ async function copyNumber(num: string) {
 }
 
 .chip {
-  padding: 9px 10px;
+  padding: 14px 16px;
   border-radius: 4px;
   font-size: 0.72rem;
   font-weight: 500;

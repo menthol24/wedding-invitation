@@ -71,8 +71,8 @@ export const directionsSection = {
     zoom: 17,
   },
   navigationLinks: [
-    { label: '티맵', href: '#' },
-    { label: '카카오내비', href: 'https://map.naver.com/p/directions/-/3zetzr,2AKl3Y,%EB%8D%94%EB%B2%A0%EB%A5%B4G,,/-/car?c=15.00,0,0,0,dh' },
+    { label: '티맵', href: 'https://tmap.life/7946ae5c' },
+    { label: '카카오맵', href: 'https://kko.to/SmW6dQx3k4' },
     { label: '네이버지도', href: 'https://map.naver.com/p/directions/-/3zetzr,2AKl3Y,%EB%8D%94%EB%B2%A0%EB%A5%B4G,,/-/car?c=15.00,0,0,0,dh' },
   ],
 }

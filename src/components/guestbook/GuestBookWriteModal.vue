@@ -53,22 +53,10 @@ function onSubmit(ev: Event) {
             </label>
 
             <label class="field">
-              <span class="label">비밀번호</span>
-              <input
-                v-model="form.password"
-                type="password"
-                name="guest-password"
-                class="input"
-                autocomplete="new-password"
-                placeholder="글 수정 등에 활용 가능 (예시)"
-              />
-            </label>
-
-            <label class="field">
               <span class="label">내용</span>
               <textarea v-model="form.message" rows="5" class="textarea" />
             </label>
-
+            <span style="font-size: 12px;">부적절한 글은 관리자(유민선)에 의해 삭제될 수 있습니다.</span>
             <div class="actions">
               <button type="button" class="btn btn--muted" @click="emit('close')">취소</button>
               <button type="submit" class="btn btn--accent" :disabled="busy">
@@ -196,6 +184,7 @@ function onSubmit(ev: Event) {
     color: var(--color-body-muted);
     border: 1px solid rgba(72, 58, 54, 0.1);
     font-size:0.9rem;
+    margin-block: 4px;
   }
 
   .btn--accent {
@@ -204,6 +193,7 @@ function onSubmit(ev: Event) {
     border: 1px solid rgba(169, 120, 134, 0.28);
     box-shadow: none;
     font-size:0.9rem;
+    margin-block: 4px;
   }
 }
 </style>

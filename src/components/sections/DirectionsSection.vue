@@ -22,7 +22,7 @@ const naverClientId = String(import.meta.env.VITE_NAVER_MAP_CLIENT_ID ?? '')
 // 버튼 라벨 → 아이콘 매핑
 const navIconMap: Record<string, string> = {
   '티맵': tmapIcon,
-  '카카오내비': kakaomapIcon,
+  '카카오맵': kakaomapIcon,
   '네이버지도': navermapIcon,
 }
 

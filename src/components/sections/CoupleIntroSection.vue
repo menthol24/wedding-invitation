@@ -158,8 +158,9 @@ defineProps<{
   width: 100%;
   height: clamp(148px, 38vw, 198px);
   object-fit: cover;
-  border-radius: var(--radius-photo);
+  border-radius: 50%;
   box-shadow: var(--shadow-soft);
+  aspect-ratio: 1 / 1;
 }
 
 @media (max-width: 360px) {
