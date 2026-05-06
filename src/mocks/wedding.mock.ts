@@ -220,5 +220,7 @@ export const shareMeta = {
    * 이 도메인이 카카오 디벨로퍼스 > 플랫폼 > Web 사이트 도메인에 등록되어 있어야
    * 카카오톡에서 클릭이 차단되지 않습니다.
    */
+  imageWidth: 400,
+  imageHeight: 600,
   url: 'https://wedding-invitation-sandy-chi.vercel.app',
 }

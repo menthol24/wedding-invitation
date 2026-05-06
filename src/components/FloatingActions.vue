@@ -39,6 +39,8 @@ async function shareKakao() {
     title: shareMeta.title,
     description: shareMeta.description,
     imageUrl: shareMeta.imageUrl,
+    imageWidth: shareMeta.imageWidth,
+    imageHeight: shareMeta.imageHeight,
     linkUrl: shareMeta.url,
   })
   if (ok) return

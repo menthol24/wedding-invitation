@@ -69,9 +69,9 @@ export type WeddingSharePayload = {
   description: string
   /** 절대 URL 권장. 상대경로면 SITE_URL 기준으로 보정됨 */
   imageUrl: string
-  /** 클릭 시 이동할 청첩장 URL. 비우면 현재 페이지 URL */
+  imageWidth: number
+  imageHeight: number
   linkUrl?: string
-  /** 메인 버튼 라벨 (기본: "청첩장 보기") */
   buttonLabel?: string
 }
 
@@ -119,6 +119,8 @@ export function shareWedding(payload: WeddingSharePayload): boolean {
       title: payload.title,
       description: payload.description,
       imageUrl,
+      imageWidth: payload.imageWidth ?? 400,
+      imageHeight: payload.imageHeight ?? 400,
       link,
     },
     buttons: [
