@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useCountdown } from '@/composables/useCountdown'
 import { buildMonthGrid, WEEKDAY_LABELS_KO } from '@/utils/calendar'
 
@@ -11,19 +11,76 @@ const props = defineProps<{
   highlightedDay: number
   ceremonyTimeShort: string
   countdownHeadline: string
+  /** 두 사람이 처음 만난 날 (ISO: YYYY-MM-DD) */
+  meetSinceIso: string
+  /** 디데이 섹션 상단 라벨 */
+  ddayHeadline: string
 }>()
 
 const grid = computed(() =>
   buildMonthGrid(props.calendarYear, props.calendarMonthIndex),
 )
 
-const pad = (n: number) => String(n).padStart(2, '0')
-
 const { parts } = useCountdown(props.weddingIso)
+
+// 디데이(함께한 시간) — 만남일로부터 오늘까지 흐른 햇수와 일수를 계산
+const now = ref(new Date())
+let timer: number | undefined
+
+onMounted(() => {
+  // 자정 경계에서 일수가 바뀔 수 있어 1분마다 갱신
+  timer = window.setInterval(() => {
+    now.value = new Date()
+  }, 60_000)
+})
+
+onBeforeUnmount(() => {
+  if (timer !== undefined) window.clearInterval(timer)
+})
+
+const sinceParts = computed(() => {
+  const start = new Date(props.meetSinceIso)
+  const today = now.value
+
+  // 시간 정보를 무시하고 날짜 단위로만 비교
+  const startDate = new Date(start.getFullYear(), start.getMonth(), start.getDate())
+  const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+
+  let years = todayDate.getFullYear() - startDate.getFullYear()
+  // 같은 해 안에서 만남 기념일을 아직 지나지 않았다면 1년 차감
+  const anniversaryThisYear = new Date(
+    todayDate.getFullYear(),
+    startDate.getMonth(),
+    startDate.getDate(),
+  )
+  if (todayDate < anniversaryThisYear) years -= 1
+
+  // 가장 최근에 지난 만남 기념일로부터의 잔여 일수
+  const lastAnniversary = new Date(
+    todayDate.getFullYear() - (todayDate < anniversaryThisYear ? 1 : 0),
+    startDate.getMonth(),
+    startDate.getDate(),
+  )
+  const dayMs = 24 * 60 * 60 * 1000
+  const days = Math.floor((todayDate.getTime() - lastAnniversary.getTime()) / dayMs)
+
+  return { years: Math.max(0, years), days: Math.max(0, days) }
+})
 </script>
 
 <template>
   <section class="cal section-pad section-pad--wide" aria-labelledby="cal-heading">
+    <div class="dday" :aria-label="ddayHeadline">
+      <p class="dday__label">{{ ddayHeadline }}</p>
+      <p class="dday__value">
+        <span class="dday__num">{{ sinceParts.years }}</span
+        ><span class="dday__unit">년</span>
+        <span class="dday__num">{{ sinceParts.days }}</span
+        ><span class="dday__unit">일</span>
+      </p>
+      <div class="dday__rule" aria-hidden="true" />
+    </div>
+
     <div class="title-stack">
       <h2 id="cal-heading">
         <span v-for="(line, i) in titleLines" :key="i" class="title-line">{{ line }}</span>
@@ -61,46 +118,68 @@ const { parts } = useCountdown(props.weddingIso)
 
     <div class="section-rule" aria-hidden="true" />
 
-    <div class="count-intro">
-      <p class="count-intro__line">{{ countdownHeadline }}</p>
-    </div>
-
-    <div class="badges" role="group" aria-label="카운트다운">
+    <div class="dday dday--countdown" :aria-label="countdownHeadline">
+      <p class="dday__label">{{ countdownHeadline }}</p>
       <template v-if="parts.isPast">
         <p class="done">저희의 날을 맞이해 주셔서 감사합니다.</p>
       </template>
-      <template v-else>
-        <div class="badge-pack">
-          <div class="badge-circle">
-            <span class="badge-circle__num">{{ pad(parts.days) }}</span>
-          </div>
-          <span class="badge-pack__unit">Days</span>
-        </div>
-        <div class="badge-pack">
-          <div class="badge-circle">
-            <span class="badge-circle__num">{{ pad(parts.hours) }}</span>
-          </div>
-          <span class="badge-pack__unit">Hours</span>
-        </div>
-        <div class="badge-pack">
-          <div class="badge-circle">
-            <span class="badge-circle__num">{{ pad(parts.minutes) }}</span>
-          </div>
-          <span class="badge-pack__unit">Minutes</span>
-        </div>
-        <div class="badge-pack">
-          <div class="badge-circle">
-            <span class="badge-circle__num">{{ pad(parts.seconds) }}</span>
-          </div>
-          <span class="badge-pack__unit">Seconds</span>
-        </div>
-      </template>
+      <p v-else class="dday__value">
+        <span class="dday__num">{{ parts.days }}</span
+        ><span class="dday__unit">일</span>
+        <span class="dday__num">{{ parts.hours }}</span
+        ><span class="dday__unit">시간</span>
+        <span class="dday__num">{{ parts.minutes }}</span
+        ><span class="dday__unit">분</span>
+        <span class="dday__num">{{ parts.seconds }}</span
+        ><span class="dday__unit">초</span>
+      </p>
     </div>
   </section>
 </template>
 
 <style scoped lang="scss">
 @use '@/styles/variables' as *;
+
+.dday {
+  text-align: center;
+  margin-bottom: 36px;
+
+  &__label {
+    margin: 0 0 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-body-muted);
+  }
+
+  &__value {
+    margin: 0;
+    font-family: $font-display;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--color-section-heading);
+    line-height: 1.2;
+  }
+
+  &__num {
+    font-variant-numeric: tabular-nums;
+    margin-right: 4px;
+  }
+
+  &__unit {
+    font-size: 0.95rem;
+    margin-right: 10px;
+    color: var(--color-body);
+  }
+
+  &__rule {
+    height: 1px;
+    width: 80px;
+    margin: 40px auto 0;
+  }
+}
 
 .title-stack {
   text-align: left;
@@ -120,6 +199,7 @@ const { parts } = useCountdown(props.weddingIso)
 
   letter-spacing: 0.01em;
   word-spacing: 0.02em !important;
+  text-align: center;
 
   &:not(:first-child) {
     margin-top: 4px;
@@ -224,67 +304,8 @@ const { parts } = useCountdown(props.weddingIso)
 
 .section-rule {
   height: 1px;
-  margin: 36px auto 28px;
+  margin: 36px auto 70px;
   background: rgba(196, 149, 149, 0.38);
-}
-
-.count-intro {
-  text-align: center;
-  margin-bottom: 28px;
-
-  &__line {
-    margin: 0;
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    color: var(--color-body);
-  }
-}
-
-.badges {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  gap: 8px;
-  max-width: 340px;
-  margin: 0 auto;
-}
-
-.badge-pack {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.badge-circle {
-  width: clamp(3.25rem, 17vw, 3.75rem);
-  height: clamp(3.25rem, 17vw, 3.75rem);
-  border-radius: 50%;
-  background: var(--color-countdown-pink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 3px 12px rgba(42, 36, 34, 0.07);
-
-  &__num {
-    font-size: clamp(0.98rem, 4.2vw, 1.08rem);
-    font-weight: 600;
-    color: #ffffff;
-    letter-spacing: 0.02em;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-}
-
-.badge-pack__unit {
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-body-muted);
 }
 
 .done {

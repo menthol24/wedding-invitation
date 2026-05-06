@@ -117,6 +117,7 @@ async function copyNumber(num: string) {
     line-height: 1.92;
     color: var(--color-body-muted);
     letter-spacing: 0.01em;
+    white-space: pre-line;
 
     &:last-child {
       margin-bottom: 0;

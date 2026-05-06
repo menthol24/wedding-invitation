@@ -7,10 +7,8 @@ defineProps<{
 
 <template>
   <section class="ceremony section-pad section-pad--after-poster">
-    <div class="divider" />
     <p class="date">{{ dateLabel }}</p>
     <p class="venue">{{ venueName }}</p>
-    <div class="divider" />
   </section>
 </template>
 
@@ -42,5 +40,8 @@ defineProps<{
   color: var(--color-body-muted);
   letter-spacing: 0.03em;
   line-height: 1.75;
+
+  background: rgb(255 250 233 / 73%);
+  width: 50%;
 }
 </style>

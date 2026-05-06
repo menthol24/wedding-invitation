@@ -88,6 +88,8 @@ function handleLoadingDone() {
           :highlighted-day="countdownSection.highlightedDay"
           :ceremony-time-short="countdownSection.ceremonyTimeShort"
           :countdown-headline="countdownSection.countdownHeadline"
+          :meet-since-iso="countdownSection.meetSinceIso"
+          :dday-headline="countdownSection.ddayHeadline"
         />
 
         <GallerySection :items="galleryImages" />

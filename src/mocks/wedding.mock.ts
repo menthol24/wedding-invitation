@@ -1,7 +1,7 @@
 import { ASSET_URLS } from './assetPaths'
 
 /** 예식 시작 시각 (로컬) — 카운트다운·달력에 사용 */
-export const WEDDING_EVENT_ISO = '2026-08-16T15:20:00+09:00'
+export const WEDDING_EVENT_ISO = '2026-08-16T15:30:00+09:00'
 
 export const weddingPoster = {
   imageUrl: ASSET_URLS.poster,
@@ -10,8 +10,8 @@ export const weddingPoster = {
 }
 
 export const ceremonyInfo = {
-  dateLabel: '2026년 8월 16일 일요일 오후 3시 20분',
-  venueName: '더베르G 단독홀',
+  dateLabel: '2026.08.16(일) 15:30',
+  venueName: '영등포 더베르G 단독홀',
 }
 
 export const invitationSection = {
@@ -40,7 +40,9 @@ export const couplesSection = {
 }
 
 export const countdownSection = {
-  titleLines: ['팔월의', '열여섯 번째 날.'],
+  meetSinceIso: '2020-04-16',
+  ddayHeadline: '구원과 민선이가 함께한 시간',
+  titleLines: ['팔월의 열여섯 번째 날'],
   calendarYear: 2026,
   /** 8월 → 0-based 7 */
   calendarMonthIndex: 7,
@@ -48,7 +50,7 @@ export const countdownSection = {
   /** 달력 강조일 아래 작은 글씨 */
   ceremonyTimeShort: '오후 3:20',
   /** 디데이 상단 한 줄 */
-  countdownHeadline: '원 ♥ 민선 결혼식까지',
+  countdownHeadline: '우리의 결혼식까지',
 }
 
 export const galleryImages = ASSET_URLS.gallery.map((url, index) => ({
@@ -141,10 +143,10 @@ export const timelineItems = [
   {
     text: '2020년 고등학교 친구의 소개로 만난 우리. 신랑의 구애 끝에 세번째 만남에 사귀게 되었어요.',
     photoUrl: ASSET_URLS.timeline1,
-    alt: '2019 추억',
+    alt: '첫만남',
   },
   {
-    text: '신랑 덕에 운동을 시작하고 강해졌어요. 하지만 둘 다 먹고 마시는 걸 좋아해서 살 빼기가 힘들어요T_T',
+    text: '신랑 덕에 신부도 운동에 눈을 떴어요. 하지만 둘 다 먹고 마시는 걸 좋아해서 살 빼기가 힘들어요T_T',
     photoUrl: ASSET_URLS.timeline2,
     alt: '운동',
   },
@@ -154,12 +156,12 @@ export const timelineItems = [
     alt: '여행',
   },
   {
-    text: '저는 감성적이고 조화로운 ENFJ, 남자친구는 사고적이지만 유연한 ENTP. 최고의 조합이에요.',
+    text: '신부는 감성적이고 조화로운 ENFJ, 신랑은 사고적이지만 유연한 ENTP. 최고의 조합이에요.',
     photoUrl: ASSET_URLS.timeline4,
-    alt: '함께',
+    alt: '최고의 조합',
   },
   {
-    text: '작년 12월, 프로포즈를 받았습니다. 위시리스트 중 하나였던 한강이 보이는 레스토랑에서.',
+    text: '작년 11월 신부의 로망이었던 한강이 보이는 레스토랑에서 프로포즈♥️.',
     photoUrl: ASSET_URLS.timeline5,
     alt: '프로포즈',
   },
@@ -173,8 +175,8 @@ export const guestbookIntro = {
 export const accountsSection = {
   title: '마음 전하실 곳',
   introLines: [
-    '멀리서도 축하의 마음을 전하고 싶으신 분들을 위해 계좌번호를 안내드립니다.',
-    '소중한 축하를 보내주셔서 감사드리며, 따뜻한 마음에 깊이 감사드립니다.',
+    '멀리서도 축하의 마음을 전하고 싶으신 분들을 위해\n계좌번호를 안내드립니다.',
+    '소중한 축하를 보내주셔서 감사드리며,\n따뜻한 마음에 깊이 감사드립니다.',
   ],
   groups: [
     {
