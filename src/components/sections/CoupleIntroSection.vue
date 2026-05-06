@@ -156,9 +156,9 @@ defineProps<{
 
 .photo-wrap img {
   width: 100%;
-  height: clamp(148px, 38vw, 198px);
+  height: clamp(170px, 38vw, 210px);
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: var(--radius-photo);
   box-shadow: var(--shadow-soft);
   aspect-ratio: 1 / 1;
 }

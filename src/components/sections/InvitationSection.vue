@@ -85,9 +85,11 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 .line {
   margin: 0;
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.62;
   letter-spacing: -0.01em;
   color: var(--color-body);
+  white-space: pre-line;
+
 }
 
 @media (prefers-reduced-motion: reduce) {

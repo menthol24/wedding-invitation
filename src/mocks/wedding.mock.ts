@@ -17,8 +17,8 @@ export const ceremonyInfo = {
 export const invitationSection = {
   headline: '소중한 분들을 초대합니다.',
   paragraphs: [
-    ['오랜 기다림 속에서 저희 두 사람,', '한 마음 되어 참된 사랑의 결실을', '맺게 되었습니다.'],
-    ['오셔서 축복해 주시면 큰 기쁨이겠습니다.'],
+    ['눈부신 젊음처럼 찬란한 여름', '푸른 녹음이 바람에 일렁이는 아름다운 날,\n\n', '서로의 가장 든든한 편이 되기로 약속합니다.'],
+    ['귀한 걸음으로 함께 축복해 주시면 감사하겠습니다.'],
   ],
 }
 
@@ -156,7 +156,7 @@ export const timelineItems = [
     alt: '여행',
   },
   {
-    text: '신부는 감성적이고 조화로운 ENFJ, 신랑은 사고적이지만 유연한 ENTP. 최고의 조합이에요.',
+    text: '신부는 감성적이고 조화로운 ENFJ, 신랑은 사고적이지만 유연한 ENTP. 최고의 커플이에요.',
     photoUrl: ASSET_URLS.timeline4,
     alt: '최고의 조합',
   },
@@ -186,7 +186,7 @@ export const accountsSection = {
         {
           role: '신랑',
           bankInfo: '신한 구원',
-          number: '1000-397-038961',
+          number: '110-221-930230',
         },
       ],
     },
@@ -197,7 +197,7 @@ export const accountsSection = {
         {
           role: '신부',
           bankInfo: '토스뱅크 유민선',
-          number: '1000-29839322',
+          number: '1000-2983-9322',
         },
       ],
     },
