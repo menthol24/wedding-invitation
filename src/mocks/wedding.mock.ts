@@ -161,7 +161,7 @@ export const timelineItems = [
     alt: '최고의 조합',
   },
   {
-    text: '작년 11월 신부의 로망이었던 한강이 보이는 레스토랑에서 프로포즈♥️.',
+    text: '작년 11월 신부의 로망이었던 한강이 보이는 레스토랑에서 프로포즈♥️',
     photoUrl: ASSET_URLS.timeline5,
     alt: '프로포즈',
   },

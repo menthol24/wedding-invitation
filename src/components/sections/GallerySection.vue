@@ -67,7 +67,7 @@ function closeLightbox() {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 2px;
   background: rgba(72, 58, 54, 0.06);
   padding: 2px;
