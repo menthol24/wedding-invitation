@@ -5,6 +5,7 @@ import kakaomapIcon from '@/assets/images/icons/kakaomap.svg'
 import navermapIcon from '@/assets/images/icons/navermap.jpg'
 
 defineProps<{
+  title?: string
   venueTitle: string
   hallLine: string
   phone: string
@@ -33,7 +34,7 @@ function iconFor(label: string): string | undefined {
 
 <template>
   <section class="dir section-pad section-pad--wide" aria-labelledby="dir-heading">
-    <h2 id="dir-heading" class="title">오시는 길</h2>
+    <h2 v-if="title" id="dir-heading" class="title">{{ title }}</h2>
 
     <div class="info">
       <div class="venue-row">
@@ -86,7 +87,6 @@ function iconFor(label: string): string | undefined {
 .title {
   margin: 0 0 40px;
   text-align: center;
-  font-family: $font-display;
   font-size: 1.38rem;
   font-weight: 500;
   letter-spacing: 0.08em;

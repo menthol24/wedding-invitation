@@ -182,7 +182,6 @@ function chooseTab(id: string) {
 .title {
   margin: 0 0 36px;
   text-align: center;
-  font-family: $font-display;
   font-size: 1.38rem;
   font-weight: 500;
   letter-spacing: 0.07em;
@@ -201,7 +200,7 @@ function chooseTab(id: string) {
     border: none;
     padding: 12px 0 16px;
     flex: 1;
-    font-size: 0.82rem;
+    font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.03em;
     color: var(--color-body-muted);

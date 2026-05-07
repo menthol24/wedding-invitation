@@ -277,7 +277,7 @@ const sinceParts = computed(() => {
   width: 2rem;
   height: 1.9rem;
   background: var(--color-countdown-pink);
-  color: #fffefd;
+  color: #ffffff;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.02em;

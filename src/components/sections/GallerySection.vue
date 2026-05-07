@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import GalleryLightbox from '@/components/gallery/GalleryLightbox.vue'
 import type { GallerySlide } from '@/components/gallery/gallery.types'
 
@@ -9,7 +9,20 @@ export interface GalleryItem {
   alt: string
 }
 
-const props = defineProps<{ items: GalleryItem[] }>()
+const props = defineProps<{ title?: string; items: GalleryItem[] }>()
+
+// 3열 × 5행 = 15장까지 펼치기 전 노출
+const COLLAPSED_ROWS = 5
+const COLUMNS = 3
+const COLLAPSED_COUNT = COLLAPSED_ROWS * COLUMNS
+
+const expanded = ref(false)
+const canCollapse = computed(() => props.items.length > COLLAPSED_COUNT)
+const visibleItems = computed(() =>
+  canCollapse.value && !expanded.value
+    ? props.items.slice(0, COLLAPSED_COUNT)
+    : props.items,
+)
 
 const lightboxOpen = ref(false)
 const lightboxIndex = ref(0)
@@ -24,15 +37,19 @@ function openAt(index: number) {
 function closeLightbox() {
   lightboxOpen.value = false
 }
+
+function toggleExpanded() {
+  expanded.value = !expanded.value
+}
 </script>
 
 <template>
   <section class="gallery section-pad section-pad--wide" aria-labelledby="gallery-heading">
-    <h2 id="gallery-heading" class="title">갤러리</h2>
+    <h2 v-if="title" id="gallery-heading" class="title">{{ title }}</h2>
 
     <div class="grid">
       <button
-        v-for="(it, idx) in props.items"
+        v-for="(it, idx) in visibleItems"
         :key="it.id"
         type="button"
         class="tile"
@@ -41,6 +58,18 @@ function closeLightbox() {
         <img :src="it.src" :alt="it.alt" loading="lazy" decoding="async" />
       </button>
     </div>
+
+    <button
+      v-if="canCollapse"
+      type="button"
+      class="toggle"
+      :class="{ 'toggle--expanded': expanded }"
+      :aria-expanded="expanded"
+      :aria-label="expanded ? '갤러리 접기' : '갤러리 더보기'"
+      @click="toggleExpanded"
+    >
+      <span class="chevron" aria-hidden="true" />
+    </button>
 
     <GalleryLightbox
       :open="lightboxOpen"
@@ -58,7 +87,6 @@ function closeLightbox() {
 .title {
   margin: 0 0 40px;
   text-align: center;
-  font-family: $font-display;
   font-size: 1.38rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -67,11 +95,47 @@ function closeLightbox() {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2px;
-  background: rgba(72, 58, 54, 0.06);
+  background: #ffffff;
   padding: 2px;
   border-radius: 4px;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid #e4e3e2;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #979696;
+
+  &:focus-visible {
+    outline: 2px solid rgba(212, 163, 163, 0.55);
+    outline-offset: 2px;
+    border-radius: 999px;
+  }
+}
+
+// 꺽쇠 — 두 변을 보더로 그려 회전
+.chevron {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-3px) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.toggle--expanded .chevron {
+  transform: translateY(3px) rotate(-135deg);
 }
 
 .tile {

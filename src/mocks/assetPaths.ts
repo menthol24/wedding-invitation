@@ -30,6 +30,8 @@ import timeline2 from '@/assets/images/timeline/timeline2.jpg';
 import timeline3 from '@/assets/images/timeline/timeline3.png';
 import timeline4 from '@/assets/images/timeline/timeline4.png';
 import timeline5 from '@/assets/images/timeline/timeline5.jpg';
+import profileGroom from '@/assets/images/profile/ko2.png';
+import profileBride from '@/assets/images/profile/ms2.png';
 
 export const ASSET_URLS = {
   poster,
@@ -61,4 +63,6 @@ export const ASSET_URLS = {
   timeline3,
   timeline4,
   timeline5,
+  profileGroom,
+  profileBride,
 }

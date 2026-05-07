@@ -6,12 +6,15 @@ export interface TimelinePiece {
   alt?: string
 }
 
-defineProps<{ items: TimelinePiece[] }>()
+defineProps<{
+  title: string
+  items: TimelinePiece[]
+}>()
 </script>
 
 <template>
   <section class="tl section-pad section-pad--wide" aria-labelledby="tl-heading">
-    <h2 id="tl-heading" class="heading">우리의 시간</h2>
+    <h2 id="tl-heading" class="title">{{ title }}</h2>
 
     <div class="axis">
       <div v-for="(it, idx) in items" :key="idx" class="row" :class="{ 'row--flip': idx % 2 === 1 }">
@@ -30,10 +33,9 @@ defineProps<{ items: TimelinePiece[] }>()
 <style scoped lang="scss">
 @use '@/styles/variables' as *;
 
-.heading {
+.title {
   margin: 0 0 48px;
   text-align: center;
-  font-family: $font-display;
   font-size: 1.38rem;
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -51,7 +53,7 @@ defineProps<{ items: TimelinePiece[] }>()
     bottom: 40px;
     left: 50%;
     width: 1px;
-    background: rgba(169, 120, 134, 0.15);
+    background: rgb(69 69 69 / 15%);
     transform: translateX(-0.5px);
   }
 }
@@ -98,7 +100,7 @@ defineProps<{ items: TimelinePiece[] }>()
   grid-column: 3;
   grid-row: 1;
   justify-self: start;
-  padding-left: 12px;
+  padding-left: 10px;
   text-align: left;
 }
 
@@ -107,7 +109,7 @@ defineProps<{ items: TimelinePiece[] }>()
   grid-column: 3;
   justify-self: start;
   padding-right: 0;
-  padding-left: 12px;
+  padding-left: 10px;
 }
 
 .row--flip .content {

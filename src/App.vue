@@ -3,9 +3,9 @@ import { ref, watchEffect } from 'vue'
 import LoadingScreen from '@/components/LoadingScreen.vue'
 import FloatingActions from '@/components/FloatingActions.vue'
 import PosterSection from '@/components/sections/PosterSection.vue'
-import CeremonySection from '@/components/sections/CeremonySection.vue'
 import InvitationSection from '@/components/sections/InvitationSection.vue'
-import CoupleIntroSection from '@/components/sections/CoupleIntroSection.vue'
+import IntroSection from '@/components/sections/IntroSection.vue'
+import ProfileSection from '@/components/sections/ProfileSection.vue'
 import CalendarCountdownSection from '@/components/sections/CalendarCountdownSection.vue'
 import GallerySection from '@/components/sections/GallerySection.vue'
 import DirectionsSection from '@/components/sections/DirectionsSection.vue'
@@ -21,12 +21,13 @@ import {
   ceremonyInfo,
   invitationSection,
   couplesSection,
+  profileSection,
   countdownSection,
-  galleryImages,
+  gallerySection,
   directionsSection,
   transportInfo,
   venueGuideTabs,
-  timelineItems,
+  timelineSection,
   guestbookIntro,
   accountsSection,
 } from '@/mocks/wedding.mock'
@@ -72,10 +73,19 @@ function handleLoadingDone() {
           :paragraphs="invitationSection.paragraphs"
         />
 
-        <CoupleIntroSection
+        <IntroSection
           :groom="couplesSection.groom"
           :bride="couplesSection.bride"
         />
+
+        <ProfileSection
+          :title="profileSection.title"
+          :cards="profileSection.cards"
+        />
+
+        <TimelineSection
+            :title="timelineSection.title"
+            :items="timelineSection.items" />
 
         <CalendarCountdownSection
           :wedding-iso="WEDDING_EVENT_ISO"
@@ -89,15 +99,16 @@ function handleLoadingDone() {
           :dday-headline="countdownSection.ddayHeadline"
         />
 
-        <GallerySection :items="galleryImages" />
+        <GallerySection
+          :title="gallerySection.title"
+          :items="gallerySection.items"
+        />
 
         <DirectionsSection v-bind="directionsSection" />
 
         <TransportInfoSection :blocks="transportInfo.blocks" />
 
         <VenueGuideTabsSection :tabs="venueGuideTabs" />
-
-        <TimelineSection :items="timelineItems" />
 
         <GuestBookSection
           :title="guestbookIntro.title"
@@ -106,7 +117,10 @@ function handleLoadingDone() {
 
         <AccountsSection v-bind="accountsSection" />
 
-        <footer class="foot">with love</footer>
+        <footer class="foot">
+          <p class="foot__message">앞으로도 행복하게 살겠습니다!</p>
+          <p class="foot__signoff">구원, 민선 드림</p>
+        </footer>
       </div>
     </main>
 
@@ -115,6 +129,8 @@ function handleLoadingDone() {
 </template>
 
 <style lang="scss">
+@use '@/styles/variables' as *;
+
 .app {
   min-height: 100vh;
   /** 데스크톱에서 양 옆 라이트 그레이 */
@@ -170,13 +186,40 @@ function handleLoadingDone() {
   align-content: center;
 }
 
+// 모든 섹션 헤더(.title)는 $font-title 폰트를 사용 — 사이즈/마진 등 개별 디테일은 각 섹션에서 정의
+.canvas .title {
+  font-family: $font-title;
+}
+
 .canvas .foot {
   text-align: center;
-  padding: 40px 24px calc(88px + env(safe-area-inset-bottom));
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  letter-spacing: 0.28em;
-  font-size: 0.88rem;
-  color: rgba(110, 103, 99, 0.42);
+  padding: 56px 24px calc(96px + env(safe-area-inset-bottom));
+  color: var(--color-body-muted);
+}
+
+.canvas .foot__message {
+  margin: 0;
+  font-family: $font-title;
+  font-size: 1.05rem;
+  letter-spacing: 0.16em;
+  line-height: 1.6;
+  color: var(--color-section-heading);
+}
+
+.canvas .foot__divider {
+  display: block;
+  width: 28px;
+  height: 1px;
+  margin: 18px auto;
+  background: var(--color-accent);
+  opacity: 0.55;
+}
+
+.canvas .foot__signoff {
+  margin: 0;
+  font-family: $font-body;
+  font-size: 1.1rem;
+  color: var(--color-body-muted);
+  margin-top: 15px;
 }
 </style>

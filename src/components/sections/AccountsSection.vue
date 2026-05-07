@@ -113,9 +113,7 @@ async function copyNumber(num: string) {
 .title {
   margin: 0 0 32px;
   text-align: center;
-  font-family: $font-display;
-  font-size: 1.38rem;
-  font-weight: 500;
+  font-size: 1.1rem;
   letter-spacing: 0.08em;
   color: var(--color-section-heading);
 }

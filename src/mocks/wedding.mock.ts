@@ -39,6 +39,29 @@ export const couplesSection = {
   },
 }
 
+export const profileSection = {
+  title: 'About Us',
+  cards: [
+    {
+      id: 'groom',
+      roleLabel: '신랑',
+      name: '구원',
+      photoUrl: ASSET_URLS.profileGroom,
+      alt: '신랑 어린 시절 사진',
+      description: '1988년 12월 전주 출생\n트레이너, 성우, 사회자, 사업\n' +
+          '무엇이든 씩씩하게 해내는 재주꾼',
+    },
+    {
+      id: 'bride',
+      roleLabel: '신부',
+      name: '유민선',
+      photoUrl: ASSET_URLS.profileBride,
+      alt: '신부 어린 시절 사진',
+      description: '1991년 3월생 시흥 출신\n새로운 경험을 좋아하는 사람\n생존운동 열심히 하는\n웹개발자',
+    },
+  ],
+}
+
 export const countdownSection = {
   meetSinceIso: '2020-04-16',
   ddayHeadline: '구원과 민선이가 함께한 시간',
@@ -53,13 +76,17 @@ export const countdownSection = {
   countdownHeadline: '우리의 결혼식까지',
 }
 
-export const galleryImages = ASSET_URLS.gallery.map((url, index) => ({
-  id: `g-${index + 1}`,
-  src: url,
-  alt: `웨딩 갤러리 ${index + 1}`,
-}))
+export const gallerySection = {
+  title: 'Gallery',
+  items: ASSET_URLS.gallery.map((url, index) => ({
+    id: `g-${index + 1}`,
+    src: url,
+    alt: `웨딩 갤러리 ${index + 1}`,
+  })),
+}
 
 export const directionsSection = {
+  title: 'Location',
   venueTitle: '더베르G',
   hallLine: '단독홀',
   phone: '02-2088-5272',
@@ -139,44 +166,48 @@ export const venueGuideTabs = [
   },
 ] as const
 
-export const timelineItems = [
-  {
-    text: '2020년 고등학교 친구의 소개로 만난 우리. 신랑의 구애 끝에 세번째 만남에 사귀게 되었어요.',
-    photoUrl: ASSET_URLS.timeline1,
-    alt: '첫만남',
-  },
-  {
-    text: '신랑 덕에 신부도 운동에 눈을 떴어요. 하지만 둘 다 먹고 마시는 걸 좋아해서 살 빼기가 힘들어요T_T',
-    photoUrl: ASSET_URLS.timeline2,
-    alt: '운동',
-  },
-  {
-    text: '우리의 인생 여행지는 오키나와! 날씨도 일정도 음식도 바다도 모두 완벽. 또 가고싶다~',
-    photoUrl: ASSET_URLS.timeline3,
-    alt: '여행',
-  },
-  {
-    text: '신부는 감성적이고 조화로운 ENFJ, 신랑은 사고적이지만 유연한 ENTP. 최고의 커플이에요.',
-    photoUrl: ASSET_URLS.timeline4,
-    alt: '최고의 조합',
-  },
-  {
-    text: '작년 11월 신부의 로망이었던 한강이 보이는 레스토랑에서 프로포즈♥️',
-    photoUrl: ASSET_URLS.timeline5,
-    alt: '프로포즈',
-  },
-]
+export const timelineSection = {
+  title: 'Our Timeline',
+  items: [
+    {
+      text: '2020년 고등학교 친구의 소개로 만난 우리. 신랑의 구애 끝에 세번째 만남에 사귀게 되었어요.',
+      photoUrl: ASSET_URLS.timeline1,
+      alt: '첫만남',
+    },
+    {
+      text: '신랑 덕에 신부도 운동에 눈을 떴어요. 하지만 둘 다 먹고 마시는 걸 좋아해서 살이 안빠져요T_T',
+      photoUrl: ASSET_URLS.timeline2,
+      alt: '운동',
+    },
+    {
+      text: '우리의 인생 여행지 오키나와! 날씨도 일정도 음식도 바다도 모두 완벽. 또 가고싶다~',
+      photoUrl: ASSET_URLS.timeline3,
+      alt: '여행',
+    },
+    {
+      text: '신부는 감성적이고 조화로운 ENFJ, 신랑은 사고적이지만 유연한 ENTP. 최고의 커플!',
+      photoUrl: ASSET_URLS.timeline4,
+      alt: '최고의 조합',
+    },
+    {
+      text: '작년 11월 신부의 로망이었던 한강이 보이는 레스토랑에서 프로포즈♥️',
+      photoUrl: ASSET_URLS.timeline5,
+      alt: '프로포즈',
+    },
+  ]
+}
+
 
 export const guestbookIntro = {
-  title: '방명록',
+  title: 'Message',
   emptyMessageLines: ['아직 작성된 방명록이 없습니다.', '첫 방명록을 작성해주세요.'],
 }
 
 export const accountsSection = {
   title: '마음 전하실 곳',
   introLines: [
-    '멀리서도 축하의 마음을 전하고 싶으신 분들을 위해\n계좌번호를 안내드립니다.',
-    '소중한 축하를 보내주셔서 감사드리며,\n따뜻한 마음에 깊이 감사드립니다.',
+    '멀리서도 축하의 마음을 전하고 싶으신 분들을 위해\n기재했습니다.',
+    '너그러운 마음으로 양해 부탁드립니다.',
   ],
   groups: [
     {

@@ -261,7 +261,6 @@ function jumpToPage(n: number) {
 .title {
   margin: 0;
   text-align: center;
-  font-family: $font-display;
   font-size: 1.38rem;
   font-weight: 500;
   letter-spacing: 0.08em;
