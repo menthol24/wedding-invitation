@@ -12,7 +12,7 @@ export interface GalleryItem {
 const props = defineProps<{ title?: string; items: GalleryItem[] }>()
 
 // 3열 × 5행 = 15장까지 펼치기 전 노출
-const COLLAPSED_ROWS = 5
+const COLLAPSED_ROWS = 4
 const COLUMNS = 3
 const COLLAPSED_COUNT = COLLAPSED_ROWS * COLUMNS
 

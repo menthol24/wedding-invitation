@@ -56,7 +56,7 @@ function onSubmit(ev: Event) {
               <span class="label">내용</span>
               <textarea v-model="form.message" rows="5" class="textarea" />
             </label>
-            <span style="font-size: 12px;">부적절한 글은 민선이에 의해 삭제될 수 있음</span>
+            <span style="font-size: 12px;">부적절한 글은 무통보 삭제될 수 있음!</span>
             <div class="actions">
               <button type="button" class="btn btn--muted" @click="emit('close')">취소</button>
               <button type="submit" class="btn btn--accent" :disabled="busy">

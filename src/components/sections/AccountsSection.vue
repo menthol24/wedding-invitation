@@ -110,10 +110,11 @@ async function copyNumber(num: string) {
 <style scoped lang="scss">
 @use '@/styles/variables' as *;
 
-.title {
-  font-size: $fs-md !important;
-  margin-bottom: 20px !important;
-  font-family: $font-title-kor !important;
+#acct-heading {
+  font-size: $fs-md;
+  margin-bottom: 20px;
+  font-family: $font-title-kor;
+  letter-spacing: $ls-base;
 }
 
 .intro {
@@ -123,9 +124,8 @@ async function copyNumber(num: string) {
   .line {
     margin: 0 0 14px;
     font-size: $fs-base;
-    line-height: $lh-relaxed;
+    line-height: $lh-base;
     color: var(--color-body-muted);
-    white-space: pre-line;
 
     &:last-child {
       margin-bottom: 0;
@@ -250,24 +250,13 @@ async function copyNumber(num: string) {
 }
 
 .chip {
-  padding: 14px 16px;
+  padding: 8px 12px;
   border-radius: 4px;
   font-size: $fs-xs;
   font-weight: 500;
   border: 1px solid rgba(72, 58, 54, 0.12);
   background: #ffffff;
   color: var(--color-body-muted);
-}
-
-.chip--pay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: #fee500;
-  color: #191919;
-  font-weight: 700;
-  min-height: 36px;
 }
 
 .pay-mark {

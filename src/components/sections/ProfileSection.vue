@@ -146,9 +146,7 @@ defineProps<{
   margin: 0;
   font-size: $fs-base;
   line-height: $lh-base;
-
   color: var(--color-body-muted);
-  white-space: pre-line;
 }
 
 </style>

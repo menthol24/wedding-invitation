@@ -143,7 +143,6 @@ function iconFor(label: string): string | undefined {
   line-height: $lh-relaxed;
   color: var(--color-body-muted);
   margin-inline: auto;
-  white-space: pre-line;
 }
 
 .map-shell {

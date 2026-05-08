@@ -118,8 +118,8 @@ async function onShareKakao() {
   margin: 0;
   font-family: $font-title-kor;
   font-size: $fs-md;
-  letter-spacing: $ls-wide;
-  line-height: $lh-relaxed;
+  letter-spacing: $ls-base;
+  line-height: $lh-base;
   color: var(--color-section-heading);
 }
 

@@ -17,7 +17,7 @@ export const ceremonySection = {
 export const invitationSection = {
   headline: '소중한 분들을 초대합니다.',
   paragraphs: [
-    ['눈부신 젊음처럼 찬란한 여름', '푸른 녹음이 바람에 일렁이는 아름다운 날,\n\n', '서로의 가장 든든한 편이 되기로 약속합니다.'],
+    ['눈부신 젊음처럼 찬란한 여름', '푸른 녹음이 바람에 일렁이는 아름다운 날,', '서로의 가장 든든한 편이 되기로 약속합니다.'],
     ['귀한 걸음으로 함께 축복해 주시면 감사하겠습니다.'],
   ],
 }
@@ -57,7 +57,7 @@ export const profileSection = {
       name: '유민선',
       photoUrl: ASSET_URLS.profileBride,
       alt: '신부 어린 시절 사진',
-      description: '1991년 3월생 시흥 출신\n새로운 경험을 좋아하는 사람\n생존운동 열심히 하는 웹개발자',
+      description: '1991년 3월생 시흥 출신\n조금 게으른 완벽주의자\n생존운동 열심히 하는 웹개발자',
     },
   ],
 }
@@ -235,7 +235,7 @@ export const accountsSection = {
 }
 
 export const footerSection = {
-  message: '앞으로도 행복하게 살겠습니다!',
+  message: '소중한 축복과 따뜻한 마음,\n오래도록 잊지 않겠습니다.',
   signoff: '구원, 민선 드림',
 }
 

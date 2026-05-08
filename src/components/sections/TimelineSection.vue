@@ -13,7 +13,6 @@ const props = defineProps<{
   items: TimelinePiece[]
   /** 두 사람이 처음 만난 날 (ISO: YYYY-MM-DD) — 디데이 계산용 */
   meetSinceIso?: string
-  /** 디데이 윗줄 라벨 — 예: "구원과 민선이가 함께한 시간" */
   ddayLabel?: string
 }>()
 

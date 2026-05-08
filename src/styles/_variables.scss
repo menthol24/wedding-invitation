@@ -53,7 +53,7 @@
 
 $font-poster-script: 'BulgaryRose', cursive;
 $font-title-eng: 'EthrealExtraLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
-$font-title-kor: 'Cafe24OhsquareAir', 'Apple SD Gothic Neo', system-ui, sans-serif;
+$font-title-kor: 'NanumRegular', 'Apple SD Gothic Neo', system-ui, sans-serif;
 $font-body: 'PretendardLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
 $font-body-strong: 'PretendardRegular', 'Apple SD Gothic Neo', system-ui, sans-serif;
 
@@ -109,6 +109,7 @@ $lh-loose:   1.85;   // 긴 본문, 주소
 
   /** 디데이 원형 배지 */
   --color-countdown-pink: #f7b8bf;
+  --color-calendar-sun: #ff3939;
 
   /** 신랑 / 신부 역할 컬러 */
   --color-role-groom: #5f93b7;

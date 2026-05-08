@@ -57,10 +57,9 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 .line {
   margin: 0;
   font-size: $fs-base;
-  line-height: $lh-relaxed;
+  line-height: $lh-base;
   letter-spacing: $ls-base;
   color: var(--color-body);
-  white-space: pre-line;
 
 }
 

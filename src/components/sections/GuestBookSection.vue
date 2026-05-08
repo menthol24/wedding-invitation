@@ -255,7 +255,6 @@ function jumpToPage(n: number) {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0 32px;
 }
 .write-btn {
   position: absolute;
