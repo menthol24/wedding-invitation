@@ -171,16 +171,16 @@ withDefaults(
 
 .poster__names-role {
   font-family: $font-body;
-  font-size: 0.78rem;
-  letter-spacing: 0.05em;
+  font-size: $fs-xs;
+  letter-spacing: $ls-wide;
   opacity: 0.85;
 }
 
 .poster__names-given {
   font-family: $font-body;
-  font-size: 0.95rem;
+  font-size: $fs-base;
   font-weight: 500;
-  letter-spacing: 0.05em;
+  letter-spacing: $ls-wide;
 }
 
 .poster__copy {
@@ -204,13 +204,14 @@ withDefaults(
 }
 
 .poster__line {
+  width:100%;
   display: inline-block;
   margin: 0;
   font-family: $font-poster-script;
   font-size: clamp(3.0rem, 9vw, 3.6rem);
   font-weight: 400;
-  letter-spacing: 0.04em;
-  line-height: 1.3;
+
+  line-height: $lh-tight;
   color: var(--color-poster-gold);
   white-space: nowrap;
   opacity: 0;
@@ -372,19 +373,17 @@ $sparkles: (
 
 .date {
   margin: 0px auto 0px;
-  font-size: 0.94rem;
+  font-size: $fs-base;
   font-weight: 500;
-  letter-spacing: 0.01em;
   color: #ffffff;
-  line-height: 1.2;
+  line-height: $lh-tight;
 }
 
 .venue {
   margin: 0 auto 0px;
-  font-size: 1rem;
+  font-size: $fs-md;
   font-weight: 500;
   color: #ffffff;
-  letter-spacing: 0.03em;
-  line-height: 1.75;
+  line-height: $lh-loose;
 }
 </style>

@@ -18,8 +18,7 @@ body {
   font-family: $font-body;
   font-weight: 400;
   font-size: 0.3rem;
-  letter-spacing: -0.1em;
-  line-height: 0.1;
+  letter-spacing: $ls-base;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -36,10 +35,19 @@ button {
 }
 
 .title {
-  letter-spacing: -0.01em !important;
-  word-spacing: -0.05em;
+  font-family: $font-title-eng;
+  font-size: 1.9rem;
+  text-align: center;
+  letter-spacing: -0.01em;
+  margin: 0px 10px 40px 10px;
+  color: var(--color-section-heading);
 }
+
 .heading {
   letter-spacing: -0.01em !important;
   word-spacing: -0.05em;
+}
+
+p {
+  margin: 0;
 }

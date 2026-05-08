@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'BulgaryRoseFont';
+  font-family: 'BulgaryRose';
   src: url('@/assets/fonts/BulgaryRose-L3ggG.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
@@ -7,25 +7,32 @@
 }
 
 @font-face {
-  font-family: 'NanumRegularFont';
-  src: url('@/assets/fonts/NanumSquareAcR.woff2') format('truetype');
+  font-family: 'NanumRegular';
+  src: url('@/assets/fonts/NanumSquareAcR.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'PretendardMediumFont';
-  src: url('@/assets/fonts/Pretendard-Medium.woff2') format('truetype');
-  font-weight: 400;
+  font-family: 'PretendardMedium';
+  src: url('@/assets/fonts/Pretendard-Medium.woff2') format('woff2');
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'PretendardLightFont';
-  src: url('@/assets/fonts/Pretendard-Light.woff2') format('truetype');
-  font-weight: 400;
+  font-family: 'PretendardLight';
+  src: url('@/assets/fonts/Pretendard-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ClassyVogue';
+  src: url('@/assets/fonts/Classyvogueregular.ttf') format('truetype');
   font-style: normal;
   font-display: swap;
 }
@@ -33,70 +40,97 @@
 @font-face {
   font-family: 'Cafe24OhsquareAir';
   src: url('@/assets/fonts/Cafe24OhsquareAir-v2.0.ttf') format('truetype');
-  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-$font-poster-script: 'BulgaryRoseFont', cursive;
-$font-display: 'PretendardMediumFont', 'Apple SD Gothic Neo', system-ui, sans-serif;
-$font-body: 'NanumRegularFont', 'Apple SD Gothic Neo', system-ui, sans-serif;
-$font-title: 'Cafe24OhsquareAir', 'Apple SD Gothic Neo', system-ui, sans-serif;
+@font-face {
+  font-family: 'EthrealExtraLight';
+  src: url('@/assets/fonts/EtherealDemo-ExtraLight.otf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
 
+$font-poster-script: 'BulgaryRose', cursive;
+$font-title-eng: 'EthrealExtraLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
+$font-title-kor: 'Cafe24OhsquareAir', 'Apple SD Gothic Neo', system-ui, sans-serif;
+$font-body: 'PretendardLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
+$font-body-strong: 'PretendardRegular', 'Apple SD Gothic Neo', system-ui, sans-serif;
+
+/** 타이포 토큰 — 모든 섹션에서 이 값들만 사용 */
+// font-size 단계
+$fs-xs:   0.78rem;  // 캡션, 라벨
+$fs-sm:   0.84rem;  // 보조 본문, 작은 메타
+$fs-base: 0.9rem;   // 본문 기본
+$fs-md:   1.05rem;  // 강조 본문, 부제
+$fs-lg:   1.2rem;   // 인사 헤드라인
+$fs-xl:   1.4rem;   // 디데이 숫자
+$fs-xxl:   2.0rem;   // 섹션 타이틀
+
+// letter-spacing 단계
+$ls-base:   0;       // 본문 기본
+$ls-wide:   0.04em;  // 약한 강조
+$ls-wider:  0.12em;  // 큰 영문 타이틀, 메시지
+
+// line-height 단계
+$lh-narrow:  0.1;      // 라인 박스 정렬용 (화살표 등)
+$lh-flat:    1;      // 라인 박스 정렬용 (화살표 등)
+$lh-tight:   1.2;    // 포스터 타이틀
+$lh-base:    1.42;    // 기본 본문, UI
+$lh-relaxed: 1.6;   // 인사 본문, 인트로
+$lh-loose:   1.85;   // 긴 본문, 주소
 :root {
   --page-max: 430px;
 
-  /** 참고안 — 거의 화이트에 가까운 아이보리 */
-  --color-bg: #fdfdfd;
-  --color-bg-medium: rgba(255, 250, 233, 0.7);
-  --color-bg-soft: rgba(255, 249, 239, 0.56);
+  /** 전체 배경 - 밝고 깨끗한 크림 아이보리 */
+  --color-bg: #fffdf8;
+  --color-bg-medium: rgba(255, 246, 229, 0.8);
+  --color-bg-soft: rgba(255, 250, 233, 0.95);
   --color-surface: #ffffff;
-  --color-border: rgba(72, 58, 54, 0.07);
+  --color-border: rgba(92, 66, 58, 0.08);
 
   /** 로딩 텍스트 그라데이션 **/
   --color-loading-gradation: linear-gradient(
-      135deg,
-      #c49595 0%,
-      #df9f9f 35%,
-      #e9c79c 75%,
-      #c49595 100%
+                  135deg,
+                  #c77d86 0%,
+                  #ee9ea6 38%,
+                  #f2c27e 72%,
+                  #c77d86 100%
   );
 
-  /** 로즈 베이지 / 더스트 핑크 톤 */
-  --color-accent: #d4a3a3;
-  --color-accent-strong: #c49595;
-  --color-accent-soft: rgba(212, 163, 163, 0.14);
+  /** 메인 포인트 - 생기 있는 피치핑크 */
+  --color-accent: #eea5aa;
+  --color-accent-strong: #c77d86;
+  --color-accent-soft: rgba(238, 165, 170, 0.18);
 
   /** 섹션 제목 */
-  --color-section-heading: #df9f9f;
-
+  --color-section-heading: #ec9ca4;
+  --color-section-item-heading: #d98188;
 
   /** 디데이 원형 배지 */
-  --color-countdown-pink: #f0b8bc;
+  --color-countdown-pink: #f7b8bf;
 
-  /** 신랑 / 신부 역할 컬러 — 신랑: 청록, 신부: 진한 분홍 */
-  --color-role-groom: #6393c7;
-  --color-role-bride: #c84b7a;
+  /** 신랑 / 신부 역할 컬러 */
+  --color-role-groom: #5f93b7;
+  --color-role-bride: #e4869a;
 
   /** 본문 */
-  --color-body: #4a4a4a;
-  --color-body-muted: #7a7572;
+  --color-body: #413a36;
+  --color-body-muted: #746a64;
+  --color-body-light-grey: #9e9998;
 
-  --color-text: var(--color-body);
-  --color-text-muted: var(--color-body-muted);
+  /** 포스터 스크립트 — 샴페인 골드 */
+  --color-poster-gold: #ffe8a8;
+  --color-poster-gold-soft: #f3d28f;
 
-  /** 히어로 스크립트 — 샴페인 골드 */
-  --color-poster-gold: #ffeebf;
-  --color-poster-gold-soft: #f0dcb8;
+  --color-poster-overlay: rgba(255, 253, 248, 0.96);
 
-  --color-poster-overlay: rgba(252, 249, 245, 0.97);
+  --radius-card: 14px;
+  --radius-photo: 12px;
+  --radius-button: 999px;
 
-  --radius-card: 12px;
-  --radius-photo: 10px;
-  --radius-button: 6px;
-
-  --shadow-soft: 0 4px 20px rgba(42, 36, 34, 0.04);
-  --shadow-lift: 0 2px 10px rgba(42, 36, 34, 0.035);
+  --shadow-soft: 0 8px 26px rgba(72, 54, 45, 0.06);
+  --shadow-lift: 0 4px 14px rgba(72, 54, 45, 0.055);
 
   font-synthesis-weight: none;
 }

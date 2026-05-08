@@ -50,17 +50,9 @@ defineProps<{
 @use '@/styles/variables' as *;
 
 // 섹션 자체에 연한 아이보리/베이지 배경을 깔아 카드(흰색)와 대비
-.profile {
-  /*background: var(--color-bg-soft);*/
-}
-
-.title {
-  margin: 0 0 50px;
-  text-align: center;
-  font-size: 1.38rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--color-section-heading);
+#profile-heading {
+  text-align: right;
+  margin-bottom: 15px;
 }
 
 .stack {
@@ -122,10 +114,10 @@ defineProps<{
 
 .role {
   margin: 0 0 8px;
-  font-family: $font-display;
-  font-size: 0.78rem;
+  font-family: $font-body;
+  font-size: $fs-xs;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: $ls-wider;
   text-transform: uppercase;
 }
 
@@ -143,18 +135,18 @@ defineProps<{
 
 .name {
   margin-left: 8px;
-  font-family: $font-display;
-  font-size: 1.0rem;
+  font-family: $font-body;
+  font-size: $fs-md;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: $ls-wide;
   color: var(--color-body);
 }
 
 .desc {
   margin: 0;
-  font-size: 0.88rem;
-  line-height: 1.5;
-  letter-spacing: 0.01em;
+  font-size: $fs-base;
+  line-height: $lh-base;
+
   color: var(--color-body-muted);
   white-space: pre-line;
 }

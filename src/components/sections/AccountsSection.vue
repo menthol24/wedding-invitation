@@ -111,11 +111,9 @@ async function copyNumber(num: string) {
 @use '@/styles/variables' as *;
 
 .title {
-  margin: 0 0 32px;
-  text-align: center;
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
-  color: var(--color-section-heading);
+  font-size: $fs-md !important;
+  margin-bottom: 20px !important;
+  font-family: $font-title-kor !important;
 }
 
 .intro {
@@ -124,10 +122,9 @@ async function copyNumber(num: string) {
 
   .line {
     margin: 0 0 14px;
-    font-size: 0.9rem;
-    line-height: 1.62;
+    font-size: $fs-base;
+    line-height: $lh-relaxed;
     color: var(--color-body-muted);
-    letter-spacing: 0.01em;
     white-space: pre-line;
 
     &:last-child {
@@ -157,9 +154,9 @@ async function copyNumber(num: string) {
   border: none;
   border-bottom: 1px solid rgba(72, 58, 54, 0.06);
   background: transparent;
-  font-size: 0.92rem;
+  font-size: $fs-base;
   font-weight: 500;
-  letter-spacing: 0.04em;
+
 }
 
 .acc__label {
@@ -206,16 +203,16 @@ async function copyNumber(num: string) {
 .info {
   flex: 1;
   min-width: 0;
-  line-height: 1.5;
+  line-height: $lh-base;
 }
 
 .role {
   margin: 0 0 6px;
-  font-size: 0.78rem;
+  font-size: $fs-xs;
   font-weight: 600;
   color: var(--color-section-heading);
-  letter-spacing: 0.06em;
-  line-height: 1.5
+  letter-spacing: $ls-wide;
+  line-height: $lh-base;
 }
 
 // 그룹별 신랑/신부 색상 — acc__label(아코디언 헤더)과 row의 .role 모두 적용
@@ -231,18 +228,17 @@ async function copyNumber(num: string) {
 
 .num {
   margin: 0 0 8px;
-  font-size: 0.92rem;
+  font-size: $fs-base;
   font-weight: 600;
-  letter-spacing: 0.05em;
   color: var(--color-body);
   font-variant-numeric: tabular-nums;
 }
 
 .bank {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: $fs-sm;
   color: var(--color-body-muted);
-  line-height: 1.5;
+  line-height: $lh-base;
 }
 
 .ops {
@@ -256,7 +252,7 @@ async function copyNumber(num: string) {
 .chip {
   padding: 14px 16px;
   border-radius: 4px;
-  font-size: 0.72rem;
+  font-size: $fs-xs;
   font-weight: 500;
   border: 1px solid rgba(72, 58, 54, 0.12);
   background: #ffffff;
@@ -275,7 +271,7 @@ async function copyNumber(num: string) {
 }
 
 .pay-mark {
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
+  font-size: $fs-xs;
+
 }
 </style>

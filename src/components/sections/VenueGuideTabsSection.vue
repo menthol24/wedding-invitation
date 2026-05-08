@@ -10,7 +10,7 @@ export type VenueTab = {
   blocks: { subtitle: string; lines: string[] }[]
 }
 
-const props = defineProps<{ tabs: readonly VenueTab[] }>()
+const props = defineProps<{ title?: string; tabs: readonly VenueTab[] }>()
 
 const activeId = ref(props.tabs[0]?.id ?? '')
 
@@ -80,6 +80,8 @@ function chooseTab(id: string) {
 
 <template>
   <section class="guide section-pad section-pad--wide" aria-labelledby="guide-heading">
+    <h2 v-if="props.title" id="guide-heading" class="title">{{ props.title }}</h2>
+
     <div class="tablist" role="tablist" aria-label="예식장 부가 안내">
       <button
         v-for="t in tabs"
@@ -179,15 +181,6 @@ function chooseTab(id: string) {
 <style scoped lang="scss">
 @use '@/styles/variables' as *;
 
-.title {
-  margin: 0 0 36px;
-  text-align: center;
-  font-size: 1.38rem;
-  font-weight: 500;
-  letter-spacing: 0.07em;
-  color: var(--color-section-heading);
-}
-
 .tablist {
   display: flex;
   gap: 0;
@@ -200,9 +193,8 @@ function chooseTab(id: string) {
     border: none;
     padding: 12px 0 16px;
     flex: 1;
-    font-size: 0.9rem;
+    font-size: $fs-base;
     font-weight: 500;
-    letter-spacing: 0.03em;
     color: var(--color-body-muted);
     position: relative;
   }
@@ -220,7 +212,7 @@ function chooseTab(id: string) {
   }
 
   .tab--active {
-    color: var(--color-section-heading);
+    color: var(--color-section-item-heading);
   }
 
   .tab--active::after {
@@ -258,18 +250,16 @@ function chooseTab(id: string) {
 
 .sub {
   margin: 0 0 10px;
-  font-size: 0.88rem;
+  font-size: $fs-base;
   font-weight: 600;
-  color: var(--color-section-heading);
+  color: var(--color-section-item-heading);
 }
 
 .para {
   margin: 0 0 7px;
-  font-size: 0.86rem;
-  line-height: 1.85;
+  font-size: $fs-sm;
+  line-height: $lh-base;
   color: var(--color-body-muted);
-  letter-spacing: 0.01em;
-
   &:last-child {
     margin-bottom: 0;
   }

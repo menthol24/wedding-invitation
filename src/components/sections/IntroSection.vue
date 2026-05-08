@@ -72,9 +72,9 @@ defineProps<{
 }
 
 .role {
-  font-size: 0.82rem;
+  font-size: $fs-sm;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: $ls-wider;
   color: var(--color-section-heading);
 }
 
@@ -88,10 +88,10 @@ defineProps<{
 }
 
 .given {
-  font-family: $font-display;
-  font-size: 1.18rem;
+  font-family: $font-body;
+  font-size: $fs-md;
   font-weight: 500;
-  letter-spacing: 0.05em;
+  letter-spacing: $ls-wide;
   color: var(--color-body);
 }
 
@@ -110,9 +110,7 @@ defineProps<{
 
 .parents {
   margin: 0;
-  font-size: 0.86rem;
-  line-height: 1.78;
-  letter-spacing: 0.02em;
+  font-size: $fs-sm;
   color: var(--color-body-muted);
 }
 

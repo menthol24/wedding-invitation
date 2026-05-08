@@ -42,10 +42,10 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 
 .heading {
   margin: 0 0 40px;
-  font-size: 1.2rem;
+  font-size: $fs-lg;
   font-weight: 500;
   color: var(--color-section-heading);
-  letter-spacing: 0.01em;
+
   word-spacing: 0.02em !important;
 }
 
@@ -56,9 +56,9 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 
 .line {
   margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.62;
-  letter-spacing: -0.01em;
+  font-size: $fs-base;
+  line-height: $lh-relaxed;
+  letter-spacing: $ls-base;
   color: var(--color-body);
   white-space: pre-line;
 

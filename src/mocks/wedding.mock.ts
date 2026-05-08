@@ -3,13 +3,13 @@ import { ASSET_URLS } from './assetPaths'
 /** 예식 시작 시각 (로컬) — 카운트다운·달력에 사용 */
 export const WEDDING_EVENT_ISO = '2026-08-16T15:30:00+09:00'
 
-export const weddingPoster = {
+export const posterSection = {
   imageUrl: ASSET_URLS.poster,
   /** 스크립트 히어로 — 두 줄 권장 */
   titleLines: ['We\'re getting', 'married!'],
 }
 
-export const ceremonyInfo = {
+export const ceremonySection = {
   dateLabel: '2026.08.16(일) 15:30',
   venueName: '영등포 더베르G 단독홀',
 }
@@ -40,7 +40,7 @@ export const couplesSection = {
 }
 
 export const profileSection = {
-  title: 'About Us',
+  title: 'ABOUT US',
   cards: [
     {
       id: 'groom',
@@ -57,27 +57,29 @@ export const profileSection = {
       name: '유민선',
       photoUrl: ASSET_URLS.profileBride,
       alt: '신부 어린 시절 사진',
-      description: '1991년 3월생 시흥 출신\n새로운 경험을 좋아하는 사람\n생존운동 열심히 하는\n웹개발자',
+      description: '1991년 3월생 시흥 출신\n새로운 경험을 좋아하는 사람\n생존운동 열심히 하는 웹개발자',
     },
   ],
 }
 
-export const countdownSection = {
+export const calendarSection = {
+  title: 'WEDDING DAY',
   meetSinceIso: '2020-04-16',
-  ddayHeadline: '구원과 민선이가 함께한 시간',
-  titleLines: ['팔월의 열여섯 번째 날'],
+  ddayHeadline: '구원과 민선이 함께한 시간',
+  weddingDay: '2026년 8월 16일 일요일 | 오후 3시반',
+  weddingDayEng: 'Sunday, Aug 16, 2026 | PM 3:30',
   calendarYear: 2026,
   /** 8월 → 0-based 7 */
   calendarMonthIndex: 7,
   highlightedDay: 16,
   /** 달력 강조일 아래 작은 글씨 */
-  ceremonyTimeShort: '오후 3:20',
+  ceremonyTimeShort: '오후 3:30',
   /** 디데이 상단 한 줄 */
   countdownHeadline: '우리의 결혼식까지',
 }
 
 export const gallerySection = {
-  title: 'Gallery',
+  title: 'GALLERY',
   items: ASSET_URLS.gallery.map((url, index) => ({
     id: `g-${index + 1}`,
     src: url,
@@ -85,12 +87,12 @@ export const gallerySection = {
   })),
 }
 
-export const directionsSection = {
-  title: 'Location',
+export const locationSection = {
+  title: 'LOCATION',
   venueTitle: '더베르G',
   hallLine: '단독홀',
   phone: '02-2088-5272',
-  address: '서울 영등포구 국회대로 612 (당산동3가 2-7)',
+  address: '서울 영등포구 국회대로 612 (당산동3가 2-7)\n코레일유통사옥 2층',
   /** 네이버 지도 API 중심 좌표 (필요 시 주소 검색 후 수정) */
   map: {
     lat: 37.525952,
@@ -102,23 +104,19 @@ export const directionsSection = {
     { label: '카카오맵', href: 'https://kko.to/SmW6dQx3k4' },
     { label: '네이버지도', href: 'https://map.naver.com/p/directions/-/3zetzr,2AKl3Y,%EB%8D%94%EB%B2%A0%EB%A5%B4G,,/-/car?c=15.00,0,0,0,dh' },
   ],
-}
-
-export const transportInfo = {
-  blocks: [
+  transportBlocks: [
     {
-      subtitle: '[지하철]',
+      subtitle: '🚇지하철',
       lines: ['2·5호선 영등포구청역 4번 출구에서 566m(도보 약 7분)'],
     },
     {
-      subtitle: '[셔틀버스]',
+      subtitle: '🚌셔틀버스',
       lines: [
-        '영등포구청역 5번 출구 ↔ 더베르G 주차장 입구 좌측',
-        '순환 운행',
+        '영등포구청역 5번 출구 ↔ 더베르G 주차장 입구 좌측 순환 운행',
       ],
     },
     {
-      subtitle: '[주차]',
+      subtitle: '🚗주차',
       lines: [
         '건물 내 지하주차장 이용(2시간 무료 주차)',
         '2층 웰컴드링크존 또는 지하 1층 연회장에서 주차등록 후 출차',
@@ -127,47 +125,49 @@ export const transportInfo = {
   ],
 }
 
-export const venueGuideTabs = [
-  {
-    id: 'welcome',
-    title: '웰컴드링크',
-    imageUrl: ASSET_URLS.tabWelcomeDrinks,
-    imageAlt: '웰컴 드링크 안내 이미지',
-    blocks: [
-      {
-        subtitle: '[웰컴드링크 안내]',
-        lines: ['귀한 발걸음 해주신 하객분들을 위해 로비에 간단한 음료가 준비되어 있습니다. 식 전에 여유롭게 즐겨주세요.'],
-      },
-    ],
-  },
-  {
-    id: 'bridal-room',
-    title: '신부대기실',
-    imageUrl: ASSET_URLS.tabBrideWaiting,
-    imageAlt: '신부대기실',
-    blocks: [
-      {
-        subtitle: '[신부대기실 위치 및 인사 가능 시간]',
-        lines: ['홀 왼편 \'베르아일(복도)\' 끝에 위치, 사진 촬영 및 인사는 예식 시작 15분 전까지 가능합니다.'],
-      },
-    ],
-  },
-  {
-    id: 'atm',
-    title: 'ATM 안내',
-    imageUrl: ASSET_URLS.tabAtm,
-    imageAlt: 'ATM 위치 안내',
-    blocks: [
-      {
-        subtitle: '[위치]',
-        lines: ['더베르G 2층 접수대 좌측 끝 포토월 옆에 2대가 있습니다.'],
-      },
-    ],
-  },
-] as const
+export const venueGuideSection = {
+  title: 'VENUE GUIDE',
+  tabs: [
+    {
+      id: 'welcome',
+      title: '웰컴드링크',
+      imageUrl: ASSET_URLS.tabWelcomeDrinks,
+      imageAlt: '웰컴 드링크 안내 이미지',
+      blocks: [
+        {
+          subtitle: '🍹웰컴드링크 안내',
+          lines: ['귀한 발걸음 해주신 하객분들을 위해 로비에 간단한 음료가 준비되어 있습니다. 식 전에 여유롭게 즐겨주세요.'],
+        },
+      ],
+    },
+    {
+      id: 'bridal-room',
+      title: '신부대기실',
+      imageUrl: ASSET_URLS.tabBrideWaiting,
+      imageAlt: '신부대기실',
+      blocks: [
+        {
+          subtitle: '👰🏻신부대기실 위치 및 인사 가능 시간',
+          lines: ['홀 왼편 \'베르아일(복도)\' 끝에 위치, 사진 촬영 및 인사는 예식 시작 15분 전까지 가능합니다.'],
+        },
+      ],
+    },
+    {
+      id: 'atm',
+      title: 'ATM 안내',
+      imageUrl: ASSET_URLS.tabAtm,
+      imageAlt: 'ATM 위치 안내',
+      blocks: [
+        {
+          subtitle: '💳ATM 위치',
+          lines: ['더베르G 2층 접수대 좌측 끝 포토월 옆에 2대가 있습니다.'],
+        },
+      ],
+    },
+  ],
+} as const
 
 export const timelineSection = {
-  title: 'Our Timeline',
   items: [
     {
       text: '2020년 고등학교 친구의 소개로 만난 우리. 신랑의 구애 끝에 세번째 만남에 사귀게 되었어요.',
@@ -198,16 +198,15 @@ export const timelineSection = {
 }
 
 
-export const guestbookIntro = {
-  title: 'Message',
+export const guestbookSection = {
+  title: 'MESSAGE',
   emptyMessageLines: ['아직 작성된 방명록이 없습니다.', '첫 방명록을 작성해주세요.'],
 }
 
 export const accountsSection = {
   title: '마음 전하실 곳',
   introLines: [
-    '멀리서도 축하의 마음을 전하고 싶으신 분들을 위해\n기재했습니다.',
-    '너그러운 마음으로 양해 부탁드립니다.',
+    '참석이 어려우신 분들을 위해 기재했습니다.\n너그러운 마음으로 양해 부탁드립니다.',
   ],
   groups: [
     {
@@ -235,8 +234,13 @@ export const accountsSection = {
   ],
 }
 
+export const footerSection = {
+  message: '앞으로도 행복하게 살겠습니다!',
+  signoff: '구원, 민선 드림',
+}
+
 /** 공유 시 제목 등 — 배포 후 문구 수정 */
-export const shareMeta = {
+export const shareSection = {
   title: '구원 ♥ 민선 결혼합니다',
   text: '저희 두 사람의 새로운 시작을 함께해 주세요.',
   description: '2026년 8월 16일 오후 3시 30분\n영등포 더베르G',

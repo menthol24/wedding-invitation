@@ -257,16 +257,6 @@ function jumpToPage(n: number) {
   justify-content: center;
   margin: 0 0 32px;
 }
-
-.title {
-  margin: 0;
-  text-align: center;
-  font-size: 1.38rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--color-section-heading);
-}
-
 .write-btn {
   position: absolute;
   right: 0;
@@ -311,7 +301,7 @@ function jumpToPage(n: number) {
 .hint {
   margin: 0 0 22px;
   text-align: center;
-  font-size: 0.82rem;
+  font-size: $fs-sm;
   color: var(--color-body-muted);
 }
 
@@ -321,8 +311,8 @@ function jumpToPage(n: number) {
 
   p {
     margin: 8px 0;
-    font-size: 0.9rem;
-    line-height: 1.88;
+    font-size: $fs-base;
+    line-height: $lh-loose;
     color: var(--color-body-muted);
   }
 }
@@ -371,14 +361,14 @@ function jumpToPage(n: number) {
   margin-bottom: 12px;
 
   .name {
-    font-size: 0.9rem;
+    font-size: $fs-base;
     font-weight: 600;
     color: var(--color-body);
   }
 
   .date {
-    font-size: 0.72rem;
-    letter-spacing: 0.05em;
+    font-size: $fs-xs;
+    letter-spacing: $ls-wide;
     color: var(--color-body-muted);
     opacity: 0.85;
   }
@@ -386,8 +376,8 @@ function jumpToPage(n: number) {
 
 .body {
   margin: 0;
-  font-size: 0.88rem;
-  line-height: 1.82;
+  font-size: $fs-base;
+  line-height: $lh-loose;
   color: var(--color-body-muted);
   white-space: pre-wrap;
 }
@@ -408,9 +398,9 @@ function jumpToPage(n: number) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.82rem;
+  font-size: $fs-sm;
   font-weight: 500;
-  letter-spacing: 0.02em;
+
   color: var(--color-body-muted);
   background: #ffffff;
   border: 1px solid rgba(72, 58, 54, 0.1);
@@ -440,7 +430,7 @@ function jumpToPage(n: number) {
 }
 
 .page-arrow {
-  font-size: 1rem;
-  line-height: 1;
+  font-size: $fs-md;
+  line-height: $lh-flat;
 }
 </style>

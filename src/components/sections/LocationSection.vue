@@ -4,6 +4,8 @@ import tmapIcon from '@/assets/images/icons/tmap.svg'
 import kakaomapIcon from '@/assets/images/icons/kakaomap.svg'
 import navermapIcon from '@/assets/images/icons/navermap.jpg'
 
+export type TransportBlock = { subtitle: string; lines: string[] }
+
 defineProps<{
   title?: string
   venueTitle: string
@@ -16,6 +18,7 @@ defineProps<{
     zoom: number
   }
   navigationLinks: { label: string; href: string }[]
+  transportBlocks?: readonly TransportBlock[]
 }>()
 
 const naverClientId = String(import.meta.env.VITE_NAVER_MAP_CLIENT_ID ?? '')
@@ -33,8 +36,8 @@ function iconFor(label: string): string | undefined {
 </script>
 
 <template>
-  <section class="dir section-pad section-pad--wide" aria-labelledby="dir-heading">
-    <h2 v-if="title" id="dir-heading" class="title">{{ title }}</h2>
+  <section class="location section-pad section-pad--wide" aria-labelledby="location-heading">
+    <h2 v-if="title" id="location-heading" class="title">{{ title }}</h2>
 
     <div class="info">
       <div class="venue-row">
@@ -78,20 +81,18 @@ function iconFor(label: string): string | undefined {
         <span class="app-btn__label">{{ lnk.label }}</span>
       </a>
     </div>
+
+    <div v-if="transportBlocks && transportBlocks.length" class="transport">
+      <div v-for="(b, i) in transportBlocks" :key="i" class="block">
+        <h3 class="sub">{{ b.subtitle }}</h3>
+        <p v-for="(ln, li) in b.lines" :key="li" class="para">{{ ln }}</p>
+      </div>
+    </div>
   </section>
 </template>
 
 <style scoped lang="scss">
 @use '@/styles/variables' as *;
-
-.title {
-  margin: 0 0 40px;
-  text-align: center;
-  font-size: 1.38rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--color-section-heading);
-}
 
 .info {
   text-align: center;
@@ -104,13 +105,14 @@ function iconFor(label: string): string | undefined {
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 
 .venue-name {
   margin: 0;
-  font-size: 1.08rem;
+  font-size: $fs-md;
   font-weight: 600;
-  letter-spacing: 0.04em;
+
   color: var(--color-body);
 }
 
@@ -124,9 +126,7 @@ function iconFor(label: string): string | undefined {
   color: var(--color-section-heading);
   background: rgba(212, 163, 163, 0.12);
   border: 1px solid rgba(212, 163, 163, 0.25);
-  transition:
-    background 0.15s ease,
-    transform 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
 
   &:hover {
     background: rgba(212, 163, 163, 0.2);
@@ -137,39 +137,13 @@ function iconFor(label: string): string | undefined {
   }
 }
 
-.hall {
-  margin: 12px 0 12px;
-  font-size: 0.88rem;
-  color: var(--color-body-muted);
-  letter-spacing: 0.03em;
-}
-
-.phone-line {
-  margin: 0 0 14px;
-}
-
-.phone {
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--color-body-muted);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(72, 58, 54, 0.12);
-  padding-bottom: 2px;
-
-  &:hover {
-    color: var(--color-section-heading);
-    border-bottom-color: rgba(196, 149, 149, 0.45);
-  }
-}
-
 .addr {
   margin: 0;
-  font-size: 0.88rem;
-  line-height: 1.85;
+  font-size: $fs-base;
+  line-height: $lh-relaxed;
   color: var(--color-body-muted);
-  letter-spacing: 0.01em;
-  max-width: 19rem;
   margin-inline: auto;
+  white-space: pre-line;
 }
 
 .map-shell {
@@ -201,15 +175,12 @@ function iconFor(label: string): string | undefined {
     text-decoration: none;
     padding: 12px 6px;
     border-radius: 4px;
-    font-size: 0.72rem;
+    font-size: $fs-xs;
     font-weight: 500;
-    letter-spacing: 0.03em;
     color: var(--color-body);
     border: 1px solid rgba(72, 58, 54, 0.1);
     background: var(--color-surface);
-    transition:
-      border-color 180ms ease,
-      background-color 180ms ease;
+    transition: border-color 180ms ease, background-color 180ms ease;
 
     &:hover {
       border-color: rgba(196, 149, 149, 0.35);
@@ -230,7 +201,40 @@ function iconFor(label: string): string | undefined {
   }
 
   .app-btn__label {
-    line-height: 1;
+    line-height: $lh-flat;
+  }
+}
+
+// 교통 안내 — 지도/길찾기 아래에 이어 붙는 영역
+.transport {
+  margin-top: 36px;
+}
+
+.block {
+  margin-bottom: 24px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sub {
+  margin: 0 0 10px;
+  font-size: $fs-base;
+  font-weight: 600;
+  color: var(--color-section-item-heading);
+
+}
+
+.para {
+  margin: 0 0 2px;
+  font-size: $fs-sm;
+  line-height: $lh-base;
+  color: var(--color-body-muted);
+
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 </style>

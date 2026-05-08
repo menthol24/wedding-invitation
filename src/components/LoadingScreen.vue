@@ -152,7 +152,7 @@ onBeforeUnmount(() => {
 
 .stage__top {
   margin: 0 0 22px;
-  font-family: $font-display;
+  font-family: $font-body;
   font-size: 0.7rem;
   letter-spacing: 0.42em;
   text-transform: uppercase;
@@ -210,7 +210,7 @@ onBeforeUnmount(() => {
 
 .stage__sub {
   margin: 0 0 28px;
-  font-family: 'Cormorant Garamond', $font-display, serif;
+  font-family: 'Cormorant Garamond', $font-body, serif;
   font-style: italic;
   font-size: 0.86rem;
   letter-spacing: 0.18em;

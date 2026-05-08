@@ -84,13 +84,8 @@ function toggleExpanded() {
 <style scoped lang="scss">
 @use '@/styles/variables' as *;
 
-.title {
-  margin: 0 0 40px;
-  text-align: center;
-  font-size: 1.38rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  color: var(--color-section-heading);
+.gallery {
+  padding-inline: 0px !important;
 }
 
 .grid {
@@ -98,7 +93,6 @@ function toggleExpanded() {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2px;
   background: #ffffff;
-  padding: 2px;
   border-radius: 4px;
 }
 
