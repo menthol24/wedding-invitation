@@ -37,15 +37,14 @@ export function createSupabaseGuestBookProvider(): GuestBookProvider {
 
     },
 
-    async remove(id: string): Promise<void> {
-      const { error } = await supabase
-          .from('guestbook')
-          .update({ is_visible: false })
-          .eq('id', id)
+      async remove(id: string): Promise<void> {
+          const { error } = await supabase.rpc('soft_delete_guestbook', {
+              target_id: id,
+          })
 
-      if (error) {
-        throw new Error(`[guestbook] Supabase soft-delete error: ${error.message}`)
+          if (error) {
+              throw new Error(`[guestbook] Supabase soft-delete error: ${error.message}`)
+          }
       }
-    },
   }
 }
