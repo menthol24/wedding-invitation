@@ -54,18 +54,11 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   backdrop-filter: blur(10px);
   color: #ffffff;
   box-shadow: 0 4px 18px rgba(42, 36, 34, 0.08);
+  cursor: pointer;
 
   &:active {
     transform: translateY(1px);
     opacity: 0.92;
   }
 }
-
-.bubble--kakao {
-  background: #fee500;
-  backdrop-filter: none;
-  color: #191919;
-  box-shadow: 0 4px 18px rgba(42, 36, 34, 0.12);
-}
-
 </style>

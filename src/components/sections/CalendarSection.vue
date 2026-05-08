@@ -46,7 +46,11 @@ const { parts } = useCountdown(props.weddingIso)
           v-for="(cell, ci) in row"
           :key="`${ri}-${ci}`"
           class="cell"
-          :class="{ 'cell--muted': cell === null, 'cell--pick': cell === highlightedDay }"
+          :class="{
+            'cell--muted': cell === null,
+            'cell--pick': cell === highlightedDay,
+            'cell--sun': ci === 0 && cell !== null
+          }"
         >
           <template v-if="cell !== null && cell === highlightedDay">
             <div class="pick">
@@ -187,7 +191,7 @@ const { parts } = useCountdown(props.weddingIso)
   }
 
   .w--sun {
-    color: var(--color-section-heading);
+    color: var(--color-calendar-sun);
     opacity: 1;
   }
 }
@@ -200,9 +204,15 @@ const { parts } = useCountdown(props.weddingIso)
 .cell {
   min-height: 2.85rem;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding-top: 2px;
+}
+.cell .num {
+  margin-top: 6px;
+}
+
+.cell--sun .num {
+  color: var(--color-calendar-sun);
+  opacity: 1;
 }
 
 .cell--muted {
@@ -252,10 +262,7 @@ const { parts } = useCountdown(props.weddingIso)
   font-size: $fs-xs;
   font-weight: 500;
   color: var(--color-body-muted);
-
   white-space: nowrap;
-  position: relative;
-  top: 8px;
 }
 
 .done {

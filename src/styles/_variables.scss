@@ -31,15 +31,16 @@
 }
 
 @font-face {
-  font-family: 'ClassyVogue';
-  src: url('@/assets/fonts/Classyvogueregular.ttf') format('truetype');
+  font-family: 'PretendardLightJp';
+  src: url('@/assets/fonts/PretendardJP-Light.otf') format('truetype');
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Cafe24OhsquareAir';
-  src: url('@/assets/fonts/Cafe24OhsquareAir-v2.0.ttf') format('truetype');
+  font-family: 'ClassyVogue';
+  src: url('@/assets/fonts/Classyvogueregular.ttf') format('truetype');
   font-style: normal;
   font-display: swap;
 }
@@ -54,7 +55,10 @@
 $font-poster-script: 'BulgaryRose', cursive;
 $font-title-eng: 'EthrealExtraLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
 $font-title-kor: 'NanumRegular', 'Apple SD Gothic Neo', system-ui, sans-serif;
-$font-body: 'PretendardLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
+// $font-body는 CSS 변수 --font-body를 참조 — :lang(ja)에서 동적으로 일본어 폰트로 전환됨
+$font-body: var(--font-body);
+$font-body-ko: 'PretendardLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
+$font-body-jp: 'PretendardLightJp', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
 $font-body-strong: 'PretendardRegular', 'Apple SD Gothic Neo', system-ui, sans-serif;
 
 /** 타이포 토큰 — 모든 섹션에서 이 값들만 사용 */
@@ -81,6 +85,9 @@ $lh-relaxed: 1.6;   // 인사 본문, 인트로
 $lh-loose:   1.85;   // 긴 본문, 주소
 :root {
   --page-max: 430px;
+
+  /** 본문 폰트 — html[lang="ja"]에서 일본어용으로 자동 전환 */
+  --font-body: #{$font-body-ko};
 
   /** 전체 배경 - 밝고 깨끗한 크림 아이보리 */
   --color-bg: #fffdf8;

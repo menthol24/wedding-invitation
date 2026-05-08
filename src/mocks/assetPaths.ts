@@ -32,6 +32,9 @@ import timeline4 from '@/assets/images/timeline/timeline4.png';
 import timeline5 from '@/assets/images/timeline/timeline5.jpg';
 import profileGroom from '@/assets/images/profile/ko2.png';
 import profileBride from '@/assets/images/profile/ms2.png';
+import coupleShot from '@/assets/images/coupleShot.jpg';
+import letter1 from '@/assets/images/letter/letter1.png';
+import letter2 from '@/assets/images/letter/letter2.png';
 
 export const ASSET_URLS = {
   poster,
@@ -65,4 +68,7 @@ export const ASSET_URLS = {
   timeline5,
   profileGroom,
   profileBride,
+  coupleShot,
+  letter1,
+  letter2,
 }

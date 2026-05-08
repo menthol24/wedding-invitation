@@ -85,9 +85,11 @@ withDefaults(
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 100svh;
+  height: 100dvh;
   max-height: 860px;
   margin-bottom: -1px;
+  // 자식 합성 레이어가 부모 페인트 영역을 벗어나지 못하도록 — 모바일 주소창 변화 시 사진이 튀어 보이는 현상 방지
+  contain: paint;
 
   img {
     width: 100%;
@@ -95,8 +97,11 @@ withDefaults(
     object-fit: cover;
     object-position: center 45%;
     display: block;
-    transform: scale(1.3);
+    // scale + translateZ(0) — 합성 레이어를 분리해 viewport 변화 시 리페인트 영향 최소화
+    transform: scale(1.3) translateZ(0);
     transform-origin: center center;
+    backface-visibility: hidden;
+    will-change: transform;
     // 사진 하단을 부드럽게 페이드 — 다음 섹션과 자연스럽게 이어지도록
     -webkit-mask-image: linear-gradient(
       to bottom,

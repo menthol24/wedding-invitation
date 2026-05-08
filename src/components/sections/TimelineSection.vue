@@ -233,7 +233,7 @@ const sinceParts = computed(() => {
   font-size: $fs-sm;
   line-height: $lh-base;
   color: var(--color-body-muted);
-  word-break: keep-all;
+  word-break: auto-phrase;
 
 }
 </style>

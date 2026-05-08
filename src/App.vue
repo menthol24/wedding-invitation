@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import LoadingScreen from '@/components/LoadingScreen.vue'
 import FloatingActions from '@/components/FloatingActions.vue'
 import PosterSection from '@/components/sections/PosterSection.vue'
@@ -12,26 +12,35 @@ import LocationSection from '@/components/sections/LocationSection.vue'
 import VenueGuideTabsSection from '@/components/sections/VenueGuideTabsSection.vue'
 import TimelineSection from '@/components/sections/TimelineSection.vue'
 import GuestBookSection from '@/components/sections/GuestBookSection.vue'
+import LetterSection from '@/components/sections/LetterSection.vue'
 import AccountsSection from '@/components/sections/AccountsSection.vue'
 import FooterSection from '@/components/sections/FooterSection.vue'
 
-import {
-  WEDDING_EVENT_ISO,
-  posterSection,
-  ceremonySection,
-  invitationSection,
-  couplesSection,
-  profileSection,
-  calendarSection,
-  gallerySection,
-  locationSection,
-  venueGuideSection,
-  timelineSection,
-  guestbookSection,
-  accountsSection,
-  footerSection,
-  shareSection,
-} from '@/mocks/wedding.mock'
+import { getWeddingMock } from '@/mocks'
+import { useLocale } from '@/composables/useLocale'
+
+const { locale } = useLocale()
+
+const mock = computed(() => getWeddingMock(locale.value))
+
+// 섹션별 데이터 — locale 변경 시 자동 갱신
+const WEDDING_EVENT_ISO = computed(() => mock.value.WEDDING_EVENT_ISO)
+const posterSection = computed(() => mock.value.posterSection)
+const ceremonySection = computed(() => mock.value.ceremonySection)
+const invitationSection = computed(() => mock.value.invitationSection)
+const couplesSection = computed(() => mock.value.couplesSection)
+const profileSection = computed(() => mock.value.profileSection)
+const calendarSection = computed(() => mock.value.calendarSection)
+const gallerySection = computed(() => mock.value.gallerySection)
+const locationSection = computed(() => mock.value.locationSection)
+const venueGuideSection = computed(() => mock.value.venueGuideSection)
+const timelineSection = computed(() => mock.value.timelineSection)
+const guestbookSection = computed(() => mock.value.guestbookSection)
+const letterSection = computed(() => mock.value.letterSection)
+const accountsSection = computed(() => mock.value.accountsSection)
+const footerSection = computed(() => mock.value.footerSection)
+const shareSection = computed(() => mock.value.shareSection)
+const loadingSection = computed(() => mock.value.loadingSection)
 
 const isLoading = ref(true)
 
@@ -51,8 +60,8 @@ function handleLoadingDone() {
     :preload-images="[posterSection.imageUrl]"
     :min-duration="2800"
     :max-duration="6000"
-    groom-name="Koo One"
-    bride-name="Yoo Minsun"
+    :groom-name="loadingSection.groomName"
+    :bride-name="loadingSection.brideName"
     @done="handleLoadingDone"
   />
 
@@ -119,7 +128,14 @@ function handleLoadingDone() {
           :empty-message-lines="guestbookSection.emptyMessageLines"
         />
 
-        <AccountsSection v-bind="accountsSection" />
+        <LetterSection
+          :image-url="letterSection.imageUrl"
+          :image-alt="letterSection.imageAlt"
+          :bride-letter="letterSection.brideLetter"
+          :groom-letter="letterSection.groomLetter"
+        />
+
+        <AccountsSection v-if="locale === 'ko'" v-bind="accountsSection" />
 
         <FooterSection
           :message="footerSection.message"
@@ -193,7 +209,7 @@ function handleLoadingDone() {
 
 // 모든 섹션 헤더(.title) 공통 — 토큰 사용
 .canvas .title {
-  margin: 0 0 36px;
+  margin: 0 8px 36px;
   text-align: center;
   font-family: $font-title-eng;
   font-size: $fs-xxl;

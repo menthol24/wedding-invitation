@@ -23,6 +23,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+// 일본어 모드 — html[lang="ja"]에서 본문 폰트 변수만 일본어용으로 덮어씀
+// $font-body가 var(--font-body)를 참조하므로 모든 컴포넌트에 자동 적용됨
+:lang(ja) {
+  --font-body: #{$font-body-jp};
+}
+
 #app {
   white-space: pre-line;
 }

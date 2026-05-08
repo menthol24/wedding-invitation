@@ -39,6 +39,12 @@ export const couplesSection = {
   },
 }
 
+/** 로딩 스크린 — 언어 무관하게 영문 고정 표기 */
+export const loadingSection = {
+  groomName: 'Koo One',
+  brideName: 'Yoo Minsun',
+}
+
 export const profileSection = {
   title: 'ABOUT US',
   cards: [
@@ -201,6 +207,19 @@ export const timelineSection = {
 export const guestbookSection = {
   title: 'MESSAGE',
   emptyMessageLines: ['아직 작성된 방명록이 없습니다.', '첫 방명록을 작성해주세요.'],
+}
+
+export const letterSection = {
+  imageUrl: ASSET_URLS.coupleShot,
+  imageAlt: '신랑 신부 사진',
+  brideLetter: {
+    imageUrl: ASSET_URLS.letter1,
+    alt: '신부의 손글씨 편지',
+  },
+  groomLetter: {
+    imageUrl: ASSET_URLS.letter2,
+    alt: '신랑의 손글씨 편지',
+  },
 }
 
 export const accountsSection = {
