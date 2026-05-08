@@ -19,14 +19,11 @@ export const ceremonySection = {
 }
 
 export const invitationSection = {
-  headline: '大切な皆さまをご招待いたします。',
+  headline: '大切な皆さまへ',
   paragraphs: [
-    [
-      '若さのように輝く夏、',
-      '青い緑が風に揺れる美しい日に、',
-      'お互いの一番の味方になることを約束します。',
-    ],
-    ['お忙しい中、足を運んで祝福してくださると幸いです。'],
+      [ '青々とした緑が風に揺れる美しい日に、'],
+      [ '私たちは互いのいちばんの味方になることを誓います。'],
+      [ 'ご多用のところ恐縮ではございますが、温かく見守っていただけますと幸いです。'],
   ],
 }
 
@@ -41,7 +38,7 @@ export const couplesSection = {
   bride: {
     roleLabel: '新婦',
     givenName: 'ユ・ミンソン',
-    parentsLine: '故 ユ・ヒジュ、ムン・ソノクの娘',
+    parentsLine: '故 ユ・ヒジュ、ムン・ソノクの長女',
     photoUrl: ASSET_URLS.bride,
     alt: '新婦の写真',
   },
@@ -63,7 +60,7 @@ export const profileSection = {
       photoUrl: ASSET_URLS.profileGroom,
       alt: '新郎の幼少期の写真',
       description:
-        '1988年12月 全州生まれ\nトレーナー、声優、司会者、事業\n何でも頼もしくこなす多才な人',
+          '1988年12月 全州生まれ\nトレーナー、声優、司会者、事業家\n何でも頼もしくこなす多才な人',
     },
     {
       id: 'bride',
@@ -72,7 +69,7 @@ export const profileSection = {
       photoUrl: ASSET_URLS.profileBride,
       alt: '新婦の幼少期の写真',
       description:
-        '1991年3月 安山・始興育ち\nちょっと怠け者の完璧主義者\nサバイバル運動を頑張るウェブ開発者',
+          '1991年3月 安山・始興育ち\nちょっぴり怠け者な完璧主義者\n生きるための運動を頑張るウェブ開発者',
     },
   ],
 }
@@ -112,7 +109,7 @@ export const gallerySection = {
 export const locationSection = {
   title: 'LOCATION',
   venueTitle: 'ザ・ベルG',
-  hallLine: '単独ホール',
+  hallLine: '貸切ホール',
   phone: '02-2088-5272',
   address: 'ソウル特別市 永登浦区 国会大路 612 (堂山洞3街 2-7)\nコレイル流通社屋 2階',
   map: {
@@ -133,14 +130,14 @@ export const locationSection = {
     {
       subtitle: '🚌シャトルバス',
       lines: [
-        '永登浦区庁駅 5番出口 ↔ ザ・ベルG 駐車場入口左側を循環運行',
+        '永登浦区庁駅 5番出口とザ・ベルG駐車場入口左側を結ぶシャトルバスが循環運行しています。',
       ],
     },
     {
       subtitle: '🚗駐車',
       lines: [
-        '建物内の地下駐車場をご利用ください(2時間無料)',
-        '2階ウェルカムドリンクゾーンまたは地下1階の宴会場で駐車登録後に出庫',
+          '建物内の地下駐車場をご利用いただけます（2時間無料）',
+          '2階ウェルカムドリンクゾーン、または地下1階の宴会場にて駐車登録後、ご出庫ください。',
       ],
     },
   ],
@@ -196,7 +193,7 @@ export const timelineSection = {
   },
   items: [
     {
-      text: '2020年、高校の友人の紹介で出会った私たち。新郎の熱心なアプローチで3度目の出会いで付き合うことに。',
+      text: '2020年、高校時代の友人の紹介で出会った私たち。新郎の熱心なアプローチの末、3回目のデートでお付き合いが始まりました。',
       photoUrl: ASSET_URLS.timeline1,
       alt: '初対面',
     },
@@ -206,17 +203,17 @@ export const timelineSection = {
       alt: '運動',
     },
     {
-      text: '私たちの人生の旅行先は沖縄!天気も日程も食事も海も、すべてが完璧だった。',
+      text: '私たちにとって忘れられない旅先、沖縄！天気も予定も食事も海も、すべてが完璧でした。',
       photoUrl: ASSET_URLS.timeline3,
       alt: '旅行',
     },
     {
-      text: '新婦は感性的で調和を大切にするENFJ、新郎は思考的だけど柔軟なENTP。なかなかいいじゃん!',
+      text: '新婦は感性豊かで調和を大切にするENFJ、新郎は論理的だけど柔軟なENTP。意外と相性ぴったりな二人です。',
       photoUrl: ASSET_URLS.timeline4,
       alt: '最高の組み合わせ',
     },
     {
-      text: '昨年11月、新婦の憧れだった漢江の見えるレストランでプロポーズ♥️',
+      text: '昨年11月、新婦が憧れていた漢江の見えるレストランでプロポーズ♥️',
       photoUrl: ASSET_URLS.timeline5,
       alt: 'プロポーズ',
     },
