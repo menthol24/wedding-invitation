@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useReveal } from '@/composables/useReveal'
+
 export type LetterImage = {
   imageUrl: string
   alt?: string
@@ -11,13 +13,15 @@ defineProps<{
   brideLetter: LetterImage
   groomLetter: LetterImage
 }>()
+
+const { el, revealed } = useReveal({ threshold: 0.2 })
 </script>
 
 <template>
   <section class="letter section-pad section-pad--wide" aria-labelledby="letter-heading">
     <h2 v-if="title" id="letter-heading" class="title">{{ title }}</h2>
 
-    <div class="stage">
+    <div ref="el" class="stage" :class="{ 'is-revealed': revealed }">
       <figure class="photo">
         <img :src="imageUrl" :alt="imageAlt ?? ''" loading="lazy" decoding="async" />
       </figure>
@@ -76,17 +80,40 @@ defineProps<{
   user-select: none;
   // 종이/잉크 느낌 — 사진과 어우러지도록 약간의 그림자
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.10));
+
+  // 스크롤 reveal — 좌/우에서 미끄러져 들어오며 페이드인
+  opacity: 0;
+  transition:
+    opacity 1400ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 1400ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
 }
 
-// 신부 — 좌상단 영역
+// 신부 — 좌상단 영역, 왼쪽에서 슬라이드 인
 .handwriting--bride {
   top: -20%;
   left: 4%;
+  transform: translateX(-24px);
 }
 
-// 신랑 — 우하단 영역
+// 신랑 — 우하단 영역, 오른쪽에서 슬라이드 인 (살짝 늦게)
 .handwriting--groom {
   bottom: -10%;
   right: 4%;
+  transform: translateX(24px);
+  transition-delay: 300ms;
+}
+
+.stage.is-revealed .handwriting {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .handwriting {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 </style>

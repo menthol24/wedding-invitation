@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useReveal } from '@/composables/useReveal'
 
 export interface TimelinePiece {
   year?: string
@@ -15,6 +16,8 @@ const props = defineProps<{
   meetSinceIso?: string
   ddayLabel?: string
 }>()
+
+const { el, revealed } = useReveal({ threshold: 0.2 })
 
 const now = ref(new Date())
 let timer: number | undefined
@@ -72,7 +75,7 @@ const sinceParts = computed(() => {
       </p>
     </div>
 
-    <div class="axis">
+    <div ref="el" class="axis" :class="{ 'is-revealed': revealed }">
       <div v-for="(it, idx) in items" :key="idx" class="row" :class="{ 'row--flip': idx % 2 === 1 }">
         <figure class="fig">
           <img :src="it.photoUrl" :alt="it.alt ?? ''" loading="lazy" decoding="async" />
@@ -126,6 +129,19 @@ const sinceParts = computed(() => {
 
 .axis {
   position: relative;
+
+  // 스크롤 reveal — 뷰포트에 들어오면 axis 전체가 한 번에 페이드인
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 1500ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 1500ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+
+  &.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   &::before {
     content: '';
@@ -235,5 +251,14 @@ const sinceParts = computed(() => {
   color: var(--color-body-muted);
   word-break: auto-phrase;
 
+}
+
+// 모션 줄이기 환경에서는 reveal 트랜지션 생략
+@media (prefers-reduced-motion: reduce) {
+  .axis {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 </style>

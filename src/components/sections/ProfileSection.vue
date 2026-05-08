@@ -114,9 +114,9 @@ defineProps<{
 
 .role {
   margin: 0 0 8px;
-  font-family: $font-body;
-  font-size: $fs-xs;
+  font-family: $font-body-strong;
   font-weight: 600;
+  font-size: $fs-sm;
   letter-spacing: $ls-wider;
   text-transform: uppercase;
 }
@@ -131,6 +131,7 @@ defineProps<{
 
 .card--bride .role {
   color: var(--color-role-bride);
+  font-family: $font-body-strong;
 }
 
 .name {
