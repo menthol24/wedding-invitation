@@ -5,7 +5,7 @@ export const WEDDING_EVENT_ISO = '2026-08-16T15:30:00+09:00'
 
 export const posterSection = {
   imageUrl: ASSET_URLS.poster,
-  titleLines: ['We\'re getting', 'married!'],
+  titleLines: ['We\'re Getting', 'Married!'],
 }
 
 export const ceremonySection = {
@@ -86,6 +86,13 @@ export const calendarSection = {
   ceremonyTimeShort: '午後 3:30',
   /** 디데이 상단 한 줄 */
   countdownHeadline: '私たちの結婚式まで',
+  /** 카운트다운 단위 라벨 — 로케일별로 다르게 표시 */
+  countdownUnits: {
+    days: '日',
+    hours: '時間',
+    minutes: '分',
+    seconds: '秒',
+  },
 }
 
 export const gallerySection = {
@@ -177,6 +184,11 @@ export const venueGuideSection = {
 } as const
 
 export const timelineSection = {
+  /** 함께한 시간 디데이 단위 라벨 */
+  sinceUnits: {
+    years: '年',
+    days: '日',
+  },
   items: [
     {
       text: '2020年、高校の友人の紹介で出会った私たち。新郎の熱心なアプローチで3度目の出会いで付き合うことに。',

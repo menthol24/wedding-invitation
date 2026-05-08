@@ -28,7 +28,7 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 
       <!-- 신부 손글씨 — 사진 좌상단 영역에 자연스럽게 얹힘 -->
       <img
-        class="handwriting handwriting--bride"
+        class="handwriting handwriting--groom"
         :src="brideLetter.imageUrl"
         :alt="brideLetter.alt ?? ''"
         loading="lazy"
@@ -37,7 +37,7 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 
       <!-- 신랑 손글씨 — 사진 우하단 영역에 자연스럽게 얹힘 -->
       <img
-        class="handwriting handwriting--groom"
+        class="handwriting handwriting--bride"
         :src="groomLetter.imageUrl"
         :alt="groomLetter.alt ?? ''"
         loading="lazy"
@@ -74,7 +74,6 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 // 손글씨 — 투명 PNG, 사진 위에 겹쳐서 자연스럽게
 .handwriting {
   position: absolute;
-  width: 60%;
   height: auto;
   pointer-events: none;
   user-select: none;
@@ -90,18 +89,20 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 }
 
 // 신부 — 좌상단 영역, 왼쪽에서 슬라이드 인
-.handwriting--bride {
+.handwriting--groom {
   top: -18%;
   left: 2%;
   transform: translateX(-24px);
+  width: 60%;
 }
 
 // 신랑 — 우하단 영역, 오른쪽에서 슬라이드 인 (살짝 늦게)
-.handwriting--groom {
+.handwriting--bride {
   bottom: -15%;
   right: 0%;
   transform: translateX(22px);
   transition-delay: 300ms;
+  width: 55%;
 }
 
 .stage.is-revealed .handwriting {

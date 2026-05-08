@@ -6,7 +6,7 @@ export const WEDDING_EVENT_ISO = '2026-08-16T15:30:00+09:00'
 export const posterSection = {
   imageUrl: ASSET_URLS.poster,
   /** 스크립트 히어로 — 두 줄 권장 */
-  titleLines: ['We\'re getting', 'married!'],
+  titleLines: ['We\'re Getting', 'Married!'],
 }
 
 export const ceremonySection = {
@@ -82,6 +82,13 @@ export const calendarSection = {
   ceremonyTimeShort: '오후 3:30',
   /** 디데이 상단 한 줄 */
   countdownHeadline: '우리의 결혼식까지',
+  /** 카운트다운 단위 라벨 — 로케일별로 다르게 표시 */
+  countdownUnits: {
+    days: '일',
+    hours: '시간',
+    minutes: '분',
+    seconds: '초',
+  },
 }
 
 export const gallerySection = {
@@ -174,6 +181,11 @@ export const venueGuideSection = {
 } as const
 
 export const timelineSection = {
+  /** 함께한 시간 디데이 단위 라벨 */
+  sinceUnits: {
+    years: '년',
+    days: '일',
+  },
   items: [
     {
       text: '2020년 고등학교 친구의 소개로 만난 우리. 신랑의 구애 끝에 세번째 만남에 사귀게 되었어요.',
@@ -186,12 +198,12 @@ export const timelineSection = {
       alt: '운동',
     },
     {
-      text: '우리의 인생 여행지 오키나와! 날씨도 일정도 음식도 바다도 모두 완벽. 또 가고싶다~',
+      text: '우리의 인생 여행지 오키나와! 날씨도 일정도 음식도 바다도 모두 완벽했다.',
       photoUrl: ASSET_URLS.timeline3,
       alt: '여행',
     },
     {
-      text: '신부는 감성적이고 조화로운 ENFJ, 신랑은 사고적이지만 유연한 ENTP. 최고의 커플!',
+      text: '신부는 감성적이고 조화로운 ENFJ, 신랑은 사고적이지만 유연한 ENTP 우린 제법 잘어울려요.',
       photoUrl: ASSET_URLS.timeline4,
       alt: '최고의 조합',
     },

@@ -7,6 +7,14 @@
 }
 
 @font-face {
+  font-family: 'BroadcastMatter';
+  src: url('@/assets/fonts/Broadcast_Matter.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'NanumRegular';
   src: url('@/assets/fonts/NanumSquareAcR.woff2') format('woff2');
   font-weight: 400;
@@ -52,6 +60,7 @@
   font-display: swap;
 }
 
+$font-loading-name: 'BulgaryRose', cursive;
 $font-poster-script: 'BulgaryRose', cursive;
 $font-title-eng: 'EthrealExtraLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
 $font-title-kor: 'NanumRegular', 'Apple SD Gothic Neo', system-ui, sans-serif;

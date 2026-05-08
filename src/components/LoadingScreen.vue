@@ -152,7 +152,7 @@ onBeforeUnmount(() => {
 
 .stage__top {
   margin: 0 0 22px;
-  font-family: $font-body;
+  font-family: $font-body-strong;
   font-size: 0.7rem;
   letter-spacing: 0.42em;
   text-transform: uppercase;
@@ -173,8 +173,8 @@ onBeforeUnmount(() => {
   // iOS Safari 의 background-clip:text + transform 애니메이션 충돌 방지를 위해
   // 그라디언트 텍스트는 inner span 으로 분리, 애니메이션은 바깥 요소가 담당
   display: inline-block;
-  font-family: $font-poster-script;
-  font-size: clamp(1.8rem, 9vw, 2.4rem);
+  font-family: $font-loading-name;
+  font-size: clamp(3.2rem, 9vw, 3.8rem);
   line-height: 1.4;
   padding: 0.05em 0.08em;
   letter-spacing: 0.02em;
@@ -206,17 +206,6 @@ onBeforeUnmount(() => {
   display: inline-flex;
   color: var(--color-countdown-pink);
   animation: heartbeat 1.4s ease-in-out 0.6s infinite both;
-}
-
-.stage__sub {
-  margin: 0 0 28px;
-  font-family: 'Cormorant Garamond', $font-body, serif;
-  font-style: italic;
-  font-size: 0.86rem;
-  letter-spacing: 0.18em;
-  color: var(--color-body-muted);
-  opacity: 0;
-  animation: sub-in 1s ease 0.7s forwards;
 }
 
 // === 키프레임 ===
