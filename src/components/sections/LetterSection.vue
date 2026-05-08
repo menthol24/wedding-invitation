@@ -47,7 +47,7 @@ defineProps<{
 @use '@/styles/variables' as *;
 
 .letter {
-  padding-inline: 0px !important;
+  padding: 150px 0px !important;
 }
 
 .stage {
@@ -75,7 +75,7 @@ defineProps<{
   pointer-events: none;
   user-select: none;
   // 종이/잉크 느낌 — 사진과 어우러지도록 약간의 그림자
-  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12));
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.10));
 }
 
 // 신부 — 좌상단 영역

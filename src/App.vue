@@ -123,16 +123,16 @@ function handleLoadingDone() {
             :items="gallerySection.items"
         />
 
-        <GuestBookSection
-          :title="guestbookSection.title"
-          :empty-message-lines="guestbookSection.emptyMessageLines"
-        />
-
         <LetterSection
           :image-url="letterSection.imageUrl"
           :image-alt="letterSection.imageAlt"
           :bride-letter="letterSection.brideLetter"
           :groom-letter="letterSection.groomLetter"
+        />
+
+        <GuestBookSection
+            :title="guestbookSection.title"
+            :empty-message-lines="guestbookSection.emptyMessageLines"
         />
 
         <AccountsSection v-if="locale === 'ko'" v-bind="accountsSection" />
