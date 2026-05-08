@@ -30,7 +30,7 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
   position: relative;
   text-align: center;
   overflow: hidden;
-  min-height: 500px;
+  min-height: 600px;
   background: var(--color-bg-medium);
 }
 
@@ -84,8 +84,8 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
   opacity: 0;
   transform: translateY(14px);
   transition:
-      opacity 2000ms cubic-bezier(0.22, 0.61, 0.36, 1),
-      transform 2000ms cubic-bezier(0.22, 0.61, 0.36, 1);
+      opacity 2500ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 2500ms cubic-bezier(0.22, 0.61, 0.36, 1);
   will-change: opacity, transform;
 
   &.is-revealed {

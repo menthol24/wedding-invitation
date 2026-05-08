@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
 withDefaults(
   defineProps<{
     imageUrl: string
@@ -23,11 +25,28 @@ withDefaults(
   },
 )
 
+// 카카오톡 인앱브라우저 등에서 하단 컨트롤바가 동적으로 등장/퇴장하면 svh/lvh 단위가
+// 의도와 달리 재계산되며 포스터 사진이 흔들려 보임. 진입 시점의 innerHeight를 px로
+// 박아두고 세로/가로 회전 시에만 갱신해 컨테이너를 고정.
+const posterHeight = ref<string>('100lvh')
+
+function measureHeight() {
+  posterHeight.value = `${window.innerHeight}px`
+}
+
+onMounted(() => {
+  measureHeight()
+  window.addEventListener('orientationchange', measureHeight)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('orientationchange', measureHeight)
+})
 </script>
 
 <template>
   <section class="poster" aria-label="웰컴 영역">
-    <div class="poster__photo">
+    <div class="poster__photo" :style="{ height: posterHeight }">
       <img :src="imageUrl" decoding="async" fetchpriority="high" />
       <!-- 포스터 상단 양옆 이름 헤더 -->
       <div v-if="groomName || brideName" class="poster__names">
@@ -89,8 +108,9 @@ withDefaults(
   position: relative;
   overflow: hidden;
   width: 100%;
-  // svh는 모바일에서 작은 viewport 기준으로 고정 — 주소창 변화에 영향받지 않음
-  height: 100svh;
+  // 실제 height는 인라인 스타일로 진입 시점 innerHeight(px)가 주입됨.
+  // 아래 값은 JS 미실행/하이드레이션 전 폴백 용도.
+  height: 100lvh;
   max-height: 860px;
   margin-bottom: -1px;
   contain: paint;
