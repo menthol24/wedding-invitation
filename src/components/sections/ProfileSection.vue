@@ -116,7 +116,7 @@ defineProps<{
   margin: 0 0 8px;
   font-family: $font-body-strong;
   font-weight: 600;
-  font-size: $fs-sm;
+  font-size: $fs-base;
   letter-spacing: $ls-wider;
   text-transform: uppercase;
 }

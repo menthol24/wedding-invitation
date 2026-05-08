@@ -236,7 +236,7 @@ async function copyNumber(num: string) {
 
 .bank {
   margin: 0;
-  font-size: $fs-sm;
+  font-size: $fs-base;
   color: var(--color-body-muted);
   line-height: $lh-base;
 }

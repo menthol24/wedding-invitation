@@ -300,7 +300,7 @@ function jumpToPage(n: number) {
 .hint {
   margin: 0 0 22px;
   text-align: center;
-  font-size: $fs-sm;
+  font-size: $fs-base;
   color: var(--color-body-muted);
 }
 
@@ -397,7 +397,7 @@ function jumpToPage(n: number) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: $fs-sm;
+  font-size: $fs-base;
   font-weight: 500;
 
   color: var(--color-body-muted);

@@ -227,7 +227,7 @@ function iconFor(label: string): string | undefined {
 
 .para {
   margin: 0 0 2px;
-  font-size: $fs-sm;
+  font-size: $fs-base;
   line-height: $lh-base;
   color: var(--color-body-muted);
 

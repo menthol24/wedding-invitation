@@ -257,7 +257,7 @@ function chooseTab(id: string) {
 
 .para {
   margin: 0 0 7px;
-  font-size: $fs-sm;
+  font-size: $fs-base;
   line-height: $lh-base;
   color: var(--color-body-muted);
   &:last-child {

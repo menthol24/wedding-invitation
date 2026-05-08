@@ -150,7 +150,7 @@ async function onShareKakao() {
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   font-family: $font-body;
-  font-size: $fs-sm;
+  font-size: $fs-base;
 
   color: var(--color-body);
   cursor: pointer;

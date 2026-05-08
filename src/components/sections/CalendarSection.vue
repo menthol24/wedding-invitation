@@ -131,7 +131,7 @@ const { parts } = useCountdown(props.weddingIso)
 }
 .dday__label {
    margin: 0 0 10px;
-   font-size: $fs-sm;
+   font-size: $fs-base;
    font-weight: 600;
    letter-spacing: $ls-wide;
    text-transform: uppercase;

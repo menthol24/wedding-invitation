@@ -100,7 +100,7 @@ const sinceParts = computed(() => {
 
 .dday__label {
   margin: 0 0 10px;
-  font-size: $fs-sm;
+  font-size: $fs-base;
   font-weight: 600;
   letter-spacing: $ls-wide;
   line-height: $lh-relaxed;
@@ -246,7 +246,7 @@ const sinceParts = computed(() => {
 
 .text {
   margin: 0;
-  font-size: $fs-sm;
+  font-size: $fs-base;
   line-height: $lh-base;
   color: var(--color-body-muted);
   word-break: auto-phrase;
