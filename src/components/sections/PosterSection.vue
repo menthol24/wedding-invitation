@@ -85,23 +85,22 @@ withDefaults(
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 100dvh;
+  // svh는 모바일에서 작은 viewport 기준으로 고정 — 주소창 변화에 영향받지 않음
+  height: 100svh;
   max-height: 860px;
   margin-bottom: -1px;
-  // 자식 합성 레이어가 부모 페인트 영역을 벗어나지 못하도록 — 모바일 주소창 변화 시 사진이 튀어 보이는 현상 방지
   contain: paint;
 
   img {
-    width: 100%;
-    height: 100%;
+    // transform: scale 대신 실제 사이즈로 확대 — 모바일 사파리에서 합성 레이어 변형 버그 방지
+    position: absolute;
+    width: 130%;
+    height: 130%;
+    left: -15%;
+    top: -15%;
     object-fit: cover;
     object-position: center 45%;
     display: block;
-    // scale + translateZ(0) — 합성 레이어를 분리해 viewport 변화 시 리페인트 영향 최소화
-    transform: scale(1.3) translateZ(0);
-    transform-origin: center center;
-    backface-visibility: hidden;
-    will-change: transform;
     // 사진 하단을 부드럽게 페이드 — 다음 섹션과 자연스럽게 이어지도록
     -webkit-mask-image: linear-gradient(
       to bottom,
