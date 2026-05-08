@@ -7,6 +7,11 @@ export const posterSection = {
   imageUrl: ASSET_URLS.poster,
   /** 스크립트 히어로 — 두 줄 권장 */
   titleLines: ['We\'re Getting', 'Married!'],
+  /** 포스터 상단 양옆 이름 위 역할 라벨 — 로케일별로 다른 텍스트 */
+  roleLabels: {
+    groom: '신랑',
+    bride: '신부',
+  },
 }
 
 export const ceremonySection = {
@@ -63,7 +68,7 @@ export const profileSection = {
       name: '유민선',
       photoUrl: ASSET_URLS.profileBride,
       alt: '신부 어린 시절 사진',
-      description: '1991년 3월생 시흥 출신\n조금 게으른 완벽주의자\n생존운동 열심히 하는 웹개발자',
+      description: '1991년 3월생 안산\/시흥 출신\n조금 게으른 완벽주의자\n생존운동 열심히 하는 웹개발자',
     },
   ],
 }

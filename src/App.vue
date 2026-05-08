@@ -72,6 +72,7 @@ function handleLoadingDone() {
         :title-lines="posterSection.titleLines"
         :groom-name="couplesSection.groom.givenName"
         :bride-name="couplesSection.bride.givenName"
+        :role-labels="posterSection.roleLabels"
         :play="!isLoading"
         :date-label="ceremonySection.dateLabel"
         :venue-name="ceremonySection.venueName"
@@ -97,7 +98,8 @@ function handleLoadingDone() {
             :title="timelineSection.title"
             :items="timelineSection.items"
             :meet-since-iso="calendarSection.meetSinceIso"
-            :dday-label="calendarSection.ddayHeadline" />
+            :dday-label="calendarSection.ddayHeadline"
+            :since-units="timelineSection.sinceUnits" />
 
         <CalendarSection
           :title="calendarSection.title"
@@ -109,6 +111,7 @@ function handleLoadingDone() {
           :highlighted-day="calendarSection.highlightedDay"
           :ceremony-time-short="calendarSection.ceremonyTimeShort"
           :countdown-headline="calendarSection.countdownHeadline"
+          :countdown-units="calendarSection.countdownUnits"
         />
 
         <LocationSection v-bind="locationSection" />

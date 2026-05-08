@@ -13,6 +13,13 @@ const props = defineProps<{
   highlightedDay: number
   ceremonyTimeShort: string
   countdownHeadline: string
+  /** 카운트다운 단위 라벨 — 로케일별로 다른 텍스트 (예: 한국어 '일/시간/분/초', 일본어 '日/時間/分/秒') */
+  countdownUnits: {
+    days: string
+    hours: string
+    minutes: string
+    seconds: string
+  }
 }>()
 
 const grid = computed(() =>
@@ -70,13 +77,13 @@ const { parts } = useCountdown(props.weddingIso)
       </template>
       <p v-else class="dday__value">
         <span class="dday__num">{{ parts.days }}</span
-        ><span class="dday__unit">일</span>
+        ><span class="dday__unit">{{ countdownUnits.days }}</span>
         <span class="dday__num">{{ parts.hours }}</span
-        ><span class="dday__unit">시간</span>
+        ><span class="dday__unit">{{ countdownUnits.hours }}</span>
         <span class="dday__num">{{ parts.minutes }}</span
-        ><span class="dday__unit">분</span>
+        ><span class="dday__unit">{{ countdownUnits.minutes }}</span>
         <span class="dday__num">{{ parts.seconds }}</span
-        ><span class="dday__unit">초</span>
+        ><span class="dday__unit">{{ countdownUnits.seconds }}</span>
       </p>
     </div>
   </section>

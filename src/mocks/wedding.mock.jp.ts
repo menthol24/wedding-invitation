@@ -6,6 +6,11 @@ export const WEDDING_EVENT_ISO = '2026-08-16T15:30:00+09:00'
 export const posterSection = {
   imageUrl: ASSET_URLS.poster,
   titleLines: ['We\'re Getting', 'Married!'],
+  /** 포스터 상단 양옆 이름 위 역할 라벨 — 로케일별로 다른 텍스트 */
+  roleLabels: {
+    groom: '新郎',
+    bride: '新婦',
+  },
 }
 
 export const ceremonySection = {
@@ -67,7 +72,7 @@ export const profileSection = {
       photoUrl: ASSET_URLS.profileBride,
       alt: '新婦の幼少期の写真',
       description:
-        '1991年3月 始興生まれ\nちょっと怠け者の完璧主義者\nサバイバル運動を頑張るウェブ開発者',
+        '1991年3月 安山・始興育ち\nちょっと怠け者の完璧主義者\nサバイバル運動を頑張るウェブ開発者',
     },
   ],
 }
@@ -201,12 +206,12 @@ export const timelineSection = {
       alt: '運動',
     },
     {
-      text: '私たちの人生の旅行先は沖縄!天気も日程も食事も海も、すべてが完璧。また行きたいなぁ〜',
+      text: '私たちの人生の旅行先は沖縄!天気も日程も食事も海も、すべてが完璧だった。',
       photoUrl: ASSET_URLS.timeline3,
       alt: '旅行',
     },
     {
-      text: '新婦は感性的で調和を大切にするENFJ、新郎は思考的だけど柔軟なENTP。最高のカップル!',
+      text: '新婦は感性的で調和を大切にするENFJ、新郎は思考的だけど柔軟なENTP。なかなかいいじゃん!',
       photoUrl: ASSET_URLS.timeline4,
       alt: '最高の組み合わせ',
     },

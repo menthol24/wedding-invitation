@@ -10,6 +10,11 @@ withDefaults(
     brideName?: string
     dateLabel: string
     venueName: string
+    /** 신랑/신부 역할 라벨 — 로케일별로 다른 텍스트 (예: 한국어 '신랑/신부', 일본어 '新郎/新婦') */
+    roleLabels: {
+      groom: string
+      bride: string
+    }
   }>(),
   {
     play: false,
@@ -27,11 +32,11 @@ withDefaults(
       <!-- 포스터 상단 양옆 이름 헤더 -->
       <div v-if="groomName || brideName" class="poster__names">
         <span class="poster__names-side poster__names-side--left">
-          <span class="poster__names-role">신랑</span>
+          <span class="poster__names-role">{{ roleLabels.groom }}</span>
           <span class="poster__names-given">{{ groomName }}</span>
         </span>
         <span class="poster__names-side poster__names-side--right">
-          <span class="poster__names-role">신부</span>
+          <span class="poster__names-role">{{ roleLabels.bride }}</span>
           <span class="poster__names-given">{{ brideName }}</span>
         </span>
       </div>

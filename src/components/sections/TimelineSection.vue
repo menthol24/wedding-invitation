@@ -15,6 +15,11 @@ const props = defineProps<{
   /** 두 사람이 처음 만난 날 (ISO: YYYY-MM-DD) — 디데이 계산용 */
   meetSinceIso?: string
   ddayLabel?: string
+  /** 함께한 시간 단위 라벨 — 로케일별로 다른 텍스트 (예: 한국어 '년/일', 일본어 '年/日') */
+  sinceUnits: {
+    years: string
+    days: string
+  }
 }>()
 
 const { el, revealed } = useReveal({ threshold: 0.2 })
@@ -69,9 +74,9 @@ const sinceParts = computed(() => {
       <p v-if="ddayLabel" class="dday__label">{{ ddayLabel }}</p>
       <p class="dday__value">
         <span class="dday__num">{{ sinceParts.years }}</span
-        ><span class="dday__unit">년</span>
+        ><span class="dday__unit">{{ sinceUnits.years }}</span>
         <span class="dday__num">{{ sinceParts.days }}</span
-        ><span class="dday__unit">일</span>
+        ><span class="dday__unit">{{ sinceUnits.days }}</span>
       </p>
     </div>
 
