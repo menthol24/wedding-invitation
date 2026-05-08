@@ -74,7 +74,7 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 // 손글씨 — 투명 PNG, 사진 위에 겹쳐서 자연스럽게
 .handwriting {
   position: absolute;
-  width: 50%;
+  width: 60%;
   height: auto;
   pointer-events: none;
   user-select: none;
@@ -91,16 +91,16 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 
 // 신부 — 좌상단 영역, 왼쪽에서 슬라이드 인
 .handwriting--bride {
-  top: -20%;
-  left: 4%;
+  top: -18%;
+  left: 2%;
   transform: translateX(-24px);
 }
 
 // 신랑 — 우하단 영역, 오른쪽에서 슬라이드 인 (살짝 늦게)
 .handwriting--groom {
-  bottom: -10%;
-  right: 4%;
-  transform: translateX(24px);
+  bottom: -15%;
+  right: 0%;
+  transform: translateX(22px);
   transition-delay: 300ms;
 }
 

@@ -103,7 +103,7 @@ export const locationSection = {
   map: {
     lat: 37.525952,
     lng: 126.902249,
-    zoom: 17,
+    zoom: 16,
   },
   navigationLinks: [
     { label: '티맵', href: 'https://tmap.life/7946ae5c' },

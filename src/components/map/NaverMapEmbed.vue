@@ -11,7 +11,7 @@ const props = withDefaults(
     mapLabel?: string
   }>(),
   {
-    zoom: 17,
+    zoom: 16,
     mapLabel: '예식장 위치 지도',
   },
 )
