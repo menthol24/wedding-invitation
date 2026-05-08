@@ -1,4 +1,3 @@
-@use 'sass:list';
 <script setup lang="ts">
 withDefaults(
   defineProps<{

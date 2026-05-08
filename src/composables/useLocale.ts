@@ -2,7 +2,7 @@ import { ref, watch } from 'vue'
 import type { Locale } from '@/mocks'
 
 const STORAGE_KEY = 'wedding-invitation:locale'
-const SUPPORTED: Locale[] = ['ko', 'ja']
+const SUPPORTED: Locale[] = ['ko', 'jp']
 
 function readInitialLocale(): Locale {
   if (typeof window === 'undefined') return 'ko'
@@ -28,7 +28,7 @@ function readInitialLocale(): Locale {
 
 const locale = ref<Locale>(readInitialLocale())
 
-// <html lang> 초기 동기화 — :lang(ja) 셀렉터가 일본어 폰트로 분기시킴
+// <html lang> 초기 동기화 — :lang(jp) 셀렉터가 일본어 폰트로 분기시킴
 if (typeof document !== 'undefined') {
   document.documentElement.lang = locale.value
 }
@@ -36,7 +36,7 @@ if (typeof document !== 'undefined') {
 watch(locale, (next) => {
   if (typeof window === 'undefined') return
 
-  // <html lang> 동기화 → CSS :lang(ja) 룰이 일본어 폰트로 전환
+  // <html lang> 동기화 → CSS :lang(jp) 룰이 일본어 폰트로 전환
   document.documentElement.lang = next
 
   // URL 쿼리 동기화 (history는 쌓지 않고 replace)
@@ -61,7 +61,7 @@ export function useLocale() {
   }
 
   function toggleLocale() {
-    locale.value = locale.value === 'ko' ? 'ja' : 'ko'
+    locale.value = locale.value === 'ko' ? 'jp' : 'ko'
   }
 
   return { locale, setLocale, toggleLocale }

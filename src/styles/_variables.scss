@@ -55,7 +55,7 @@
 $font-poster-script: 'BulgaryRose', cursive;
 $font-title-eng: 'EthrealExtraLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
 $font-title-kor: 'NanumRegular', 'Apple SD Gothic Neo', system-ui, sans-serif;
-// $font-body는 CSS 변수 --font-body를 참조 — :lang(ja)에서 동적으로 일본어 폰트로 전환됨
+// $font-body는 CSS 변수 --font-body를 참조 — :lang(jp)에서 동적으로 일본어 폰트로 전환됨
 $font-body: var(--font-body);
 $font-body-ko: 'PretendardLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
 $font-body-jp: 'PretendardLightJp', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
@@ -86,7 +86,7 @@ $lh-loose:   1.85;   // 긴 본문, 주소
 :root {
   --page-max: 430px;
 
-  /** 본문 폰트 — html[lang="ja"]에서 일본어용으로 자동 전환 */
+  /** 본문 폰트 — html[lang="jp"]에서 일본어용으로 자동 전환 */
   --font-body: #{$font-body-ko};
 
   /** 전체 배경 - 밝고 깨끗한 크림 아이보리 */
