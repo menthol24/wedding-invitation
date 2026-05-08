@@ -7,11 +7,12 @@ export interface GuestBookEntry {
 
 export interface GuestBookCreateInput {
   name: string
-  password: string
   message: string
 }
 
 export interface GuestBookProvider {
   list(): Promise<GuestBookEntry[]>
   create(entry: GuestBookCreateInput): Promise<GuestBookEntry>
+  /** soft delete — is_visible 을 false 로 업데이트 */
+  remove(id: string): Promise<void>
 }

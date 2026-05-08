@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import GuestBookWriteModal from '@/components/guestbook/GuestBookWriteModal.vue'
+import GuestBookDeleteModal from '@/components/guestbook/GuestBookDeleteModal.vue'
 import { useGuestbook } from '@/composables/useGuestbook'
 import { useSwipe } from '@/composables/useSwipe'
 import type { GuestBookCreateInput, GuestBookEntry } from '@/services/guestbook/types'
@@ -16,6 +17,7 @@ const {
   loading,
   refresh,
   submit,
+  remove,
   currentPage,
   totalPages,
   goToPage,
@@ -27,6 +29,14 @@ const {
 const modalOpen = ref(false)
 const submitBusy = ref(false)
 
+// 마스터 비밀번호 — VITE_ 접두사라 빌드 결과물에 노출됨. 청첩장 성격상 장난성 안전장치 수준
+const MASTER_PASSWORD = import.meta.env.VITE_MASTER_PASSWORD ?? ''
+
+const deleteModalOpen = ref(false)
+const deleteBusy = ref(false)
+const deleteTargetId = ref<string | null>(null)
+const deleteModalRef = ref<InstanceType<typeof GuestBookDeleteModal> | null>(null)
+
 onMounted(refresh)
 
 async function onSubmit(input: GuestBookCreateInput) {
@@ -36,6 +46,36 @@ async function onSubmit(input: GuestBookCreateInput) {
     modalOpen.value = false
   } finally {
     submitBusy.value = false
+  }
+}
+
+function openDeleteModal(id: string) {
+  deleteTargetId.value = id
+  deleteModalOpen.value = true
+}
+
+function closeDeleteModal() {
+  deleteModalOpen.value = false
+  deleteTargetId.value = null
+}
+
+async function onConfirmDelete({ password }: { password: string }) {
+  if (password !== MASTER_PASSWORD) {
+    deleteModalRef.value?.showError('비밀번호가 일치하지 않습니다.')
+    return
+  }
+  if (!deleteTargetId.value) return
+
+  deleteBusy.value = true
+  try {
+    await remove(deleteTargetId.value)
+    closeDeleteModal()
+  } catch (e) {
+    deleteModalRef.value?.showError(
+      e instanceof Error ? e.message : '삭제하지 못했습니다.',
+    )
+  } finally {
+    deleteBusy.value = false
   }
 }
 
@@ -192,6 +232,28 @@ function jumpToPage(n: number) {
               <span class="date">{{ fmtDate(e.created_at) }}</span>
             </div>
             <p class="body">{{ e.message }}</p>
+            <button
+              type="button"
+              class="delete-btn"
+              aria-label="방명록 삭제"
+              @click="openDeleteModal(e.id)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M3 6h18" />
+                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+              </svg>
+            </button>
           </li>
         </ul>
         <ul class="slide list" aria-hidden="true">
@@ -243,6 +305,14 @@ function jumpToPage(n: number) {
       :busy="submitBusy"
       @close="modalOpen = false"
       @submit="onSubmit"
+    />
+
+    <GuestBookDeleteModal
+      ref="deleteModalRef"
+      :open="deleteModalOpen"
+      :busy="deleteBusy"
+      @close="closeDeleteModal"
+      @confirm="onConfirmDelete"
     />
   </section>
 </template>
@@ -346,11 +416,49 @@ function jumpToPage(n: number) {
 }
 
 .item {
+  position: relative;
   padding: 18px;
   border-radius: var(--radius-card);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-lift);
+}
+
+.delete-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-body-light-grey);
+  cursor: pointer;
+  opacity: 0.7;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease;
+
+  &:hover {
+    background: var(--color-accent-soft);
+    color: var(--color-accent-strong);
+    opacity: 1;
+  }
+
+  &:active {
+    transform: scale(0.94);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }
 
 .meta {
@@ -375,6 +483,8 @@ function jumpToPage(n: number) {
 
 .body {
   margin: 0;
+  // 우측 하단의 삭제 버튼과 메시지가 겹치지 않도록 마지막 줄에 패딩 확보
+  padding-right: 36px;
   font-size: $fs-base;
   line-height: $lh-loose;
   color: var(--color-body-muted);

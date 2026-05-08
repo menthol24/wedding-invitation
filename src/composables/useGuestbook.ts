@@ -48,6 +48,20 @@ export function useGuestbook(provider: GuestBookProvider = defaultProvider) {
     }
   }
 
+  async function remove(id: string) {
+    loading.value = true
+    error.value = null
+    try {
+      await provider.remove(id)
+      entries.value = entries.value.filter((e) => e.id !== id)
+    } catch (e) {
+      error.value = e instanceof Error ? e.message : '삭제하지 못했습니다.'
+      throw e
+    } finally {
+      loading.value = false
+    }
+  }
+
   const totalPages = computed(() =>
     Math.max(1, Math.ceil(entries.value.length / PAGE_SIZE)),
   )
@@ -77,6 +91,7 @@ export function useGuestbook(provider: GuestBookProvider = defaultProvider) {
     pageSize: PAGE_SIZE,
     refresh,
     submit,
+    remove,
     goToPage,
     nextPage() {
       goToPage(currentPage.value + 1)

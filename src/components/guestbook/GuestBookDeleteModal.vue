@@ -1,35 +1,42 @@
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+import { ref, watch } from 'vue'
 
-const props = defineProps<{ open: boolean; busy: boolean }>()
+const props = defineProps<{
+  open: boolean
+  busy: boolean
+}>()
 
 const emit = defineEmits<{
   close: []
-  submit: [{ name: string; message: string }]
+  /** 입력된 비밀번호를 부모로 전달 — 검증은 부모(섹션)가 마스터 비밀번호로 비교 */
+  confirm: [{ password: string }]
 }>()
 
-const form = reactive({
-  name: '',
-  message: '',
-})
+const password = ref('')
+const errorMsg = ref('')
 
 watch(
   () => props.open,
   (v) => {
     if (!v) {
-      form.name = ''
-      form.message = ''
+      password.value = ''
+      errorMsg.value = ''
     }
   },
 )
 
+/** 부모가 비밀번호 불일치 시 호출할 수 있도록 노출 */
+function showError(msg: string) {
+  errorMsg.value = msg
+}
+
+defineExpose({ showError })
+
 function onSubmit(ev: Event) {
   ev.preventDefault()
-  if (!form.name.trim() || !form.message.trim()) return
-  emit('submit', {
-    name: form.name.trim(),
-    message: form.message.trim(),
-  })
+  if (!password.value.trim()) return
+  errorMsg.value = ''
+  emit('confirm', { password: password.value })
 }
 </script>
 
@@ -37,27 +44,32 @@ function onSubmit(ev: Event) {
   <Teleport to="body">
     <transition name="fade">
       <div v-if="open" class="mask" role="presentation" @click.self="emit('close')">
-        <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="guestbook-modal-title">
+        <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="guestbook-delete-title">
           <div class="head">
-            <h2 id="guestbook-modal-title" class="h">방명록 작성</h2>
+            <h2 id="guestbook-delete-title" class="h">방명록 삭제</h2>
             <button type="button" class="close" aria-label="닫기" @click="emit('close')">✕</button>
           </div>
 
           <form class="form" @submit="onSubmit">
-            <label class="field">
-              <span class="label">이름</span>
-              <input v-model="form.name" name="guest-name" class="input" autocomplete="name" />
-            </label>
+            <p class="desc">관리자 비밀번호를 입력해 주세요.</p>
 
             <label class="field">
-              <span class="label">내용</span>
-              <textarea v-model="form.message" rows="5" class="textarea" />
+              <span class="label">비밀번호</span>
+              <input
+                v-model="password"
+                type="password"
+                class="input"
+                autocomplete="current-password"
+                :disabled="busy"
+              />
             </label>
-            <span style="font-size: 12px;">부적절한 글은 무통보 삭제될 수 있음!</span>
+
+            <p v-if="errorMsg" class="error" role="alert">{{ errorMsg }}</p>
+
             <div class="actions">
               <button type="button" class="btn btn--muted" @click="emit('close')">취소</button>
               <button type="submit" class="btn btn--accent" :disabled="busy">
-                {{ busy ? '저장 중…' : '작성 완료' }}
+                {{ busy ? '삭제 중…' : '삭제' }}
               </button>
             </div>
           </form>
@@ -104,7 +116,7 @@ function onSubmit(ev: Event) {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 
   .h {
     margin: 0;
@@ -126,13 +138,17 @@ function onSubmit(ev: Event) {
   }
 }
 
-.form {
+.desc {
+  margin: 0 0 16px;
+  font-size: 0.86rem;
+  color: var(--color-body-muted);
+  line-height: 1.6;
 }
 
 .field {
   display: grid;
   gap: 9px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 
   .label {
     font-size: 0.78rem;
@@ -142,8 +158,7 @@ function onSubmit(ev: Event) {
   }
 }
 
-.input,
-.textarea {
+.input {
   width: 100%;
   border-radius: 12px;
   border: 1px solid var(--color-border);
@@ -153,16 +168,16 @@ function onSubmit(ev: Event) {
   color: var(--color-body);
 }
 
-.textarea {
-  resize: vertical;
-  min-height: 120px;
-  line-height: 1.72;
+.error {
+  margin: 8px 0 0;
+  font-size: 0.8rem;
+  color: #c0463a;
 }
 
 .actions {
   display: flex;
   gap: 10px;
-  margin-top: 12px;
+  margin-top: 20px;
 
   .btn {
     flex: 1;
@@ -180,7 +195,7 @@ function onSubmit(ev: Event) {
     background: transparent;
     color: var(--color-body-muted);
     border: 1px solid rgba(72, 58, 54, 0.1);
-    font-size:0.9rem;
+    font-size: 0.9rem;
     margin-block: 4px;
   }
 
@@ -189,7 +204,7 @@ function onSubmit(ev: Event) {
     color: var(--color-section-heading);
     border: 1px solid rgba(169, 120, 134, 0.28);
     box-shadow: none;
-    font-size:0.9rem;
+    font-size: 0.9rem;
     margin-block: 4px;
   }
 }

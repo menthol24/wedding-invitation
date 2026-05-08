@@ -43,8 +43,12 @@ export function createLocalGuestBookProvider(): GuestBookProvider {
       }
       const next = [entry, ...readStore()]
       writeStore(next)
-      void input.password // Supabase 연동 시 해시 저장 등으로 사용
       return entry
+    },
+
+    async remove(id: string): Promise<void> {
+      const next = readStore().filter((e) => e.id !== id)
+      writeStore(next)
     },
   }
 }
