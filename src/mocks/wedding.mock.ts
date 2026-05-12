@@ -69,7 +69,7 @@ export const profileSection = {
       name: '유민선',
       photoUrl: ASSET_URLS.profileBride,
       alt: '신부 어린 시절 사진',
-      description: '1991년 3월생 안산\/시흥 출신\n조금 게으른 완벽주의자\n생존운동 열심히 하는 웹개발자',
+      description: '1991년 3월 안산\/시흥 출신\n조금 게으른 완벽주의자\n생존운동 열심히 하는 웹개발자',
     },
   ],
 }
@@ -78,7 +78,7 @@ export const calendarSection = {
   title: 'WEDDING DAY',
   meetSinceIso: '2020-04-16',
   ddayHeadline: '구원과 민선이 함께한 시간',
-  weddingDay: '2026년 8월 16일 일요일 | 오후 3시반',
+  weddingDay: '2026년 8월 16일 일요일 | 오후 3시 30분',
   weddingDayEng: 'Sunday, Aug 16, 2026 | PM 3:30',
   calendarYear: 2026,
   /** 8월 → 0-based 7 */
