@@ -22,6 +22,8 @@ import gallery13 from '@/assets/images/gallery/13.jpg';
 import gallery14 from '@/assets/images/gallery/14.jpg';
 import gallery15 from '@/assets/images/gallery/15.jpg';
 import gallery16 from '@/assets/images/gallery/16.jpg';
+import gallery17 from '@/assets/images/gallery/17.png';
+import gallery18 from '@/assets/images/gallery/18.png';
 import tabWelcomeDrinks from '@/assets/images/tabWelcomeDrinks.png';
 import tabBrideWaiting from '@/assets/images/tabBrideWaiting.jpg';
 import tabAtm from '@/assets/images/tabAtm.png';
@@ -57,6 +59,8 @@ export const ASSET_URLS = {
     gallery14,
     gallery15,
     gallery16,
+    gallery17,
+    gallery18,
   ] as string[],
   tabWelcomeDrinks,
   tabBrideWaiting,
