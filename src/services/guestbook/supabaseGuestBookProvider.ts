@@ -11,14 +11,15 @@ export function createSupabaseGuestBookProvider(): GuestBookProvider {
     async list() {
       const { data, error } = await supabase
           .from('guestbook')
-          .select('id, name, message, created_at')
+          .select('id, name, message, created_at, likes')
           .eq('is_visible', true)
           .order('created_at', { ascending: false })
 
       if (error) {
         throw new Error(`[guestbook] Supabase select list error: ${error.message}`)
       }
-      return data ?? []
+      // likes 컬럼이 null 이면 0 으로 보정
+      return (data ?? []).map((row) => ({ ...row, likes: row.likes ?? 0 }))
     },
 
     async create(input: GuestBookCreateInput): Promise<GuestBookEntry> {
@@ -27,13 +28,14 @@ export function createSupabaseGuestBookProvider(): GuestBookProvider {
       const { data, error } = await supabase
           .from('guestbook')
           .insert({ name, message, is_visible: true })
-          .select('id, name, message, created_at')
+          .select('id, name, message, created_at, likes')
           .single()
 
       if(error) {
         throw new Error(`[guestbook] Supabase insert error: ${error.message}`)
       }
-      return data ?? []
+      // 새 글의 좋아요 수는 0 으로 시작
+      return { ...data, likes: data?.likes ?? 0 }
 
     },
 
@@ -45,6 +47,19 @@ export function createSupabaseGuestBookProvider(): GuestBookProvider {
           if (error) {
               throw new Error(`[guestbook] Supabase soft-delete error: ${error.message}`)
           }
+      },
+
+      async like(id: string): Promise<number> {
+          // 원자적 +1 증가를 위해 RPC 사용 — 동시 클릭 시 경쟁 상태 방지
+          const { data, error } = await supabase.rpc('like_guestbook', {
+              p_target_id: id,
+          })
+
+          if (error) {
+              throw new Error(`[guestbook] Supabase like error: ${error.message}`)
+          }
+          // RPC 가 갱신된 likes 값을 반환
+          return typeof data === 'number' ? data : 0
       }
   }
 }

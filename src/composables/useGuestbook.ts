@@ -62,6 +62,29 @@ export function useGuestbook(provider: GuestBookProvider = defaultProvider) {
     }
   }
 
+  /**
+   * 좋아요 +1 — 누를 때마다 무조건 1 증가한다(중복 제어 없음).
+   * UI 즉시 반영(낙관적 업데이트) 후 서버 갱신, 실패하면 롤백한다.
+   */
+  async function addLike(id: string) {
+    const target = entries.value.find((e) => e.id === id)
+    if (!target) return
+
+    // 낙관적 업데이트
+    const prevLikes = target.likes
+    target.likes += 1
+
+    try {
+      const serverLikes = await provider.like(id)
+      // 서버가 알려준 실제 값으로 동기화
+      target.likes = serverLikes
+    } catch (e) {
+      // 실패 시 롤백
+      target.likes = prevLikes
+      error.value = e instanceof Error ? e.message : '좋아요 처리에 실패했습니다.'
+    }
+  }
+
   const totalPages = computed(() =>
     Math.max(1, Math.ceil(entries.value.length / PAGE_SIZE)),
   )
@@ -92,6 +115,7 @@ export function useGuestbook(provider: GuestBookProvider = defaultProvider) {
     refresh,
     submit,
     remove,
+    addLike,
     goToPage,
     nextPage() {
       goToPage(currentPage.value + 1)

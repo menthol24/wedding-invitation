@@ -18,6 +18,7 @@ const {
   refresh,
   submit,
   remove,
+  addLike,
   currentPage,
   totalPages,
   goToPage,
@@ -85,6 +86,20 @@ function fmtDate(iso: string) {
   const mo = `${d.getMonth() + 1}`.padStart(2, '0')
   const da = `${d.getDate()}`.padStart(2, '0')
   return `${y}.${mo}.${da}`
+}
+
+// 좋아요 클릭 시 펄스 애니메이션 재생을 위한 상태 (클릭마다 토글)
+const poppingId = ref<string | null>(null)
+
+function onLike(id: string) {
+  // 같은 버튼 연타 시에도 매번 애니메이션이 다시 재생되도록 잠깐 끊었다 켠다
+  poppingId.value = null
+  // nextTick 없이 즉시 재설정하면 클래스 변화가 합쳐져 애니메이션이 안 보일 수 있어
+  // requestAnimationFrame 으로 다음 프레임에 클래스를 다시 붙인다
+  requestAnimationFrame(() => {
+    poppingId.value = id
+  })
+  addLike(id)
 }
 
 // 페이지 번호 목록 (최대 5개 윈도우)
@@ -223,6 +238,21 @@ function jumpToPage(n: number) {
               <span class="date">{{ fmtDate(e.created_at) }}</span>
             </div>
             <p class="body">{{ e.message }}</p>
+            <span v-if="e.likes > 0" class="like-static">
+              <svg
+                class="like-icon"
+                viewBox="0 0 24 24"
+                width="15"
+                height="15"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                />
+              </svg>
+              <span class="like-count">{{ e.likes }}</span>
+            </span>
           </li>
         </ul>
         <ul class="slide list">
@@ -232,6 +262,38 @@ function jumpToPage(n: number) {
               <span class="date">{{ fmtDate(e.created_at) }}</span>
             </div>
             <p class="body">{{ e.message }}</p>
+            <button
+              type="button"
+              class="like-btn"
+              :class="{ popping: poppingId === e.id }"
+              aria-label="좋아요"
+              @click="onLike(e.id)"
+            >
+              <span class="like-heart">
+                <svg
+                  class="like-icon"
+                  viewBox="0 0 24 24"
+                  width="15"
+                  height="15"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                  />
+                </svg>
+                <!-- 클릭 시 사방으로 터지는 입자 6개 (60°씩) -->
+                <span class="like-burst" aria-hidden="true">
+                  <span style="--angle: 0deg"></span>
+                  <span style="--angle: 60deg"></span>
+                  <span style="--angle: 120deg"></span>
+                  <span style="--angle: 180deg"></span>
+                  <span style="--angle: 240deg"></span>
+                  <span style="--angle: 300deg"></span>
+                </span>
+              </span>
+              <span v-if="e.likes > 0" class="like-count">{{ e.likes }}</span>
+            </button>
             <button
               type="button"
               class="delete-btn"
@@ -263,6 +325,21 @@ function jumpToPage(n: number) {
               <span class="date">{{ fmtDate(e.created_at) }}</span>
             </div>
             <p class="body">{{ e.message }}</p>
+            <span v-if="e.likes > 0" class="like-static">
+              <svg
+                class="like-icon"
+                viewBox="0 0 24 24"
+                width="15"
+                height="15"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                />
+              </svg>
+              <span class="like-count">{{ e.likes }}</span>
+            </span>
           </li>
         </ul>
       </div>
@@ -424,6 +501,136 @@ function jumpToPage(n: number) {
   box-shadow: var(--shadow-lift);
 }
 
+.like-btn {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  // 배경/테두리 제거 — 아이콘만 노출
+  padding: 0 8px 0 6px;
+  border: 0;
+  background: transparent;
+  color: var(--color-accent-strong);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+
+  &:hover .like-icon {
+    transform: scale(1.08);
+  }
+
+  // 클릭 시 하트가 톡 튀는 피드백 (poppingId 가 붙은 동안 1회 재생)
+  &.popping .like-icon {
+    animation: like-pop 0.4s ease;
+  }
+
+  // 클릭 시 하트 주변으로 입자가 터지는 효과 (popping 일 때만 입자 재생)
+  &.popping .like-burst span {
+    animation: like-particle 0.5s ease-out;
+  }
+
+  &:active {
+    transform: scale(0.94);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+// 하트 아이콘을 감싸 burst 입자의 기준점이 되는 래퍼
+.like-heart {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.like-icon {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+// 하트 중심에서 사방으로 퍼지는 입자들 (평소엔 보이지 않음)
+.like-burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  pointer-events: none;
+  opacity: 0;
+
+  span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    // 각 입자를 6방향(60°씩)으로 회전 배치 후, 애니메이션에서 바깥으로 밀어냄
+    transform: rotate(var(--angle)) translateY(0);
+  }
+}
+
+.like-count {
+  font-size: $fs-xs;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+// prev/next 슬라이드의 비인터랙티브 좋아요 표시
+.like-static {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 8px 0 6px;
+  color: var(--color-accent-strong);
+}
+
+@keyframes like-pop {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.85);
+  }
+  60% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// 입자가 중심에서 바깥으로 튕겨나가며 사라지는 효과
+@keyframes like-particle {
+  0% {
+    transform: rotate(var(--angle)) translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    // 회전 방향 그대로 14px 바깥으로 이동하며 작아지고 사라짐
+    transform: rotate(var(--angle)) translateY(-14px) scale(0.3);
+    opacity: 0;
+  }
+}
+
 .delete-btn {
   position: absolute;
   right: 10px;
@@ -483,8 +690,8 @@ function jumpToPage(n: number) {
 
 .body {
   margin: 0;
-  // 우측 하단의 삭제 버튼과 메시지가 겹치지 않도록 마지막 줄에 패딩 확보
-  padding-right: 36px;
+  // 하단의 좋아요/삭제 버튼과 메시지가 겹치지 않도록 마지막 줄에 패딩 확보
+  padding-bottom: 34px;
   font-size: $fs-base;
   line-height: $lh-loose;
   color: var(--color-body-muted);

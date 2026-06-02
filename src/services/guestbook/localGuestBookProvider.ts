@@ -7,7 +7,9 @@ function readStore(): GuestBookEntry[] {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
     const parsed = JSON.parse(raw) as GuestBookEntry[]
-    return Array.isArray(parsed) ? parsed : []
+    if (!Array.isArray(parsed)) return []
+    // 구버전 데이터에 likes 가 없으면 0 으로 보정
+    return parsed.map((e) => ({ ...e, likes: e.likes ?? 0 }))
   } catch {
     return []
   }
@@ -40,6 +42,7 @@ export function createLocalGuestBookProvider(): GuestBookProvider {
         name: input.name.trim(),
         message: input.message.trim(),
         created_at: new Date().toISOString(),
+        likes: 0,
       }
       const next = [entry, ...readStore()]
       writeStore(next)
@@ -49,6 +52,15 @@ export function createLocalGuestBookProvider(): GuestBookProvider {
     async remove(id: string): Promise<void> {
       const next = readStore().filter((e) => e.id !== id)
       writeStore(next)
+    },
+
+    async like(id: string): Promise<number> {
+      const entries = readStore()
+      const target = entries.find((e) => e.id === id)
+      if (!target) return 0
+      target.likes = (target.likes ?? 0) + 1
+      writeStore(entries)
+      return target.likes
     },
   }
 }

@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(git rm *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(xxd)",
+      "PowerShell($content = Get-Content \"C:\\\\workspace_vue\\\\wedding-invitation\\\\index.html\" -Raw; $keywords = @\\('firebase','firestore','script','async function','addEventListener','delete','modal','<div'\\); foreach\\($k in $keywords\\){ $count = \\([regex]::Matches\\($content, [regex]::Escape\\($k\\), 'IgnoreCase'\\)\\).Count; Write-Output \"$k : $count\" })",
+      "PowerShell($lines = Get-Content \"C:\\\\workspace_vue\\\\wedding-invitation\\\\index.html\"; for\\($i=0; $i -lt $lines.Count; $i++\\){ if\\($lines[$i] -cmatch 'messageList|message-item|message-content|message-delete-btn|message-header'\\){ Write-Output \\(\"{0}: {1}\" -f \\($i+1\\), $lines[$i].Trim\\(\\).Substring\\(0, [Math]::Min\\(130, $lines[$i].Trim\\(\\).Length\\)\\)\\) } })",
+      "PowerShell($content = Get-Content \"C:\\\\workspace_vue\\\\wedding-invitation\\\\index.html\" -Raw; $checks = @{ 'updateDoc import' = 'updateDoc, increment'; 'toggleLike 함수' = 'async function toggleLike'; 'isLiked 함수' = 'function isLiked'; 'increment 호출' = 'increment\\(newLiked'; 'like-btn HTML' = 'message-like-btn'; 'like CSS' = '.message-like-btn.liked'; 'closest 이벤트' = 'closest\\(\".message-like-btn\"\\)' }; foreach\\($k in $checks.Keys\\){ $found = $content.Contains\\($checks[$k]\\); Write-Output \\(\"{0}: {1}\" -f $\\(if\\($found\\){'OK'}else{'MISSING'}\\), $k\\) })",
+      "PowerShell(npx vue-tsc --noEmit -p tsconfig.json 2>&1 | Select-Object -First 60)",
+      "PowerShell(npx vue-tsc --noEmit -p tsconfig.check.json 2>&1 | Select-Object -First 60)",
+      "Bash(git log *)",
+      "Bash(ls -la .env*)"
     ]
   }
 }

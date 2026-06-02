@@ -236,7 +236,7 @@ onBeforeUnmount(() => {
   display: inline-block;
   margin: 0;
   font-family: $font-poster-script;
-  font-size: clamp(3.0rem, 9vw, 3.6rem);
+  font-size: clamp(3.0rem, 9vw, 3.4rem);
   font-weight: 400;
 
   line-height: $lh-tight;
