@@ -128,7 +128,7 @@ function chooseTab(id: string) {
                 class="block"
               >
                 <h3 class="sub">{{ b.subtitle }}</h3>
-                <p v-for="(ln, li) in b.lines" :key="li" class="para">{{ ln }}</p>
+                <p v-for="(ln, li) in b.lines" :key="li" class="para" v-html="ln"></p>
               </div>
             </div>
           </template>
@@ -146,7 +146,7 @@ function chooseTab(id: string) {
           <div class="blocks">
             <div v-for="(b, i) in active.blocks" :key="`cur-${active.id}-${i}`" class="block">
               <h3 class="sub">{{ b.subtitle }}</h3>
-              <p v-for="(ln, li) in b.lines" :key="li" class="para">{{ ln }}</p>
+              <p v-for="(ln, li) in b.lines" :key="li" class="para" v-html="ln"></p>
             </div>
           </div>
         </article>
@@ -168,7 +168,7 @@ function chooseTab(id: string) {
                 class="block"
               >
                 <h3 class="sub">{{ b.subtitle }}</h3>
-                <p v-for="(ln, li) in b.lines" :key="li" class="para">{{ ln }}</p>
+                <p v-for="(ln, li) in b.lines" :key="li" class="para" v-html="ln"></p>
               </div>
             </div>
           </template>
@@ -262,6 +262,21 @@ function chooseTab(id: string) {
   color: var(--color-body-muted);
   &:last-child {
     margin-bottom: 0;
+  }
+
+  // v-html 로 삽입된 형광펜 강조 — 글자 아래쪽만 칠해지는 형광펜 느낌
+  :deep(mark.hl) {
+    background: linear-gradient(
+      to top,
+      rgba(255, 221, 119, 0.75) 0%,
+      rgba(255, 221, 119, 0.75) 42%,
+      transparent 42%,
+      transparent 100%
+    );
+    color: inherit;
+    font-weight: 600;
+    padding: 0 1px;
+    border-radius: 2px;
   }
 }
 

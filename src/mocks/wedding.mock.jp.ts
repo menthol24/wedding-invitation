@@ -23,11 +23,16 @@ export const invitationSection = {
   paragraphs: [
       [ '青々とした緑が風に揺れる美しい日に、'],
       [ '私たちは互いのいちばんの味方になることを誓います。'],
-      [ 'ご多用のところ恐縮ではございますが、温かく見守っていただけますと幸いです。'],
+      [ 'ご多用のところ恐縮ではございますが'],
+      [ '温かく見守っていただけますと'],
+      [ '幸いです。'],
   ],
+  /** 초대장 배경 봉투 이미지 — 흰 편지지 영역 위에 문구가 올라감 */
+  envelopeUrl: ASSET_URLS.beigeEnvelope,
+  envelopeAlt: '편지가 담긴 베이지색 봉투',
 }
 
-export const couplesSection = {
+export const introduceSection = {
   groom: {
     roleLabel: '新郎',
     givenName: 'ク・ウォン',
@@ -42,6 +47,7 @@ export const couplesSection = {
     photoUrl: ASSET_URLS.bride,
     alt: '新婦の写真',
   },
+  introducePhoto: ASSET_URLS.introduce
 }
 
 /** 로딩 스크린 — 언어 무관하게 영문 고정 표기 */
@@ -166,7 +172,7 @@ export const venueGuideSection = {
       blocks: [
         {
           subtitle: '👰🏻新婦待機室の場所と挨拶可能時間',
-          lines: ['ホール左側「ベルアイル(廊下)」の奥に位置しています。写真撮影とご挨拶は式開始15分前まで可能です。'],
+          lines: ['ホール左側「ベルアイル(廊下)」の奥に位置しています。写真撮影とご挨拶は式開始<mark class="hl">15分前</mark>まで可能です。'],
         },
       ],
     },

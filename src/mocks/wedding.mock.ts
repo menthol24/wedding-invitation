@@ -24,11 +24,15 @@ export const invitationSection = {
   paragraphs: [
     ['푸른 녹음이 바람에 일렁이는 아름다운 날,'],
     ['서로의 가장 든든한 편이 되기로 약속합니다.'],
-    ['귀한 걸음으로 함께 축복해 주시면 감사하겠습니다.'],
+    ['귀한 걸음으로 함께 축복해 주시면'],
+    ['감사하겠습니다.'],
   ],
+  /** 초대장 배경 봉투 이미지 — 흰 편지지 영역 위에 문구가 올라감 */
+  envelopeUrl: ASSET_URLS.beigeEnvelope,
+  envelopeAlt: '편지가 담긴 베이지색 봉투',
 }
 
-export const couplesSection = {
+export const introduceSection = {
   groom: {
     roleLabel: '신랑',
     givenName: '구원',
@@ -43,6 +47,7 @@ export const couplesSection = {
     photoUrl: ASSET_URLS.bride,
     alt: '신부 사진',
   },
+  introducePhoto: ASSET_URLS.introduce
 }
 
 /** 로딩 스크린 — 언어 무관하게 영문 고정 표기 */
@@ -167,7 +172,7 @@ export const venueGuideSection = {
       blocks: [
         {
           subtitle: '👰🏻신부대기실 위치 및 인사 가능 시간',
-          lines: ['홀 왼편 \'베르아일(복도)\' 끝에 위치, 사진 촬영 및 인사는 예식 시작 15분 전까지 가능합니다.'],
+          lines: ['홀 왼편 \'베르아일(복도)\' 끝에 위치, 사진 촬영 및 인사는 예식 시작 <mark class="hl">15분 전</mark>까지 가능합니다.'],
         },
       ],
     },

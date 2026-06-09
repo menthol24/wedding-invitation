@@ -4,8 +4,11 @@
  * 예: import poster from '@/assets/images/poster.jpg' 후 poster를 export 에 넣으면 됩니다.
  */
 import poster from '@/assets/images/poster.jpg';
-import groom from '@/assets/images/groom.jpg';
-import bride from '@/assets/images/bride.jpg';
+import introduce from '@/assets/images/introduce.jpg';
+import groomProfile from '@/assets/images/profile/groom_profile.jpg';
+import brideProfile from '@/assets/images/profile/bride_profile.jpg';
+import groomProfileChild from '@/assets/images/profile/groom_profile_child.png';
+import groomProfileBride from '@/assets/images/profile/bride_profile_child.png';
 import gallery1 from '@/assets/images/gallery/1.jpg';
 import gallery2 from '@/assets/images/gallery/2.jpg';
 import gallery3 from '@/assets/images/gallery/3.jpg';
@@ -22,8 +25,6 @@ import gallery13 from '@/assets/images/gallery/13.jpg';
 import gallery14 from '@/assets/images/gallery/14.jpg';
 import gallery15 from '@/assets/images/gallery/15.jpg';
 import gallery16 from '@/assets/images/gallery/16.jpg';
-import gallery17 from '@/assets/images/gallery/17.png';
-import gallery18 from '@/assets/images/gallery/18.png';
 import tabWelcomeDrinks from '@/assets/images/tabWelcomeDrinks.png';
 import tabBrideWaiting from '@/assets/images/tabBrideWaiting.jpg';
 import tabAtm from '@/assets/images/tabAtm.png';
@@ -32,16 +33,18 @@ import timeline2 from '@/assets/images/timeline/timeline2.jpg';
 import timeline3 from '@/assets/images/timeline/timeline3.png';
 import timeline4 from '@/assets/images/timeline/timeline4.png';
 import timeline5 from '@/assets/images/timeline/timeline5.jpg';
-import profileGroom from '@/assets/images/profile/ko2.png';
-import profileBride from '@/assets/images/profile/ms2.png';
 import coupleShot from '@/assets/images/coupleShot.jpg';
 import letter1 from '@/assets/images/letter/letter1.png';
 import letter2 from '@/assets/images/letter/letter2.png';
+import beigeEnvelope from '@/assets/images/beige-envelope.png';
 
 export const ASSET_URLS = {
   poster,
-  groom,
-  bride,
+  introduce,
+  groom: groomProfile,
+  bride: brideProfile,
+  profileGroom: groomProfileChild,
+  profileBride: groomProfileBride,
   gallery: [
     gallery1,
     gallery2,
@@ -58,9 +61,7 @@ export const ASSET_URLS = {
     gallery13,
     gallery14,
     gallery15,
-    gallery16,
-    gallery17,
-    gallery18,
+    gallery16
   ] as string[],
   tabWelcomeDrinks,
   tabBrideWaiting,
@@ -70,9 +71,8 @@ export const ASSET_URLS = {
   timeline3,
   timeline4,
   timeline5,
-  profileGroom,
-  profileBride,
   coupleShot,
   letter1,
   letter2,
+  beigeEnvelope,
 }

@@ -4,17 +4,32 @@ defineProps<{
     roleLabel: string
     givenName: string
     parentsLine: string
+    photoUrl?: string
+    alt?: string
   }
   bride: {
     roleLabel: string
     givenName: string
     parentsLine: string
+    photoUrl?: string
+    alt?: string
   }
+  introducePhoto: string
 }>()
 </script>
 
 <template>
   <section class="intro section-pad section-pad--wide" aria-labelledby="intro-heading">
+    <!-- 신랑·신부 프로필 사진 — 정사각형으로 한 줄에 나란히 -->
+    <div class="photos">
+      <img
+          v-if="introducePhoto"
+          :src="introducePhoto"
+          loading="lazy"
+          decoding="async"
+      />
+    </div>
+
     <article class="card">
       <div class="text">
         <div class="groom-name">
@@ -45,6 +60,19 @@ defineProps<{
 
 <style scoped lang="scss">
 @use '@/styles/variables' as *;
+
+// 신랑·신부 프로필 사진 — 정사각형 2개를 한 줄에 나란히
+.photos {
+  margin-bottom: 28px;
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    border-radius: var(--radius-photo);
+    border: 1px solid var(--color-border);
+  }
+}
 
 .card {
   padding: 10px;

@@ -52,7 +52,8 @@ defineProps<{
 // 섹션 자체에 연한 아이보리/베이지 배경을 깔아 카드(흰색)와 대비
 #profile-heading {
   text-align: right;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  margin-right: 15px;
 }
 
 .stack {
@@ -80,6 +81,16 @@ defineProps<{
     bottom: 0;
     left: 0;
     z-index: 2;
+    filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.21))
+  }
+}
+
+.photo--groom {
+  img {
+    transform: rotate(358deg);
+    width: 52%;
+    left: -10px;
+    top: -40%;
   }
 }
 
@@ -87,6 +98,8 @@ defineProps<{
   direction: ltr;
 
   img {
+    transform: rotate(2deg);
+    width: 45%;
     left: auto;
     right: 0;
   }

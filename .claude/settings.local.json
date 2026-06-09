@@ -10,7 +10,9 @@
       "PowerShell(npx vue-tsc --noEmit -p tsconfig.json 2>&1 | Select-Object -First 60)",
       "PowerShell(npx vue-tsc --noEmit -p tsconfig.check.json 2>&1 | Select-Object -First 60)",
       "Bash(git log *)",
-      "Bash(ls -la .env*)"
+      "Bash(ls -la .env*)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\workspace_vue\\\\wedding-invitation\\\\src\\\\assets\\\\images\\\\beige-envelope.png\"\\); \"$\\($img.Width\\)x$\\($img.Height\\)\"; $img.Dispose\\(\\))",
+      "PowerShell(npm run *)"
     ]
   }
 }

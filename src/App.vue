@@ -4,7 +4,7 @@ import LoadingScreen from '@/components/LoadingScreen.vue'
 import FloatingActions from '@/components/FloatingActions.vue'
 import PosterSection from '@/components/sections/PosterSection.vue'
 import InvitationSection from '@/components/sections/InvitationSection.vue'
-import IntroSection from '@/components/sections/IntroSection.vue'
+import IntroductionSection from '@/components/sections/IntroductionSection.vue'
 import ProfileSection from '@/components/sections/ProfileSection.vue'
 import CalendarSection from '@/components/sections/CalendarSection.vue'
 import GallerySection from '@/components/sections/GallerySection.vue'
@@ -28,7 +28,7 @@ const WEDDING_EVENT_ISO = computed(() => mock.value.WEDDING_EVENT_ISO)
 const posterSection = computed(() => mock.value.posterSection)
 const ceremonySection = computed(() => mock.value.ceremonySection)
 const invitationSection = computed(() => mock.value.invitationSection)
-const couplesSection = computed(() => mock.value.couplesSection)
+const introduceSection = computed(() => mock.value.introduceSection)
 const profileSection = computed(() => mock.value.profileSection)
 const calendarSection = computed(() => mock.value.calendarSection)
 const gallerySection = computed(() => mock.value.gallerySection)
@@ -70,8 +70,8 @@ function handleLoadingDone() {
       <PosterSection
         :image-url="posterSection.imageUrl"
         :title-lines="posterSection.titleLines"
-        :groom-name="couplesSection.groom.givenName"
-        :bride-name="couplesSection.bride.givenName"
+        :groom-name="introduceSection.groom.givenName"
+        :bride-name="introduceSection.bride.givenName"
         :role-labels="posterSection.roleLabels"
         :play="!isLoading"
         :date-label="ceremonySection.dateLabel"
@@ -82,11 +82,14 @@ function handleLoadingDone() {
         <InvitationSection
           :headline="invitationSection.headline"
           :paragraphs="invitationSection.paragraphs"
+          :envelope-url="invitationSection.envelopeUrl"
+          :envelope-alt="invitationSection.envelopeAlt"
         />
 
-        <IntroSection
-          :groom="couplesSection.groom"
-          :bride="couplesSection.bride"
+        <IntroductionSection
+          :groom="introduceSection.groom"
+          :bride="introduceSection.bride"
+          :introducePhoto="introduceSection.introducePhoto"
         />
 
         <ProfileSection
