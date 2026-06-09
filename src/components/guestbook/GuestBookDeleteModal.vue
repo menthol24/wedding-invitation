@@ -200,9 +200,9 @@ function onSubmit(ev: Event) {
   }
 
   .btn--accent {
-    background: rgba(169, 120, 134, 0.12);
-    color: var(--color-section-heading);
-    border: 1px solid rgba(169, 120, 134, 0.28);
+    background: var(--color-accent-soft);;
+    color: var(--color-accent-strong);
+    border: 1px solid var(--color-section-heading);;
     box-shadow: none;
     font-size: 0.9rem;
     margin-block: 4px;

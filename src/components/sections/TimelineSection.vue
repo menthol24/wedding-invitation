@@ -183,7 +183,7 @@ const sinceParts = computed(() => {
     height: 11px;
     border-radius: 50%;
     border: 2px solid var(--color-surface);
-    background: var(--color-section-heading);
+    background: var(--color-timeline-dot);
     box-shadow: 0 0 0 3px rgba(169, 120, 134, 0.12);
     z-index: 1;
     pointer-events: none;

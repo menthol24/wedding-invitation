@@ -123,9 +123,9 @@ function iconFor(label: string): string | undefined {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  color: var(--color-section-heading);
-  background: rgba(212, 163, 163, 0.12);
-  border: 1px solid rgba(212, 163, 163, 0.25);
+  color: var(--color-accent-strong);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-section-heading);
   transition: background 0.15s ease, transform 0.15s ease;
 
   &:hover {
@@ -222,7 +222,8 @@ function iconFor(label: string): string | undefined {
   font-size: $fs-base;
   font-weight: 600;
   color: var(--color-section-item-heading);
-
+  border-bottom: 0.5px solid var(--color-section-item-heading);
+  line-height: 2;
 }
 
 .para {

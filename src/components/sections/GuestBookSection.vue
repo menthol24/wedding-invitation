@@ -513,7 +513,7 @@ function jumpToPage(n: number) {
   padding: 0 8px 0 6px;
   border: 0;
   background: transparent;
-  color: var(--color-accent-strong);
+  color: var(--color-guestbook-like);
   cursor: pointer;
   transition: transform 0.12s ease;
 
@@ -585,6 +585,7 @@ function jumpToPage(n: number) {
   font-weight: 600;
   line-height: 1;
   font-variant-numeric: tabular-nums;
+  color: var(--color-body)
 }
 
 // prev/next 슬라이드의 비인터랙티브 좋아요 표시
@@ -597,7 +598,7 @@ function jumpToPage(n: number) {
   gap: 4px;
   height: 28px;
   padding: 0 8px 0 6px;
-  color: var(--color-accent-strong);
+  color: var(--color-guestbook-like);
 }
 
 @keyframes like-pop {
@@ -654,7 +655,7 @@ function jumpToPage(n: number) {
 
   &:hover {
     background: var(--color-accent-soft);
-    color: var(--color-accent-strong);
+    color: var(--color-guestbook-like);
     opacity: 1;
   }
 
@@ -675,8 +676,9 @@ function jumpToPage(n: number) {
   margin-bottom: 12px;
 
   .name {
+    font-family: $font-body-strong;
     font-size: $fs-base;
-    font-weight: 600;
+    font-weight: bold;
     color: var(--color-body);
   }
 
@@ -729,7 +731,7 @@ function jumpToPage(n: number) {
 
   &:hover:not(:disabled) {
     background: var(--color-accent-soft);
-    color: var(--color-accent-strong);
+    color: var(--color-guestbook-like);
     border-color: rgba(212, 163, 163, 0.4);
   }
 
@@ -749,4 +751,6 @@ function jumpToPage(n: number) {
   font-size: $fs-md;
   line-height: $lh-flat;
 }
+
+
 </style>

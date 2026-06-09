@@ -253,6 +253,8 @@ function chooseTab(id: string) {
   font-size: $fs-base;
   font-weight: 600;
   color: var(--color-section-item-heading);
+  border-bottom: 0.5px solid var(--color-section-item-heading);
+  line-height: 2;
 }
 
 .para {

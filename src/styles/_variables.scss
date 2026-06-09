@@ -68,7 +68,7 @@ $font-title-kor: 'NanumRegular', 'Apple SD Gothic Neo', system-ui, sans-serif;
 $font-body: var(--font-body);
 $font-body-ko: 'PretendardLight', 'Apple SD Gothic Neo', system-ui, sans-serif;
 $font-body-jp: 'PretendardLightJp', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
-$font-body-strong: 'PretendardRegular', 'Apple SD Gothic Neo', system-ui, sans-serif;
+$font-body-strong: 'PretendardMedium', 'Apple SD Gothic Neo', system-ui, sans-serif;
 
 /** 타이포 토큰 — 모든 섹션에서 이 값들만 사용 */
 // font-size 단계
@@ -114,26 +114,33 @@ $lh-loose:   1.85;   // 긴 본문, 주소
                   #c77d86 100%
   );
 
-  /** 메인 포인트 - 생기 있는 피치핑크 */
-  --color-accent: #eea5aa;
-  --color-accent-strong: #c77d86;
-  --color-accent-soft: rgba(238, 165, 170, 0.18);
-
   /** 섹션 제목 */
-  --color-section-heading: #ec9ca4;
-  --color-section-item-heading: #d98188;
+  --color-invitation-heading: #eeae54;
+  --color-section-heading: #ffbc6e;
+  --color-section-item-heading: #434343;
+
+  /** 메인 포인트 - 생기 있는 피치핑크 */
+  --color-accent: #ffd6ab;
+  --color-accent-strong: #cb8b3e;
+  --color-accent-soft: rgb(255, 248, 243);
 
   /** 디데이 원형 배지 */
-  --color-countdown-pink: #f7b8bf;
+  --color-countdown-pink: #e87482;
   --color-calendar-sun: #ff3939;
 
+  /** 타임라인 강조색 */
+  --color-timeline-dot: #ffaf5f;
+
+  /** 메세지목록 좋아요색 */
+  --color-guestbook-like: #e87482;
+
   /** 신랑 / 신부 역할 컬러 */
-  --color-role-groom: #5f93b7;
-  --color-role-bride: #e4869a;
+  --color-role-groom: #959595;
+  --color-role-bride: #959595;
 
   /** 본문 */
-  --color-body: #413a36;
-  --color-body-muted: #746a64;
+  --color-body: #4d4c4c;
+  --color-body-muted: #5f5d5c;
   --color-body-light-grey: #9e9998;
 
   /** 포스터 스크립트 — 샴페인 골드 */

@@ -130,17 +130,17 @@ export const locationSection = {
   ],
   transportBlocks: [
     {
-      subtitle: '🚇지하철',
+      subtitle: '🚇 지하철',
       lines: ['2·5호선 영등포구청역 4번 출구에서 566m(도보 약 7분)'],
     },
     {
-      subtitle: '🚌셔틀버스',
+      subtitle: '🚌 셔틀버스',
       lines: [
         '영등포구청역 5번 출구 ↔ 더베르G 주차장 입구 좌측 순환 운행',
       ],
     },
     {
-      subtitle: '🚗주차',
+      subtitle: '🚗 주차',
       lines: [
         '건물 내 지하주차장 이용(2시간 무료 주차)',
         '2층 웰컴드링크존 또는 지하 1층 연회장에서 주차등록 후 출차',
@@ -159,7 +159,7 @@ export const venueGuideSection = {
       imageAlt: '웰컴 드링크 안내 이미지',
       blocks: [
         {
-          subtitle: '🍹웰컴드링크 안내',
+          subtitle: '🍹 웰컴드링크 안내',
           lines: ['귀한 발걸음 해주신 하객분들을 위해 로비에 간단한 음료가 준비되어 있습니다. 식 전에 여유롭게 즐겨주세요.'],
         },
       ],
@@ -171,7 +171,7 @@ export const venueGuideSection = {
       imageAlt: '신부대기실',
       blocks: [
         {
-          subtitle: '👰🏻신부대기실 위치 및 인사 가능 시간',
+          subtitle: '👰🏻 신부대기실 위치 및 인사 가능 시간',
           lines: ['홀 왼편 \'베르아일(복도)\' 끝에 위치, 사진 촬영 및 인사는 예식 시작 <mark class="hl">15분 전</mark>까지 가능합니다.'],
         },
       ],
@@ -183,7 +183,7 @@ export const venueGuideSection = {
       imageAlt: 'ATM 위치 안내',
       blocks: [
         {
-          subtitle: '💳ATM 위치',
+          subtitle: '💳 ATM 위치',
           lines: ['더베르G 2층 접수대 좌측 끝 포토월 옆에 2대가 있습니다.'],
         },
       ],

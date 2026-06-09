@@ -35,7 +35,7 @@ defineProps<{
           <div class="meta">
             <div class="meta-content">
               <p class="role">{{ card.roleLabel }}</p>
-              <h3 class="name">{{ card.name }}</h3>
+              <p class="name">{{ card.name }}</p>
             </div>
             <p class="desc">{{ card.description }}</p>
           </div>
@@ -74,7 +74,6 @@ defineProps<{
 
   img {
     display: block;
-    width: 35%;
     object-fit: contain;
     object-position: bottom center;
     position: absolute;
@@ -99,7 +98,7 @@ defineProps<{
 
   img {
     transform: rotate(2deg);
-    width: 45%;
+    width: 40%;
     left: auto;
     right: 0;
   }
@@ -128,7 +127,7 @@ defineProps<{
 .role {
   margin: 0 0 8px;
   font-family: $font-body-strong;
-  font-weight: 600;
+  font-weight: bold;
   font-size: $fs-base;
   letter-spacing: $ls-wider;
   text-transform: uppercase;

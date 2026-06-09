@@ -130,17 +130,17 @@ export const locationSection = {
   ],
   transportBlocks: [
     {
-      subtitle: '🚇地下鉄',
+      subtitle: '🚇 地下鉄',
       lines: ['2・5号線 永登浦区庁駅 4番出口から566m(徒歩約7分)'],
     },
     {
-      subtitle: '🚌シャトルバス',
+      subtitle: '🚌 シャトルバス',
       lines: [
         '永登浦区庁駅 5番出口とザ・ベルG駐車場入口左側を結ぶシャトルバスが循環運行しています。',
       ],
     },
     {
-      subtitle: '🚗駐車',
+      subtitle: '🚗 駐車',
       lines: [
           '建物内の地下駐車場をご利用いただけます（2時間無料）',
           '2階ウェルカムドリンクゾーン、または地下1階の宴会場にて駐車登録後、ご出庫ください。',
@@ -159,7 +159,7 @@ export const venueGuideSection = {
       imageAlt: 'ウェルカムドリンク案内画像',
       blocks: [
         {
-          subtitle: '🍹ウェルカムドリンクのご案内',
+          subtitle: '🍹 ウェルカムドリンクのご案内',
           lines: ['お越しくださった皆さまのために、ロビーに簡単なお飲み物をご用意しております。式の前にごゆっくりお楽しみください。'],
         },
       ],
@@ -171,7 +171,7 @@ export const venueGuideSection = {
       imageAlt: '新婦待機室',
       blocks: [
         {
-          subtitle: '👰🏻新婦待機室の場所と挨拶可能時間',
+          subtitle: '👰🏻 新婦待機室の場所と挨拶可能時間',
           lines: ['ホール左側「ベルアイル(廊下)」の奥に位置しています。写真撮影とご挨拶は式開始<mark class="hl">15分前</mark>まで可能です。'],
         },
       ],
@@ -183,7 +183,7 @@ export const venueGuideSection = {
       imageAlt: 'ATM位置案内',
       blocks: [
         {
-          subtitle: '💳ATMの場所',
+          subtitle: '💳 ATMの場所',
           lines: ['ザ・ベルG 2階の受付左端、フォトウォール横に2台設置されています。'],
         },
       ],

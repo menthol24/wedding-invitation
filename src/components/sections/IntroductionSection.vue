@@ -20,16 +20,6 @@ defineProps<{
 
 <template>
   <section class="intro section-pad section-pad--wide" aria-labelledby="intro-heading">
-    <!-- 신랑·신부 프로필 사진 — 정사각형으로 한 줄에 나란히 -->
-    <div class="photos">
-      <img
-          v-if="introducePhoto"
-          :src="introducePhoto"
-          loading="lazy"
-          decoding="async"
-      />
-    </div>
-
     <article class="card">
       <div class="text">
         <div class="groom-name">

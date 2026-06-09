@@ -151,7 +151,6 @@ onUnmounted(() => {
   .sub {
     margin: 0;
     font-size: 0.72rem;
-    line-height: 1.65;
     font-weight: 400;
     color: var(--color-body-muted);
     opacity: 0.92;

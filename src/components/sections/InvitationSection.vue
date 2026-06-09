@@ -54,11 +54,11 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 }
 
 .heading {
-  margin-top: 40px;
-  font-size: $fs-lg;
+  margin-top: 42px;
+  font-size: $fs-md;
   font-weight: 500;
-  color: var(--color-section-heading);
-
+  color: var(--color-invitation-heading);
+  text-shadow: 1px 2px 2px rgb(255, 255, 255);
   word-spacing: 0.02em !important;
 }
 
@@ -68,8 +68,8 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 }
 
 .line {
-  margin-bottom: 8px;
-  font-size: $fs-base;
+  margin-bottom: 6px;
+  font-size: $fs-sm;
   letter-spacing: $lh-relaxed;
   color: var(--color-body);
 
