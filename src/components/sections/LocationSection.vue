@@ -36,7 +36,7 @@ function iconFor(label: string): string | undefined {
 </script>
 
 <template>
-  <section class="location section-pad section-pad--wide" aria-labelledby="location-heading">
+  <section class="location section-pad" aria-labelledby="location-heading">
     <h2 v-if="title" id="location-heading" class="title">{{ title }}</h2>
 
     <div class="info">

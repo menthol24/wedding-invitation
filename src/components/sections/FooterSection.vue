@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { ensureKakaoReady, shareWedding } from '@/services/kakao/share'
+import endingImage from '@/assets/images/ending.png'
 
 const props = defineProps<{
   message?: string
@@ -68,6 +69,7 @@ async function onShareKakao() {
 
 <template>
   <footer class="foot">
+    <img :src="endingImage" alt="" class="foot__ending" />
     <p v-if="message" class="foot__message">{{ message }}</p>
     <p v-if="signoff" class="foot__signoff">{{ signoff }}</p>
 
@@ -112,6 +114,21 @@ async function onShareKakao() {
   text-align: center;
   padding: 56px 24px calc(96px + env(safe-area-inset-bottom));
   color: var(--color-body-muted);
+}
+
+.foot__ending {
+  display: block;
+  width: 260px;
+  max-width: 80%;
+  height: auto;
+  margin: 0 auto 24px;
+  // PNG 투명 영역을 무시하고 하트 실루엣을 따라 외곽선을 그림
+  // 1px drop-shadow 4방향을 겹쳐 균일한 테두리 효과
+  filter:
+    drop-shadow(1px 0 0 var(--color-poster-gold, #c9a96b))
+    drop-shadow(-1px 0 0 var(--color-poster-gold, #c9a96b))
+    drop-shadow(0 1px 0 var(--color-poster-gold, #c9a96b))
+    drop-shadow(0 -1px 0 var(--color-poster-gold, #c9a96b));
 }
 
 .foot__message {

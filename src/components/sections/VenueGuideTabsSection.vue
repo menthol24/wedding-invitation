@@ -79,7 +79,7 @@ function chooseTab(id: string) {
 </script>
 
 <template>
-  <section class="guide section-pad section-pad--wide" aria-labelledby="guide-heading">
+  <section class="guide section-pad" aria-labelledby="guide-heading">
     <h2 v-if="props.title" id="guide-heading" class="title">{{ props.title }}</h2>
 
     <div class="tablist" role="tablist" aria-label="예식장 부가 안내">

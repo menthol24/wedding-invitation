@@ -207,10 +207,14 @@ function handleLoadingDone() {
 }
 
 .canvas .section-pad {
-  padding-top: clamp(78px, 20vw, 118px);
-  padding-bottom: clamp(76px, 17vw, 112px);
+  padding-top: clamp(85px, 20vw, 120px);
+  padding-bottom: clamp(85px, 20vw, 120px);
   padding-inline: 18px;
   align-content: center;
+}
+
+.canvas .section-pad--wide {
+  padding-inline: 0;
 }
 
 // 모든 섹션 헤더(.title) 공통 — 토큰 사용

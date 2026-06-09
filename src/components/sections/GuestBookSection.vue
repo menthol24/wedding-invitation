@@ -188,7 +188,7 @@ function jumpToPage(n: number) {
 </script>
 
 <template>
-  <section class="guest section-pad section-pad--wide" aria-labelledby="guest-heading">
+  <section class="guest section-pad" aria-labelledby="guest-heading">
     <div class="header">
       <h2 id="guest-heading" class="title">{{ props.title }}</h2>
       <button
@@ -655,7 +655,7 @@ function jumpToPage(n: number) {
 
   &:hover {
     background: var(--color-accent-soft);
-    color: var(--color-guestbook-like);
+    color: var(--color-accent-strong);
     opacity: 1;
   }
 

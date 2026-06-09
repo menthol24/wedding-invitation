@@ -12,7 +12,7 @@ const { el, revealed } = useReveal({ threshold: 0.2 })
 </script>
 
 <template>
-  <section ref="el" class="invite section-pad section-pad--wide">
+  <section ref="el" class="invite section-pad">
     <div class="card" :class="{ 'is-revealed': revealed }">
       <!-- 봉투 이미지: 흰 편지지 영역 위에 문구가 올라감 -->
       <img

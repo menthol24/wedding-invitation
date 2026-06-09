@@ -40,7 +40,7 @@ async function copyNumber(num: string) {
 </script>
 
 <template>
-  <section class="acct section-pad section-pad--wide" aria-labelledby="acct-heading">
+  <section class="acct section-pad" aria-labelledby="acct-heading">
     <h2 id="acct-heading" class="title">{{ props.title }}</h2>
 
     <div class="intro">

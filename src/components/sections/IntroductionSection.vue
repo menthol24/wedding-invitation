@@ -19,7 +19,7 @@ defineProps<{
 </script>
 
 <template>
-  <section class="intro section-pad section-pad--wide" aria-labelledby="intro-heading">
+  <section class="intro section-pad" aria-labelledby="intro-heading">
     <article class="card">
       <div class="text">
         <div class="groom-name">

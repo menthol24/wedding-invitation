@@ -15,7 +15,7 @@ defineProps<{
 </script>
 
 <template>
-  <section class="profile section-pad section-pad--wide" aria-labelledby="profile-heading">
+  <section class="profile section-pad" aria-labelledby="profile-heading">
     <h2 v-if="title" id="profile-heading" class="title">{{ title }}</h2>
 
     <div class="stack">

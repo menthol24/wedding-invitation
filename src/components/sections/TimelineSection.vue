@@ -67,7 +67,7 @@ const sinceParts = computed(() => {
 </script>
 
 <template>
-  <section class="tl section-pad section-pad--wide" aria-labelledby="tl-heading">
+  <section class="tl section-pad" aria-labelledby="tl-heading">
     <h2 id="tl-heading" class="title">{{ title }}</h2>
 
     <div v-if="sinceParts" class="dday" :aria-label="ddayLabel">

@@ -184,7 +184,7 @@ onBeforeUnmount(() => {
   z-index: 2; // veil/sparkles 위, copy 아래
   color: #ffffff;
   // 사진 위에서도 가독성 확보
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+  text-shadow: 1px 1px 4px rgb(0 0 0 / 93%)
 }
 
 .poster__names-side {
