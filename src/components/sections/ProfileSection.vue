@@ -59,15 +59,14 @@ defineProps<{
 .stack {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-photo);
 }
 
 .photo {
   margin: 0;
   display: flex;
   align-items: center;
-  background: var(--color-bg-soft);
-  border-radius: var(--radius-photo);
   height: 200px;
   position: relative;
   overflow: visible;
@@ -80,16 +79,16 @@ defineProps<{
     bottom: 0;
     left: 0;
     z-index: 2;
-    filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.21))
+    filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.4))
   }
 }
 
 .photo--groom {
   img {
-    transform: rotate(358deg);
-    width: 52%;
+    transform: rotate(355deg);
+    width: 53%;
     left: -10px;
-    top: -40%;
+    top: -33%;
   }
 }
 
@@ -97,10 +96,11 @@ defineProps<{
   direction: ltr;
 
   img {
-    transform: rotate(2deg);
-    width: 40%;
+    transform: rotate(4deg);
+    width: 42%;
+    top: -18%;
     left: auto;
-    right: 0;
+    right: -3%;
   }
 
   .meta {
