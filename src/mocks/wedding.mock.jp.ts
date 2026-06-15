@@ -261,7 +261,7 @@ export const shareSection = {
   title: 'ク・ウォン ♥ ユ・ミンソン 結婚します',
   text: '私たち二人の新しい門出をぜひ一緒に祝ってください。',
   description: '2026年8月16日 午後3時30分\n永登浦 ザ・ベルG',
-  imageUrl: new URL('@/assets/images/kakaoMessage.jpg', import.meta.url).href,
+  imageUrl: new URL('@/assets/images/cover.jpg', import.meta.url).href,
   imageWidth: 400,
   imageHeight: 600,
   url: 'https://wedding-invitation-sandy-chi.vercel.app',

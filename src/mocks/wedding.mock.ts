@@ -291,7 +291,7 @@ export const shareSection = {
    * 빌드 시 해시가 붙은 자산 URL 로 변환되며, 카카오 SDK 호출 시
    * VITE_SITE_URL 기준의 절대 URL 로 보정됩니다.
    */
-  imageUrl: new URL('@/assets/images/kakaoMessage.jpg', import.meta.url).href,
+  imageUrl: new URL('@/assets/images/cover.jpg', import.meta.url).href,
   /**
    * 카카오톡 메시지에서 카드 / 버튼 클릭 시 이동할 링크 (절대 URL).
    * 이 도메인이 카카오 디벨로퍼스 > 플랫폼 > Web 사이트 도메인에 등록되어 있어야
