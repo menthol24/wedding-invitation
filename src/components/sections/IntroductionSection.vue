@@ -51,6 +51,11 @@ defineProps<{
 <style scoped lang="scss">
 @use '@/styles/variables' as *;
 
+.intro {
+  padding-top: clamp(55px, 15vw, 90px) !important;
+  padding-bottom: clamp(55px, 15vw, 90px) !important;
+}
+
 // 신랑·신부 프로필 사진 — 정사각형 2개를 한 줄에 나란히
 .photos {
   margin-bottom: 28px;

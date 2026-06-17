@@ -6,6 +6,14 @@ import navermapIcon from '@/assets/images/icons/navermap.jpg'
 
 export type TransportBlock = { subtitle: string; lines: string[] }
 
+export type CharterBus = {
+  title: string
+  introLines: string[]
+  details: { label: string; value: string }[]
+  navigationLinks: { label: string; href: string }[]
+  noticeLines?: string[]
+}
+
 defineProps<{
   title?: string
   venueTitle: string
@@ -19,6 +27,7 @@ defineProps<{
   }
   navigationLinks: { label: string; href: string }[]
   transportBlocks?: readonly TransportBlock[]
+  charterBus?: CharterBus
 }>()
 
 const naverClientId = String(import.meta.env.VITE_NAVER_MAP_CLIENT_ID ?? '')
@@ -87,6 +96,43 @@ function iconFor(label: string): string | undefined {
         <h3 class="sub">{{ b.subtitle }}</h3>
         <p v-for="(ln, li) in b.lines" :key="li" class="para">{{ ln }}</p>
       </div>
+    </div>
+
+    <!-- 대절버스 안내 -->
+    <div v-if="charterBus" class="charter">
+      <h3 class="sub">{{ charterBus.title }}</h3>
+      <p v-for="(ln, i) in charterBus.introLines" :key="`ci-${i}`" class="para" v-html="ln"></p>
+
+      <div class="charter__card">
+        <dl class="charter__detail">
+          <div v-for="(d, i) in charterBus.details" :key="`cd-${i}`" class="charter__row">
+            <dt class="charter__label">{{ d.label }}</dt>
+            <dd class="charter__value">{{ d.value }}</dd>
+          </div>
+        </dl>
+
+        <a
+          v-for="lnk in charterBus.navigationLinks"
+          :key="lnk.label"
+          class="charter__map-btn"
+          :href="lnk.href"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            :src="navermapIcon"
+            alt=""
+            class="charter__map-icon"
+            aria-hidden="true"
+            decoding="async"
+          />
+          <span>{{ lnk.label }}에서 보기</span>
+        </a>
+      </div>
+
+      <ul v-if="charterBus.noticeLines && charterBus.noticeLines.length" class="charter__notice">
+        <li v-for="(ln, i) in charterBus.noticeLines" :key="`cn-${i}`">{{ ln }}</li>
+      </ul>
     </div>
   </section>
 </template>
@@ -182,8 +228,8 @@ function iconFor(label: string): string | undefined {
     transition: border-color 180ms ease, background-color 180ms ease;
 
     &:hover {
-      border-color: rgba(196, 149, 149, 0.35);
-      background: #fffdfb;
+      background: var(--color-accent-soft);
+      border-color: var(--color-accent-strong);
     }
 
     &:active {
@@ -210,7 +256,7 @@ function iconFor(label: string): string | undefined {
 }
 
 .block {
-  margin-bottom: 24px;
+  margin-bottom: 30px;
 
   &:last-child {
     margin-bottom: 0;
@@ -222,7 +268,7 @@ function iconFor(label: string): string | undefined {
   font-size: $fs-base;
   font-weight: 600;
   color: var(--color-section-item-heading);
-  border-bottom: 0.5px solid var(--color-section-item-heading);
+  border-bottom:  0.5px solid var(--color-body-very-light-grey);
   line-height: 2;
 }
 
@@ -235,6 +281,126 @@ function iconFor(label: string): string | undefined {
 
   &:last-child {
     margin-bottom: 0;
+  }
+}
+
+// v-html 로 삽입된 형광펜 강조 — 글자 전체 뒤가 칠해지는 형광펜 느낌
+:deep(mark.hl) {
+  background: rgba(255, 221, 119, 0.58);
+  color: inherit;
+  font-weight: 600;
+  padding: 1px 3px;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+// 대절버스 안내
+.charter {
+  margin-top: 36px;
+}
+
+.charter__card {
+  margin-top: 16px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  padding: 20px 18px;
+}
+
+.charter__detail {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.charter__row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.charter__label {
+  flex-shrink: 0;
+  width: 66px;
+  margin: 0;
+  font-size: $fs-xs;
+  font-weight: 600;
+  letter-spacing: $ls-base;
+  color: var(--color-section-item-heading);
+}
+
+.charter__value {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: $fs-sm;
+  line-height: $lh-base;
+  color: var(--color-body);
+}
+
+.charter__map-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 18px;
+  padding: 13px 6px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: $fs-xs;
+  font-weight: 500;
+  color: var(--color-body);
+  border: 1px solid rgba(72, 58, 54, 0.1);
+  background: var(--color-surface);
+  transition: border-color 180ms ease, background-color 180ms ease;
+
+  &:hover {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent-strong);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.charter__map-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.charter__notice {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    margin: 0 0 8px;
+    padding-left: 14px;
+    font-size: $fs-sm;
+    line-height: $lh-base;
+    color: var(--color-body-light-grey);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 0.62em;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--color-accent);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 </style>

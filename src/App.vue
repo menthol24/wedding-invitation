@@ -11,6 +11,7 @@ import GallerySection from '@/components/sections/GallerySection.vue'
 import LocationSection from '@/components/sections/LocationSection.vue'
 import VenueGuideTabsSection from '@/components/sections/VenueGuideTabsSection.vue'
 import TimelineSection from '@/components/sections/TimelineSection.vue'
+import TmiSection from '@/components/sections/TmiSection.vue'
 import GuestBookSection from '@/components/sections/GuestBookSection.vue'
 import LetterSection from '@/components/sections/LetterSection.vue'
 import AccountsSection from '@/components/sections/AccountsSection.vue'
@@ -35,6 +36,7 @@ const gallerySection = computed(() => mock.value.gallerySection)
 const locationSection = computed(() => mock.value.locationSection)
 const venueGuideSection = computed(() => mock.value.venueGuideSection)
 const timelineSection = computed(() => mock.value.timelineSection)
+const tmiSection = computed(() => mock.value.tmiSection)
 const guestbookSection = computed(() => mock.value.guestbookSection)
 const letterSection = computed(() => mock.value.letterSection)
 const accountsSection = computed(() => mock.value.accountsSection)
@@ -134,6 +136,13 @@ function handleLoadingDone() {
           :image-alt="letterSection.imageAlt"
           :bride-letter="letterSection.brideLetter"
           :groom-letter="letterSection.groomLetter"
+        />
+
+        <TmiSection
+          v-if="locale === 'ko' && tmiSection"
+          :title="tmiSection.title"
+          :intro="tmiSection.intro"
+          :items="tmiSection.items"
         />
 
         <GuestBookSection

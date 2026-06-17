@@ -147,6 +147,27 @@ export const locationSection = {
       ],
     },
   ],
+  /** 대절버스 안내 — LocationSection 하단에 카드로 표시 */
+  charterBus: {
+    title: '🚐 대절버스',
+    introLines: [
+      '전주에서 오시는 하객분들을 위한 <mark class="hl">대절버스 안내</mark>입니다.',
+    ],
+    details: [
+      { label: '탑승장소', value: '전주 월드컵경기장 정문 P10 주차장' },
+      { label: '출발시각', value: '2026. 8. 16 (일) 오전 11시' },
+      { label: '운수회사', value: '국제관광 (전북 76바 1708)' },
+    ],
+    navigationLinks: [
+      {
+        label: '네이버지도',
+        href: 'https://map.naver.com/p/search/%EC%A0%84%EC%A3%BC%EC%9B%94%EB%93%9C%EC%BB%B5%EA%B2%BD%EA%B8%B0%EC%9E%A5',
+      },
+    ],
+    noticeLines: [
+      '출발 시각 10분 전까지 탑승 부탁드립니다.',
+    ],
+  },
 }
 
 export const venueGuideSection = {
@@ -172,7 +193,7 @@ export const venueGuideSection = {
       blocks: [
         {
           subtitle: '👰🏻 신부대기실 위치 및 인사 가능 시간',
-          lines: ['홀 왼편 \'베르아일(복도)\' 끝에 위치, 사진 촬영 및 인사는 예식 시작 <mark class="hl">15분 전</mark>까지 가능합니다.'],
+          lines: ['홀 왼편 \'베르아일(복도)\' 끝에 위치, \r사진 촬영 및 인사는 예식 시작 <mark class="hl">15분 전</mark>까지 가능합니다.'],
         },
       ],
     },
@@ -227,6 +248,40 @@ export const timelineSection = {
 }
 
 
+export const tmiSection = {
+  title: 'TMI',
+  /** 섹션 상단 한 줄 — 가볍고 다정한 톤 */
+  intro: '우리 부부의 사소한 이야기',
+  items: [
+    {
+      id: 'honeymoon',
+      icon: '✈️',
+      label: '신혼여행',
+      lines: [
+        '결혼식 직후엔 안 가요. 한 박자 쉬고 9월에 떠납니다.',
+        '뉴질랜드 11박 + 시드니 3박으로 길게 다녀올 예정이에요.',
+      ],
+    },
+    {
+      id: 'ring',
+      icon: '💍',
+      label: '결혼반지',
+      lines: ['3시간의 상담 끝에 고른 우리 두 사람의 반지예요.'],
+      imageUrl: undefined as string | undefined,
+      imageAlt: '신랑 신부의 결혼반지',
+    },
+    {
+      id: 'home',
+      icon: '🏠',
+      label: '신혼집',
+      lines: [
+        '아직 우리만의 보금자리는 준비 중이에요.',
+        '당분간은 살던 월세방에서 알콩달콩 시작합니다.',
+      ],
+    },
+  ],
+}
+
 export const guestbookSection = {
   title: 'MESSAGE',
   emptyMessageLines: ['아직 작성된 방명록이 없습니다.', '첫 방명록을 작성해주세요.'],
@@ -260,6 +315,16 @@ export const accountsSection = {
           bankInfo: '신한 구원',
           number: '110-221-930230',
         },
+        {
+          role: '신랑 아버지',
+          bankInfo: '농협 구갑서',
+          number: '508-02-006212',
+        },
+        {
+          role: '신랑 어머니',
+          bankInfo: '농협 최순례',
+          number: '501110-52-000211',
+        },
       ],
     },
     {
@@ -270,6 +335,11 @@ export const accountsSection = {
           role: '신부',
           bankInfo: '토스뱅크 유민선',
           number: '1000-2983-9322',
+        },
+        {
+          role: '신부 어머니',
+          bankInfo: '농협 문선옥',
+          number: '195-02-062582',
         },
       ],
     },

@@ -253,32 +253,28 @@ function chooseTab(id: string) {
   font-size: $fs-base;
   font-weight: 600;
   color: var(--color-section-item-heading);
-  border-bottom: 0.5px solid var(--color-section-item-heading);
+  border-bottom: 0.5px solid var(--color-body-very-light-grey);
   line-height: 2;
 }
 
 .para {
   margin: 0 0 7px;
   font-size: $fs-base;
-  line-height: $lh-base;
+  line-height: $lh-relaxed;
   color: var(--color-body-muted);
   &:last-child {
     margin-bottom: 0;
   }
 
-  // v-html 로 삽입된 형광펜 강조 — 글자 아래쪽만 칠해지는 형광펜 느낌
+  // v-html 로 삽입된 형광펜 강조 — 글자 전체 뒤가 칠해지는 형광펜 느낌
   :deep(mark.hl) {
-    background: linear-gradient(
-      to top,
-      rgba(255, 221, 119, 0.75) 0%,
-      rgba(255, 221, 119, 0.75) 42%,
-      transparent 42%,
-      transparent 100%
-    );
+    background: rgba(255, 221, 119, 0.58);
     color: inherit;
     font-weight: 600;
-    padding: 0 1px;
+    padding: 1px 3px;
     border-radius: 2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 }
 

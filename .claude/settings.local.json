@@ -12,7 +12,8 @@
       "Bash(git log *)",
       "Bash(ls -la .env*)",
       "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\workspace_vue\\\\wedding-invitation\\\\src\\\\assets\\\\images\\\\beige-envelope.png\"\\); \"$\\($img.Width\\)x$\\($img.Height\\)\"; $img.Dispose\\(\\))",
-      "PowerShell(npm run *)"
+      "PowerShell(npm run *)",
+      "WebSearch"
     ]
   }
 }
