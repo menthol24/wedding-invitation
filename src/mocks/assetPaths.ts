@@ -37,6 +37,7 @@ import coupleShot from '@/assets/images/coupleShot.jpg';
 import letter1 from '@/assets/images/letter/letter1.png';
 import letter2 from '@/assets/images/letter/letter2.png';
 import beigeEnvelope from '@/assets/images/beige-envelope.png';
+import weddingRing from '@/assets/images/weddingRing.jpg';
 
 export const ASSET_URLS = {
   poster,
@@ -75,4 +76,5 @@ export const ASSET_URLS = {
   letter1,
   letter2,
   beigeEnvelope,
+  weddingRing,
 }

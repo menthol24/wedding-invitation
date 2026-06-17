@@ -15,7 +15,7 @@ export const posterSection = {
 
 export const ceremonySection = {
   dateLabel: '2026.08.16(日) 15:30',
-  venueName: '永登浦 ザ・ベルG ホール',
+  venueName: '永登浦 ザ・ベルG 貸切ホール',
 }
 
 export const invitationSection = {
@@ -121,7 +121,7 @@ export const locationSection = {
   map: {
     lat: 37.525952,
     lng: 126.902249,
-    zoom: 17,
+    zoom: 16,
   },
   navigationLinks: [
     { label: 'TMAP', href: 'https://tmap.life/7946ae5c' },
@@ -222,6 +222,39 @@ export const timelineSection = {
       text: '昨年11月、新婦が憧れていた漢江の見えるレストランでプロポーズ♥️',
       photoUrl: ASSET_URLS.timeline5,
       alt: 'プロポーズ',
+    },
+  ],
+}
+
+export const tmiSection = {
+  title: 'TMI',
+  intro: '私たち夫婦のささやかなお話',
+  items: [
+    {
+      id: 'honeymoon',
+      icon: '✈️',
+      label: '新婚旅行',
+      lines: [
+        '結婚式の直後ではなく、暑さが少し落ち着く9月に出発します。',
+        'ニュージーランド11泊＋シドニー3泊の予定です。',
+      ],
+    },
+    {
+      id: 'ring',
+      icon: '💍',
+      label: '結婚指輪',
+      lines: ['3時間の相談の末に選びました。'],
+      imageUrl: undefined as string | undefined,
+      imageAlt: '新郎新婦の結婚指輪',
+    },
+    {
+      id: 'home',
+      icon: '🏠',
+      label: '新居',
+      lines: [
+        'まだ二人だけの住まいは準備中です。',
+        'しばらくは今の賃貸のお部屋で、仲良く新生活を始めます。',
+      ],
     },
   ],
 }

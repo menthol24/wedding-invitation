@@ -174,18 +174,6 @@ export const venueGuideSection = {
   title: 'VENUE GUIDE',
   tabs: [
     {
-      id: 'welcome',
-      title: '웰컴드링크',
-      imageUrl: ASSET_URLS.tabWelcomeDrinks,
-      imageAlt: '웰컴 드링크 안내 이미지',
-      blocks: [
-        {
-          subtitle: '🍹 웰컴드링크 안내',
-          lines: ['귀한 발걸음 해주신 하객분들을 위해 로비에 간단한 음료가 준비되어 있습니다. 식 전에 여유롭게 즐겨주세요.'],
-        },
-      ],
-    },
-    {
       id: 'bridal-room',
       title: '신부대기실',
       imageUrl: ASSET_URLS.tabBrideWaiting,
@@ -194,6 +182,18 @@ export const venueGuideSection = {
         {
           subtitle: '👰🏻 신부대기실 위치 및 인사 가능 시간',
           lines: ['홀 왼편 \'베르아일(복도)\' 끝에 위치, \r사진 촬영 및 인사는 예식 시작 <mark class="hl">15분 전</mark>까지 가능합니다.'],
+        },
+      ],
+    },
+    {
+      id: 'welcome',
+      title: '웰컴드링크',
+      imageUrl: ASSET_URLS.tabWelcomeDrinks,
+      imageAlt: '웰컴 드링크 안내 이미지',
+      blocks: [
+        {
+          subtitle: '🍹 웰컴드링크 안내',
+          lines: ['귀한 발걸음 해주신 하객분들을 위해 로비에 간단한 음료가 준비되어 있습니다. 식 전에 여유롭게 즐겨주세요.'],
         },
       ],
     },
@@ -250,7 +250,6 @@ export const timelineSection = {
 
 export const tmiSection = {
   title: 'TMI',
-  /** 섹션 상단 한 줄 — 가볍고 다정한 톤 */
   intro: '우리 부부의 사소한 이야기',
   items: [
     {
@@ -258,16 +257,16 @@ export const tmiSection = {
       icon: '✈️',
       label: '신혼여행',
       lines: [
-        '결혼식 직후엔 안 가요. 한 박자 쉬고 9월에 떠납니다.',
-        '뉴질랜드 11박 + 시드니 3박으로 길게 다녀올 예정이에요.',
+        '결혼식 직후엔 가지 않고 더위가 한 풀 꺾인 9월에 떠납니다.',
+        '뉴질랜드 11박 + 시드니 3박 일정이에요.',
       ],
     },
     {
       id: 'ring',
       icon: '💍',
       label: '결혼반지',
-      lines: ['3시간의 상담 끝에 고른 우리 두 사람의 반지예요.'],
-      imageUrl: undefined as string | undefined,
+      lines: ['3시간의 상담 끝에 골랐습니다.'],
+      imageUrl: ASSET_URLS.weddingRing as string | undefined,
       imageAlt: '신랑 신부의 결혼반지',
     },
     {

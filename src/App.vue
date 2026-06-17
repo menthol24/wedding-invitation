@@ -2,6 +2,7 @@
 import { computed, ref, watchEffect } from 'vue'
 import LoadingScreen from '@/components/LoadingScreen.vue'
 import FloatingActions from '@/components/FloatingActions.vue'
+import RevealOnScroll from '@/components/RevealOnScroll.vue'
 import PosterSection from '@/components/sections/PosterSection.vue'
 import InvitationSection from '@/components/sections/InvitationSection.vue'
 import IntroductionSection from '@/components/sections/IntroductionSection.vue'
@@ -88,75 +89,98 @@ function handleLoadingDone() {
           :envelope-alt="invitationSection.envelopeAlt"
         />
 
-        <IntroductionSection
-          :groom="introduceSection.groom"
-          :bride="introduceSection.bride"
-          :introducePhoto="introduceSection.introducePhoto"
-        />
+        <RevealOnScroll>
+          <IntroductionSection
+            :groom="introduceSection.groom"
+            :bride="introduceSection.bride"
+            :introducePhoto="introduceSection.introducePhoto"
+          />
+        </RevealOnScroll>
 
-        <ProfileSection
-          :title="profileSection.title"
-          :cards="profileSection.cards"
-        />
+        <RevealOnScroll>
+          <ProfileSection
+            :title="profileSection.title"
+            :cards="profileSection.cards"
+          />
+        </RevealOnScroll>
 
-        <TimelineSection
-            :title="timelineSection.title"
-            :items="timelineSection.items"
-            :meet-since-iso="calendarSection.meetSinceIso"
-            :dday-label="calendarSection.ddayHeadline"
-            :since-units="timelineSection.sinceUnits" />
+        <RevealOnScroll>
+          <TimelineSection
+              :title="timelineSection.title"
+              :items="timelineSection.items"
+              :meet-since-iso="calendarSection.meetSinceIso"
+              :dday-label="calendarSection.ddayHeadline"
+              :since-units="timelineSection.sinceUnits" />
+        </RevealOnScroll>
 
-        <CalendarSection
-          :title="calendarSection.title"
-          :wedding-iso="WEDDING_EVENT_ISO"
-          :wedding-day="calendarSection.weddingDay"
-          :wedding-day-eng="calendarSection.weddingDayEng"
-          :calendar-year="calendarSection.calendarYear"
-          :calendar-month-index="calendarSection.calendarMonthIndex"
-          :highlighted-day="calendarSection.highlightedDay"
-          :ceremony-time-short="calendarSection.ceremonyTimeShort"
-          :countdown-headline="calendarSection.countdownHeadline"
-          :countdown-units="calendarSection.countdownUnits"
-        />
+        <RevealOnScroll>
+          <CalendarSection
+            :title="calendarSection.title"
+            :wedding-iso="WEDDING_EVENT_ISO"
+            :wedding-day="calendarSection.weddingDay"
+            :wedding-day-eng="calendarSection.weddingDayEng"
+            :calendar-year="calendarSection.calendarYear"
+            :calendar-month-index="calendarSection.calendarMonthIndex"
+            :highlighted-day="calendarSection.highlightedDay"
+            :ceremony-time-short="calendarSection.ceremonyTimeShort"
+            :countdown-headline="calendarSection.countdownHeadline"
+            :countdown-units="calendarSection.countdownUnits"
+          />
+        </RevealOnScroll>
 
-        <LocationSection v-bind="locationSection" />
+        <RevealOnScroll>
+          <LocationSection v-bind="locationSection" />
+        </RevealOnScroll>
 
-        <VenueGuideTabsSection
-          :title="venueGuideSection.title"
-          :tabs="venueGuideSection.tabs"
-        />
+        <RevealOnScroll>
+          <VenueGuideTabsSection
+            :title="venueGuideSection.title"
+            :tabs="venueGuideSection.tabs"
+          />
+        </RevealOnScroll>
 
-        <GallerySection
-            :title="gallerySection.title"
-            :items="gallerySection.items"
-        />
+        <RevealOnScroll>
+          <GallerySection
+              :title="gallerySection.title"
+              :items="gallerySection.items"
+          />
+        </RevealOnScroll>
 
-        <LetterSection
-          :image-url="letterSection.imageUrl"
-          :image-alt="letterSection.imageAlt"
-          :bride-letter="letterSection.brideLetter"
-          :groom-letter="letterSection.groomLetter"
-        />
+        <RevealOnScroll>
+          <LetterSection
+            :image-url="letterSection.imageUrl"
+            :image-alt="letterSection.imageAlt"
+            :bride-letter="letterSection.brideLetter"
+            :groom-letter="letterSection.groomLetter"
+          />
+        </RevealOnScroll>
 
-        <TmiSection
-          v-if="locale === 'ko' && tmiSection"
-          :title="tmiSection.title"
-          :intro="tmiSection.intro"
-          :items="tmiSection.items"
-        />
+<!--        <RevealOnScroll v-if="locale === 'ko' && tmiSection">
+          <TmiSection
+            :title="tmiSection.title"
+            :intro="tmiSection.intro"
+            :items="tmiSection.items"
+          />
+        </RevealOnScroll>-->
 
-        <GuestBookSection
-            :title="guestbookSection.title"
-            :empty-message-lines="guestbookSection.emptyMessageLines"
-        />
+        <RevealOnScroll>
+          <GuestBookSection
+              :title="guestbookSection.title"
+              :empty-message-lines="guestbookSection.emptyMessageLines"
+          />
+        </RevealOnScroll>
 
-        <AccountsSection v-if="locale === 'ko'" v-bind="accountsSection" />
+        <RevealOnScroll v-if="locale === 'ko'">
+          <AccountsSection v-bind="accountsSection" />
+        </RevealOnScroll>
 
-        <FooterSection
-          :message="footerSection.message"
-          :signoff="footerSection.signoff"
-          :share="shareSection"
-        />
+        <RevealOnScroll>
+          <FooterSection
+            :message="footerSection.message"
+            :signoff="footerSection.signoff"
+            :share="shareSection"
+          />
+        </RevealOnScroll>
       </div>
     </main>
 
