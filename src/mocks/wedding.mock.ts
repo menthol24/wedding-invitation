@@ -149,23 +149,23 @@ export const locationSection = {
   ],
   /** 대절버스 안내 — LocationSection 하단에 카드로 표시 */
   charterBus: {
-    title: '🚐 대절버스',
+    title: '🚐 전세버스',
     introLines: [
-      '전주에서 오시는 하객분들을 위한 <mark class="hl">대절버스 안내</mark>입니다.',
+      '전주에서 오시는 하객분들을 위한 <mark class="hl">전세버스 안내</mark>입니다.',
     ],
     details: [
-      { label: '탑승장소', value: '전주 월드컵경기장 정문 P10 주차장' },
-      { label: '출발시각', value: '2026. 8. 16 (일) 오전 11시' },
-      { label: '운수회사', value: '국제관광 (전북 76바 1708)' },
+      { label: '일시', value: '8/16(일) 오전 11시 출발' },
+      { label: '장소', value: '전주 월드컵경기장 정문 P10 주차장' },
+      { label: '탑승버스', value: '국제관광 (전북 76바 1708)' },
     ],
     navigationLinks: [
       {
-        label: '네이버지도',
+        label: '장소 확인',
         href: 'https://map.naver.com/p/search/%EC%A0%84%EC%A3%BC%EC%9B%94%EB%93%9C%EC%BB%B5%EA%B2%BD%EA%B8%B0%EC%9E%A5',
       },
     ],
     noticeLines: [
-      '출발 시각 10분 전까지 탑승 부탁드립니다.',
+      '돌아가는 버스는 내렸던 곳에서 오후 6시에 출발합니다.',
     ],
   },
 }

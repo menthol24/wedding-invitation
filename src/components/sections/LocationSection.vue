@@ -126,7 +126,7 @@ function iconFor(label: string): string | undefined {
             aria-hidden="true"
             decoding="async"
           />
-          <span>{{ lnk.label }}에서 보기</span>
+          <span>{{ lnk.label }}</span>
         </a>
       </div>
 
@@ -391,7 +391,7 @@ function iconFor(label: string): string | undefined {
       content: '';
       position: absolute;
       left: 2px;
-      top: 0.62em;
+      top: 0.5em;
       width: 4px;
       height: 4px;
       border-radius: 50%;
