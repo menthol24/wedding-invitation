@@ -10,7 +10,13 @@ withDefaults(
 )
 
 // InvitationSection 과 동일한 "떠오르며 페이드인" 연출을 공통으로 사용
-const { el, revealed } = useReveal({ threshold: 0.15, once: true })
+// threshold 0 + 하단 rootMargin: 요소가 뷰포트보다 길어도(갤러리 등) 살짝만
+// 들어오면 트리거되도록 — threshold 를 높이면 긴 섹션은 영영 발동하지 않음
+const { el, revealed } = useReveal({
+  threshold: 0,
+  rootMargin: '0px 0px -12% 0px',
+  once: false,
+})
 </script>
 
 <template>
