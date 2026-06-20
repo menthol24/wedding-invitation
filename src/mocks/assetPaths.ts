@@ -25,6 +25,21 @@ import gallery13 from '@/assets/images/gallery/13.jpg';
 import gallery14 from '@/assets/images/gallery/14.jpg';
 import gallery15 from '@/assets/images/gallery/15.jpg';
 import gallery16 from '@/assets/images/gallery/16.jpg';
+import gallery17 from '@/assets/images/gallery/17.jpg';
+import gallery18 from '@/assets/images/gallery/18.jpg';
+import gallery19 from '@/assets/images/gallery/19.jpg';
+import gallery20 from '@/assets/images/gallery/20.jpg';
+import gallery21 from '@/assets/images/gallery/21.jpg';
+import gallery22 from '@/assets/images/gallery/22.jpg';
+import gallery23 from '@/assets/images/gallery/23.jpg';
+import gallery24 from '@/assets/images/gallery/24.jpg';
+import gallery25 from '@/assets/images/gallery/25.jpg';
+import gallery26 from '@/assets/images/gallery/26.jpg';
+import gallery27 from '@/assets/images/gallery/27.jpg';
+import gallery28 from '@/assets/images/gallery/28.jpg';
+import gallery29 from '@/assets/images/gallery/29.jpg';
+import gallery30 from '@/assets/images/gallery/30.jpg';
+import gallery31 from '@/assets/images/gallery/31.jpg';
 import tabWelcomeDrinks from '@/assets/images/tabWelcomeDrinks.png';
 import tabBrideWaiting from '@/assets/images/tabBrideWaiting.jpg';
 import tabAtm from '@/assets/images/tabAtm.png';
@@ -62,7 +77,22 @@ export const ASSET_URLS = {
     gallery13,
     gallery14,
     gallery15,
-    gallery16
+    gallery16,
+    gallery17,
+    gallery18,
+    gallery19,
+    gallery20,
+    gallery21,
+    gallery22,
+    gallery23,
+    gallery24,
+    gallery25,
+    gallery26,
+    gallery27,
+    gallery28,
+    gallery29,
+    gallery30,
+    gallery31
   ] as string[],
   tabWelcomeDrinks,
   tabBrideWaiting,
